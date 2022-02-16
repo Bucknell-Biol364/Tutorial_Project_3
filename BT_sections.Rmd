@@ -12,53 +12,47 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 if (!require("readr")) install.packages("readr"); library(readr)
+if (!require("dplyr")) install.packages("dplyr"); library(dplyr)
 ```
 
 ```{r}
 library(readr)
-Covid_19<-read_csv("Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+Covid_19<-read_csv("Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 str(Covid_19)
+getwd()
 ```
+
+
+
+## Code for Ranking net Deaths by State
 
 ```{r}
 library(dplyr)
+
+#Looking at original dataset and ensuring State = coded as a factor
 Covid_19$State<-as_factor(Covid_19$State)
 nlevels(Covid_19$State)
 summary(Covid_19$State)
+#54 states, need to remove non-states
 
-```
+#Filter functions (one to be used as an example of != and one to be used as an example of ==)
+Covid_19.S<-filter(Covid_19, State != "United States" & State != "District of Columbia" & State != "New York City" & State != "Puerto Rico")
+Covid_19.S.T.X.A<-filter(Covid_19.S, Group == "By Total" & Sex == "All Sexes" & `Age Group` == "All Ages")
 
-```{r}
-Covid_19.Alltime<-filter(Covid_19, Group == "By Total")
-Covid_19.Alltime.State1<-filter(Covid_19.Alltime, State != "United States")
-Covid_19.Alltime.State2<-filter(Covid_19.Alltime.State1, State != "District of Columbia")
-Covid_19.Alltime.State3<-filter(Covid_19.Alltime.State2, State != "New York City")
-Covid_19.Alltime.State4<-filter(Covid_19.Alltime.State3, State != "Puerto Rico")
-table(Covid_19.Alltime.State4$State)
-nlevels(Covid_19.Alltime.State4$State) #why do the factor levels stay in the data set but the values disappear
+#ensuring filter process worked
+table(Covid_19.S.T.X.A$State)
+nlevels(Covid_19.S.T.X.A$State)
 
-#why doesnt something like this work:
-#Covid_19.Alltime.State1<-filter(Covid_19.Alltime, State != c("United States", "District of Columbia", "New York City", "Puerto Rico"))
-#am I missing an %in% symbol? Because this works to pull values, just not remove
-```
-
-```{r}
-Covid_19.AT.S4.A<-filter(Covid_19.Alltime.State4, Sex == "All Sexes")
-Covid_19.AT.S4.B<-filter(Covid_19.AT.S4.A, `Age Group` == "All Ages")
-
-#Covid_19.AT.S4.All<-filter(Covid_19.Alltime.State4, Sex == "All Sexes") %>%
-  #filter(Covid_19.Alltime.State4, `Age Group` == "All Ages")
-#why wouldnt this pipeline work
+#data display
+arrange(Covid_19.S.T.X.A,desc(`COVID-19 Deaths`))
 ```
 
 
 ```{r}
 library(dplyr)
-arrange(Covid_19.AT.S4.B,desc(`COVID-19 Deaths`))
-head(Covid_19.AT.S4.B, 10)
-
+Covid_19.AT.S4.B %>%
+  mutate(EC = State %in% c("Alabama", "New York")) -> Covid_19.AT.S4.B
 ```
-
 
 
 

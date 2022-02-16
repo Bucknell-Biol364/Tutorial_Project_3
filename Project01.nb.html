@@ -219,7 +219,48 @@ pre code {
 
 
 <!-- rnb-text-begin -->
+<div id="project-outline" class="section level4">
+<h4>Project Outline</h4>
+<p>Data set we are using: <a href="https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku/data" class="uri">https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku/data</a></p>
+<p>Outline: 1) Introduction to class 2) Introduction to R (M) Define RMD vs Regular R Loading Data Set Load Packages Refer to glossary for a function/stats overview… 3) Explore Data Set (with function explanations) (A) Formulate a question Read data Check packaging Run structure Look at top and bottom of data Check your n’s 4) Visualize Data Set Timeline vs death (M) Rank net deaths by state (B - Coding Done) West coast vs east coast (A) Male female histogram with death (A) Do older people have higher death rates than younger (B) 5) Statistical analysis (linear model?) to answer hypothesis Age groups and death Linear Model (B) 6) Glossary of Functions and statistical analyses (A+B+M)</p>
+</div>
+<div id="project-content" class="section level4">
+<h4>Project Content</h4>
+</div>
+<div id="code-for-ranking-net-deaths-by-state" class="section level1">
+<h1>Code for Ranking net Deaths by State</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkcilcbkNvdmlkXzE5PC1yZWFkX2NzdihcIkRhdGEvUHJvdmlzaW9uYWxfQ09WSUQtMTlfRGVhdGhzX2J5X1NleF9hbmRfQWdlLmNzdlwiKVxuI15DYW4gYmUgZGVsZXRlZCBvbmNlIHdlIGNlbWVudCBvdXIgZGF0YXNldFxuXG5saWJyYXJ5KGRwbHlyKVxuXG4jTG9va2luZyBhdCBvcmlnaW5hbCBkYXRhc2V0IGFuZCBlbnN1cmluZyBTdGF0ZSA9IGNvZGVkIGFzIGEgZmFjdG9yXG5Db3ZpZF8xOSRTdGF0ZTwtYXNfZmFjdG9yKENvdmlkXzE5JFN0YXRlKVxubmxldmVscyhDb3ZpZF8xOSRTdGF0ZSlcbnN1bW1hcnkoQ292aWRfMTkkU3RhdGUpXG4jNTQgc3RhdGVzLCBuZWVkIHRvIHJlbW92ZSBub24tc3RhdGVzXG5cbiNGaWx0ZXIgZnVuY3Rpb25zIChvbmUgdG8gYmUgdXNlZCBhcyBhbiBleGFtcGxlIG9mICE9IGFuZCBvbmUgdG8gYmUgdXNlZCBhcyBhbiBleGFtcGxlIG9mID09KVxuQ292aWRfMTkuUzwtZmlsdGVyKENvdmlkXzE5LCBTdGF0ZSAhPSBcIlVuaXRlZCBTdGF0ZXNcIiAmIFN0YXRlICE9IFwiRGlzdHJpY3Qgb2YgQ29sdW1iaWFcIiAmIFN0YXRlICE9IFwiTmV3IFlvcmsgQ2l0eVwiICYgU3RhdGUgIT0gXCJQdWVydG8gUmljb1wiKVxuQ292aWRfMTkuUy5ULlguQTwtZmlsdGVyKENvdmlkXzE5LlMsIEdyb3VwID09IFwiQnkgVG90YWxcIiAmIFNleCA9PSBcIkFsbCBTZXhlc1wiICYgYEFnZSBHcm91cGAgPT0gXCJBbGwgQWdlc1wiKVxuXG4jZW5zdXJpbmcgZmlsdGVyIHByb2Nlc3Mgd29ya2VkXG50YWJsZShDb3ZpZF8xOS5TLlQuWC5BJFN0YXRlKVxubmxldmVscyhDb3ZpZF8xOS5TLlQuWC5BJFN0YXRlKVxuXG4jZGF0YSBkaXNwbGF5XG5hcnJhbmdlKENvdmlkXzE5LlMuVC5YLkEsZGVzYyhgQ09WSUQtMTkgRGVhdGhzYCkpXG5gYGAifQ== -->
+<pre class="r"><code>library(readr)
+Covid_19&lt;-read_csv(&quot;Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv&quot;)
+#^Can be deleted once we cement our dataset
+
+library(dplyr)
+
+#Looking at original dataset and ensuring State = coded as a factor
+Covid_19$State&lt;-as_factor(Covid_19$State)
+nlevels(Covid_19$State)
+summary(Covid_19$State)
+#54 states, need to remove non-states
+
+#Filter functions (one to be used as an example of != and one to be used as an example of ==)
+Covid_19.S&lt;-filter(Covid_19, State != &quot;United States&quot; &amp; State != &quot;District of Columbia&quot; &amp; State != &quot;New York City&quot; &amp; State != &quot;Puerto Rico&quot;)
+Covid_19.S.T.X.A&lt;-filter(Covid_19.S, Group == &quot;By Total&quot; &amp; Sex == &quot;All Sexes&quot; &amp; `Age Group` == &quot;All Ages&quot;)
+
+#ensuring filter process worked
+table(Covid_19.S.T.X.A$State)
+nlevels(Covid_19.S.T.X.A$State)
+
+#data display
+arrange(Covid_19.S.T.X.A,desc(`COVID-19 Deaths`))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="project-details" class="section level4">
+<h4>Project Details</h4>
 <p>This project will require you to develop a tutorial to teach Bucknell students how to use R for graphing and data analysis.</p>
+</div>
 <div id="target-audience" class="section level2">
 <h2>Target Audience</h2>
 <p>Discuss with your group the target audience for the tutorial. Examples could be one of the new core Biology classes, another 300-level course (not 364), or a research group.</p>
@@ -233,61 +274,33 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkcilcbkNvdmlkXzE5PC1yZWFkX2NzdihcIi4vRGF0YS9Qcm92aXNpb25hbF9DT1ZJRC0xOV9EZWF0aHNfYnlfU2V4X2FuZF9BZ2UuY3N2XCIpXG5gYGAifQ== -->
-<pre class="r"><code>library(readr)
-Covid_19&lt;-read_csv(&quot;./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogODI2MjAgQ29sdW1uczogMTZcbuKUgOKUgCBDb2x1bW4gc3BlY2lmaWNhdGlvbiDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcbkRlbGltaXRlcjogXCIsXCJcbmNociAoOCk6IERhdGEgQXMgT2YsIFN0YXJ0IERhdGUsIEVuZCBEYXRlLCBHcm91cCwgU3RhdGUsIFNleCwgQWdlIEdyb3VwLCBGb290bm90ZVxuZGJsICgyKTogWWVhciwgTW9udGhcblxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
-<pre><code>Rows: 82620 Columns: 16
-── Column specification ───────────────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr (8): Data As Of, Start Date, End Date, Group, State, Sex, Age Group, Footnote
-dbl (2): Year, Month
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeShyZWFkcilcbkNvdmlkXzE5PC1yZWFkX2NzdihcXC4vRGF0YS9Qcm92aXNpb25hbF9DT1ZJRC0xOV9EZWF0aHNfYnlfU2V4X2FuZF9BZ2UuY3N2XFwpXG5gYGBcbmBgYCJ9 -->
+<pre class="r"><code>```r
+library(readr)
+Covid_19&lt;-read_csv(\./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
 
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKENvdmlkXzE5KVxuYGBgIn0= -->
-<pre class="r"><code>str(Covid_19)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoic3BlY190YmxfZGYgWzgyLDYyMCDDlyAxNl0gKFMzOiBzcGVjX3RibF9kZi90YmxfZGYvdGJsL2RhdGEuZnJhbWUpXG4gJCBEYXRhIEFzIE9mICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBjaHIgWzE6ODI2MjBdIFwiMDIvMDkvMjAyMlwiIFwiMDIvMDkvMjAyMlwiIFwiMDIvMDkvMjAyMlwiIFwiMDIvMDkvMjAyMlwiIC4uLlxuICQgU3RhcnQgRGF0ZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogY2hyIFsxOjgyNjIwXSBcIjAxLzAxLzIwMjBcIiBcIjAxLzAxLzIwMjBcIiBcIjAxLzAxLzIwMjBcIiBcIjAxLzAxLzIwMjBcIiAuLi5cbiAkIEVuZCBEYXRlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXCIwMi8wNS8yMDIyXCIgXCIwMi8wNS8yMDIyXCIgXCIwMi8wNS8yMDIyXCIgXCIwMi8wNS8yMDIyXCIgLi4uXG4gJCBHcm91cCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBjaHIgWzE6ODI2MjBdIFwiQnkgVG90YWxcIiBcIkJ5IFRvdGFsXCIgXCJCeSBUb3RhbFwiIFwiQnkgVG90YWxcIiAuLi5cbiAkIFllYXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IG51bSBbMTo4MjYyMF0gTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgLi4uXG4gJCBNb250aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBudW0gWzE6ODI2MjBdIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIC4uLlxuICQgU3RhdGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogY2hyIFsxOjgyNjIwXSBcIlVuaXRlZCBTdGF0ZXNcIiBcIlVuaXRlZCBTdGF0ZXNcIiBcIlVuaXRlZCBTdGF0ZXNcIiBcIlVuaXRlZCBTdGF0ZXNcIiAuLi5cbiAkIFNleCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXCJBbGwgU2V4ZXNcIiBcIkFsbCBTZXhlc1wiIFwiQWxsIFNleGVzXCIgXCJBbGwgU2V4ZXNcIiAuLi5cbiAkIEFnZSBHcm91cCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXCJBbGwgQWdlc1wiIFwiVW5kZXIgMSB5ZWFyXCIgXCIwLTE3IHllYXJzXCIgXCIxLTQgeWVhcnNcIiAuLi5cbiAkIENPVklELTE5IERlYXRocyAgICAgICAgICAgICAgICAgICAgICAgICA6IG51bSBbMTo4MjYyMF0gODk4Njk5IDIwMyA3OTUgOTMgMjQ0IC4uLlxuICQgVG90YWwgRGVhdGhzICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSA3MDcwMDA1IDM5NDczIDcwMDgyIDczNzcgMTE3NTYgLi4uXG4gJCBQbmV1bW9uaWEgRGVhdGhzICAgICAgICAgICAgICAgICAgICAgICAgOiBudW0gWzE6ODI2MjBdIDc5ODYwNSA0NTYgMTM0NSAyNzEgMzkwIC4uLlxuICQgUG5ldW1vbmlhIGFuZCBDT1ZJRC0xOSBEZWF0aHMgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSA0NjY5NDggMjYgMjIzIDI1IDg0IC4uLlxuICQgSW5mbHVlbnphIERlYXRocyAgICAgICAgICAgICAgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSAxMDIyOSAyNCAxOTMgNjUgODEgLi4uXG4gJCBQbmV1bW9uaWEsIEluZmx1ZW56YSwgb3IgQ09WSUQtMTkgRGVhdGhzOiBudW0gWzE6ODI2MjBdIDEyMzkxMTIgNjU3IDIxMTAgNDA0IDYzMSAuLi5cbiAkIEZvb3Rub3RlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gTkEgTkEgTkEgTkEgLi4uXG4gLSBhdHRyKCosIFwic3BlY1wiKT1cbiAgLi4gY29scyhcbiAgLi4gICBgRGF0YSBBcyBPZmAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYFN0YXJ0IERhdGVgID0gY29sX2NoYXJhY3RlcigpLFxuICAuLiAgIGBFbmQgRGF0ZWAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgR3JvdXAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgWWVhciA9IGNvbF9kb3VibGUoKSxcbiAgLi4gICBNb250aCA9IGNvbF9kb3VibGUoKSxcbiAgLi4gICBTdGF0ZSA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgLi4gICBTZXggPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYEFnZSBHcm91cGAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYENPVklELTE5IERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYFRvdGFsIERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYFBuZXVtb25pYSBEZWF0aHNgID0gY29sX251bWJlcigpLFxuICAuLiAgIGBQbmV1bW9uaWEgYW5kIENPVklELTE5IERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYEluZmx1ZW56YSBEZWF0aHNgID0gY29sX251bWJlcigpLFxuICAuLiAgIGBQbmV1bW9uaWEsIEluZmx1ZW56YSwgb3IgQ09WSUQtMTkgRGVhdGhzYCA9IGNvbF9udW1iZXIoKSxcbiAgLi4gICBGb290bm90ZSA9IGNvbF9jaGFyYWN0ZXIoKVxuICAuLiApXG4gLSBhdHRyKCosIFwicHJvYmxlbXNcIik9PGV4dGVybmFscHRyPiBcbiJ9 -->
-<pre><code>spec_tbl_df [82,620 × 16] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ Data As Of                              : chr [1:82620] &quot;02/09/2022&quot; &quot;02/09/2022&quot; &quot;02/09/2022&quot; &quot;02/09/2022&quot; ...
- $ Start Date                              : chr [1:82620] &quot;01/01/2020&quot; &quot;01/01/2020&quot; &quot;01/01/2020&quot; &quot;01/01/2020&quot; ...
- $ End Date                                : chr [1:82620] &quot;02/05/2022&quot; &quot;02/05/2022&quot; &quot;02/05/2022&quot; &quot;02/05/2022&quot; ...
- $ Group                                   : chr [1:82620] &quot;By Total&quot; &quot;By Total&quot; &quot;By Total&quot; &quot;By Total&quot; ...
- $ Year                                    : num [1:82620] NA NA NA NA NA NA NA NA NA NA ...
- $ Month                                   : num [1:82620] NA NA NA NA NA NA NA NA NA NA ...
- $ State                                   : chr [1:82620] &quot;United States&quot; &quot;United States&quot; &quot;United States&quot; &quot;United States&quot; ...
- $ Sex                                     : chr [1:82620] &quot;All Sexes&quot; &quot;All Sexes&quot; &quot;All Sexes&quot; &quot;All Sexes&quot; ...
- $ Age Group                               : chr [1:82620] &quot;All Ages&quot; &quot;Under 1 year&quot; &quot;0-17 years&quot; &quot;1-4 years&quot; ...
- $ COVID-19 Deaths                         : num [1:82620] 898699 203 795 93 244 ...
- $ Total Deaths                            : num [1:82620] 7070005 39473 70082 7377 11756 ...
- $ Pneumonia Deaths                        : num [1:82620] 798605 456 1345 271 390 ...
- $ Pneumonia and COVID-19 Deaths           : num [1:82620] 466948 26 223 25 84 ...
- $ Influenza Deaths                        : num [1:82620] 10229 24 193 65 81 ...
- $ Pneumonia, Influenza, or COVID-19 Deaths: num [1:82620] 1239112 657 2110 404 631 ...
- $ Footnote                                : chr [1:82620] NA NA NA NA ...
- - attr(*, &quot;spec&quot;)=
-  .. cols(
-  ..   `Data As Of` = col_character(),
-  ..   `Start Date` = col_character(),
-  ..   `End Date` = col_character(),
-  ..   Group = col_character(),
-  ..   Year = col_double(),
-  ..   Month = col_double(),
-  ..   State = col_character(),
-  ..   Sex = col_character(),
-  ..   `Age Group` = col_character(),
-  ..   `COVID-19 Deaths` = col_number(),
-  ..   `Total Deaths` = col_number(),
-  ..   `Pneumonia Deaths` = col_number(),
-  ..   `Pneumonia and COVID-19 Deaths` = col_number(),
-  ..   `Influenza Deaths` = col_number(),
-  ..   `Pneumonia, Influenza, or COVID-19 Deaths` = col_number(),
-  ..   Footnote = col_character()
-  .. )
- - attr(*, &quot;problems&quot;)=&lt;externalptr&gt; </code></pre>
+&lt;!-- rnb-output-begin eyJkYXRhIjoiUm93czogODI2MjAgQ29sdW1uczogMTZcbuKUgOKUgCBDb2x1bW4gc3BlY2lmaWNhdGlvbiDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcbkRlbGltaXRlcjogXFxcbiJ9 --&gt;
+</code></pre>
+<p>Rows: 82620 Columns: 16 ── Column specification ─────────────────────────────────────────────────────────────────── Delimiter:<br />
+</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuc3RyKENvdmlkXzE5KVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+str(Covid_19)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoic3BlY190YmxfZGYgWzgyLDYyMCDDlyAxNl0gKFMzOiBzcGVjX3RibF9kZi90YmxfZGYvdGJsL2RhdGEuZnJhbWUpXG4gJCBEYXRhIEFzIE9mICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBjaHIgWzE6ODI2MjBdIFxcMDIvMDkvMjAyMlxcIFxcMDIvMDkvMjAyMlxcIFxcMDIvMDkvMjAyMlxcIFxcMDIvMDkvMjAyMlxcIC4uLlxuICQgU3RhcnQgRGF0ZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogY2hyIFsxOjgyNjIwXSBcXDAxLzAxLzIwMjBcXCBcXDAxLzAxLzIwMjBcXCBcXDAxLzAxLzIwMjBcXCBcXDAxLzAxLzIwMjBcXCAuLi5cbiAkIEVuZCBEYXRlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXFwwMi8wNS8yMDIyXFwgXFwwMi8wNS8yMDIyXFwgXFwwMi8wNS8yMDIyXFwgXFwwMi8wNS8yMDIyXFwgLi4uXG4gJCBHcm91cCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBjaHIgWzE6ODI2MjBdIFxcQnkgVG90YWxcXCBcXEJ5IFRvdGFsXFwgXFxCeSBUb3RhbFxcIFxcQnkgVG90YWxcXCAuLi5cbiAkIFllYXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IG51bSBbMTo4MjYyMF0gTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgLi4uXG4gJCBNb250aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBudW0gWzE6ODI2MjBdIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIC4uLlxuICQgU3RhdGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogY2hyIFsxOjgyNjIwXSBcXFVuaXRlZCBTdGF0ZXNcXCBcXFVuaXRlZCBTdGF0ZXNcXCBcXFVuaXRlZCBTdGF0ZXNcXCBcXFVuaXRlZCBTdGF0ZXNcXCAuLi5cbiAkIFNleCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXFxBbGwgU2V4ZXNcXCBcXEFsbCBTZXhlc1xcIFxcQWxsIFNleGVzXFwgXFxBbGwgU2V4ZXNcXCAuLi5cbiAkIEFnZSBHcm91cCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXFxBbGwgQWdlc1xcIFxcVW5kZXIgMSB5ZWFyXFwgXFwwLTE3IHllYXJzXFwgXFwxLTQgeWVhcnNcXCAuLi5cbiAkIENPVklELTE5IERlYXRocyAgICAgICAgICAgICAgICAgICAgICAgICA6IG51bSBbMTo4MjYyMF0gODk4Njk5IDIwMyA3OTUgOTMgMjQ0IC4uLlxuICQgVG90YWwgRGVhdGhzICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSA3MDcwMDA1IDM5NDczIDcwMDgyIDczNzcgMTE3NTYgLi4uXG4gJCBQbmV1bW9uaWEgRGVhdGhzICAgICAgICAgICAgICAgICAgICAgICAgOiBudW0gWzE6ODI2MjBdIDc5ODYwNSA0NTYgMTM0NSAyNzEgMzkwIC4uLlxuICQgUG5ldW1vbmlhIGFuZCBDT1ZJRC0xOSBEZWF0aHMgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSA0NjY5NDggMjYgMjIzIDI1IDg0IC4uLlxuICQgSW5mbHVlbnphIERlYXRocyAgICAgICAgICAgICAgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSAxMDIyOSAyNCAxOTMgNjUgODEgLi4uXG4gJCBQbmV1bW9uaWEsIEluZmx1ZW56YSwgb3IgQ09WSUQtMTkgRGVhdGhzOiBudW0gWzE6ODI2MjBdIDEyMzkxMTIgNjU3IDIxMTAgNDA0IDYzMSAuLi5cbiAkIEZvb3Rub3RlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gTkEgTkEgTkEgTkEgLi4uXG4gLSBhdHRyKCosIFxcc3BlY1xcKT1cbiAgLi4gY29scyhcbiAgLi4gICBgRGF0YSBBcyBPZmAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYFN0YXJ0IERhdGVgID0gY29sX2NoYXJhY3RlcigpLFxuICAuLiAgIGBFbmQgRGF0ZWAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgR3JvdXAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgWWVhciA9IGNvbF9kb3VibGUoKSxcbiAgLi4gICBNb250aCA9IGNvbF9kb3VibGUoKSxcbiAgLi4gICBTdGF0ZSA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgLi4gICBTZXggPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYEFnZSBHcm91cGAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYENPVklELTE5IERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYFRvdGFsIERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYFBuZXVtb25pYSBEZWF0aHNgID0gY29sX251bWJlcigpLFxuICAuLiAgIGBQbmV1bW9uaWEgYW5kIENPVklELTE5IERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYEluZmx1ZW56YSBEZWF0aHNgID0gY29sX251bWJlcigpLFxuICAuLiAgIGBQbmV1bW9uaWEsIEluZmx1ZW56YSwgb3IgQ09WSUQtMTkgRGVhdGhzYCA9IGNvbF9udW1iZXIoKSxcbiAgLi4gICBGb290bm90ZSA9IGNvbF9jaGFyYWN0ZXIoKVxuICAuLiApXG4gLSBhdHRyKCosIFxccHJvYmxlbXNcXCk9PGV4dGVybmFscHRyPiBcbiJ9 --&gt;
+</code></pre>
+<p>spec_tbl_df [82,620 × 16] (S3: spec_tbl_df/tbl_df/tbl/data.frame) $ Data As Of : chr [1:82620] \02/09/2022 \02/09/2022 \02/09/2022 \02/09/2022 … $ Start Date : chr [1:82620] \01/01/2020 \01/01/2020 \01/01/2020 \01/01/2020 … $ End Date : chr [1:82620] \02/05/2022 \02/05/2022 \02/05/2022 \02/05/2022 … $ Group : chr [1:82620] Total Total Total Total … $ Year : num [1:82620] NA NA NA NA NA NA NA NA NA NA … $ Month : num [1:82620] NA NA NA NA NA NA NA NA NA NA … $ State : chr [1:82620] States States States States … $ Sex : chr [1:82620] Sexes Sexes Sexes Sexes … $ Age Group : chr [1:82620] Ages  year \0-17 years \1-4 years … $ COVID-19 Deaths : num [1:82620] 898699 203 795 93 244 … $ Total Deaths : num [1:82620] 7070005 39473 70082 7377 11756 … $ Pneumonia Deaths : num [1:82620] 798605 456 1345 271 390 … $ Pneumonia and COVID-19 Deaths : num [1:82620] 466948 26 223 25 84 … $ Influenza Deaths : num [1:82620] 10229 24 193 65 81 … $ Pneumonia, Influenza, or COVID-19 Deaths: num [1:82620] 1239112 657 2110 404 631 … $ Footnote : chr [1:82620] NA NA NA NA … - attr(<em>, )= .. cols( .. <code>Data As Of</code> = col_character(), .. <code>Start Date</code> = col_character(), .. <code>End Date</code> = col_character(), .. Group = col_character(), .. Year = col_double(), .. Month = col_double(), .. State = col_character(), .. Sex = col_character(), .. <code>Age Group</code> = col_character(), .. <code>COVID-19 Deaths</code> = col_number(), .. <code>Total Deaths</code> = col_number(), .. <code>Pneumonia Deaths</code> = col_number(), .. <code>Pneumonia and COVID-19 Deaths</code> = col_number(), .. <code>Influenza Deaths</code> = col_number(), .. <code>Pneumonia, Influenza, or COVID-19 Deaths</code> = col_number(), .. Footnote = col_character() .. ) - attr(</em>, )=<externalptr> ```</p>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -331,12 +344,13 @@ dbl (2): Year, Month
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
+</div>
 <div id="acknowledgements" class="section level1">
 <h1>Acknowledgements</h1>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3JvdXAgUHJvamVjdCAxIgpzdWJ0aXRsZTogIkJpb2xvZ3kgMzY4LzY2NCBCdWNrbmVsbCBVbml2ZXJzaXR5IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKYXV0aG9yOiBQcm9mLiBLZW4gRmllbGQKZGF0ZTogOSBGZWIgMjAyMgotLS0KClRoaXMgcHJvamVjdCB3aWxsIHJlcXVpcmUgeW91IHRvIGRldmVsb3AgYSB0dXRvcmlhbCB0byB0ZWFjaCBCdWNrbmVsbCBzdHVkZW50cyBob3cgdG8gdXNlIFIgZm9yIGdyYXBoaW5nIGFuZCBkYXRhIGFuYWx5c2lzLiAKCiMjIFRhcmdldCBBdWRpZW5jZQoKRGlzY3VzcyB3aXRoIHlvdXIgZ3JvdXAgdGhlIHRhcmdldCBhdWRpZW5jZSBmb3IgdGhlIHR1dG9yaWFsLiAKRXhhbXBsZXMgY291bGQgYmUgb25lIG9mIHRoZSBuZXcgY29yZSBCaW9sb2d5IGNsYXNzZXMsIGFub3RoZXIgMzAwLWxldmVsIGNvdXJzZSAobm90IDM2NCksIG9yIGEgcmVzZWFyY2ggZ3JvdXAuIAoKYGBge3IgZWNobz1GQUxTRX0KCmBgYAoKCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmBgYAoKYGBge3IgTG9hZCBMaWJyYXJpZXMsIGluY2x1ZGU9RkFMU0V9CiMgTG9hZCBvdGhlciBwYWNrYWdlcyBoZXJlLgppZiAoIXJlcXVpcmUoImRhdGFzYXVSdXMiKSkgaW5zdGFsbC5wYWNrYWdlcygiZGF0YXNhdVJ1cyIpOyBsaWJyYXJ5KGRhdGFzYXVSdXMpCmlmICghcmVxdWlyZSgidGlkeXZlcnNlIikpIGluc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIpOyBsaWJyYXJ5KHRpZHl2ZXJzZSkKYGBgCgpgYGB7cn0KbGlicmFyeShyZWFkcikKQ292aWRfMTk8LXJlYWRfY3N2KCIuL0RhdGEvUHJvdmlzaW9uYWxfQ09WSUQtMTlfRGVhdGhzX2J5X1NleF9hbmRfQWdlLmNzdiIpCnN0cihDb3ZpZF8xOSkKYGBgCgoKIyMgR3JhZGluZwoKRWFjaCBzdHVkZW50IHdpbGwgYmUgZXhwZWN0ZWQgdG8gY29tcGxldGUgdGhlIGZvbGxvd2luZyB0YXNrcyB0byBlYXJuIDg1JSBvZiB0aGUgcG9pbnRzIGF2YWlsYWJsZSBmb3IgdGhpcyBhc3NpZ25tZW50ICgyMS8yNSkuCgotIElkZW50aWZ5IGFuZCBvYnRhaW4gc3VpdGFibGUgZGF0YXNldAotIFVzZSBhIEdpdGh1YiByZXBvc2l0b3J5IGFuZCB2ZXJzaW9uIGNvbnRyb2wgdG8gY29sbGFib3JhdGUgb24gdGhlIHByb2plY3QKLSBTcGVuZCA0LTYgaG91cnMgcHJlcGFyaW5nLCBjb2RpbmcsIGFuZCB0ZXN0aW5nIHR1dG9yaWFsCiAgKyBEYXRhIGV4cGxvcmF0aW9uCiAgKyBEYXRhIHZpc3VhbGl6YXRpb24KICArIEh5cG90aGVzaXMgdGVzdGluZwotIFByZXNlbnQgdHV0b3JpYWwgaW4gY2xhc3MKLSBQcm92aWRlIHB1YmxpYyBhcmNoaXZlIHN1aXRhYmxlIGZvciBzaGFyaW5nIHRvIHN0dWRlbnRzL2ZhY3VsdHkKClR1dG9yaWFscyBmcm9tIHByZXZpb3VzIGNsYXNzZXMgY2FuIGJlIHZpZXdlZCBhdCBvdXIgcHVibGljIGdpdGh1YiBzaXRlOiBodHRwczovL2dpdGh1Yi5jb20vQnVja25lbGwtQmlvbDM2NAoKRWFjaCBncm91cCBzaG91bGQgdXNlIGFuICpBY2tub3dsZWRnZW1lbnRzKiBzZWN0aW9uIHRvIGRvY3VtZW50IHRoZSBwYXJ0aWNpcGF0aW9uIG9mIGVhY2ggbWVtYmVyIGFuZCB0aGUgY29sbGFib3JhdGlvbiB3aXRoaW4gYW5kIGJldHdlZW4gZ3JvdXBzLgoKQWRkaXRpb25hbCBjcmVkaXQgd2lsbCBiZSBhd2FyZGVkIGZvciBwcm92aWRpbmcgYXNzaXN0YW5jZSB0byBvdGhlciBncm91cHMgYW5kIGZvciB0aGUgZGV2ZWxvcG1lbnQgb2YgYSB0dXRvcmlhbCB0aGF0IGdvZXMgYmV5b25kIHRoZSBtaW5pbWFsIGV4cGVjdGF0aW9ucyBsaXN0ZWQgYWJvdmUuCgoKCmBgYHtyfQoKYGBgCgoKYGBge3J9CgpgYGAKCmBgYHtyfQoKYGBgCgoKYGBge3J9CgpgYGAKCgoKYGBge3J9CgpgYGAKCiMgQWNrbm93bGVkZ2VtZW50cwoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3JvdXAgUHJvamVjdCAxIgpzdWJ0aXRsZTogIkJpb2xvZ3kgMzY4LzY2NCBCdWNrbmVsbCBVbml2ZXJzaXR5IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKYXV0aG9yOiBQcm9mLiBLZW4gRmllbGQKZGF0ZTogOSBGZWIgMjAyMgotLS0KIyMjIyBQcm9qZWN0IE91dGxpbmUgIyMjIyMKRGF0YSBzZXQgd2UgYXJlIHVzaW5nOiBodHRwczovL2RhdGEuY2RjLmdvdi9OQ0hTL1Byb3Zpc2lvbmFsLUNPVklELTE5LURlYXRocy1ieS1TZXgtYW5kLUFnZS85YmhnLWhja3UvZGF0YQoKT3V0bGluZToKMSkgSW50cm9kdWN0aW9uIHRvIGNsYXNzCjIpIEludHJvZHVjdGlvbiB0byBSIChNKQogICAgRGVmaW5lIFJNRCB2cyBSZWd1bGFyIFIKICAgIExvYWRpbmcgRGF0YSBTZXQKICAgIExvYWQgUGFja2FnZXMKICAgIFJlZmVyIHRvIGdsb3NzYXJ5IGZvciBhIGZ1bmN0aW9uL3N0YXRzIG92ZXJ2aWV34oCmCjMpIEV4cGxvcmUgRGF0YSBTZXQgKHdpdGggZnVuY3Rpb24gZXhwbGFuYXRpb25zKSAoQSkKICAgIEZvcm11bGF0ZSBhIHF1ZXN0aW9uCiAgICBSZWFkIGRhdGEKICAgIENoZWNrIHBhY2thZ2luZyAKICAgIFJ1biBzdHJ1Y3R1cmUKICAgIExvb2sgYXQgdG9wIGFuZCBib3R0b20gb2YgZGF0YQogICAgQ2hlY2sgeW91ciBu4oCZcwo0KSBWaXN1YWxpemUgRGF0YSBTZXQKICAgIFRpbWVsaW5lIHZzIGRlYXRoIChNKQogICAgUmFuayBuZXQgZGVhdGhzIGJ5IHN0YXRlIChCIC0gQ29kaW5nIERvbmUpCiAgICBXZXN0IGNvYXN0IHZzIGVhc3QgY29hc3QgKEEpCiAgICBNYWxlIGZlbWFsZSBoaXN0b2dyYW0gd2l0aCBkZWF0aCAoQSkKICAgIERvIG9sZGVyIHBlb3BsZSBoYXZlIGhpZ2hlciBkZWF0aCByYXRlcyB0aGFuIHlvdW5nZXIgKEIpCjUpIFN0YXRpc3RpY2FsIGFuYWx5c2lzIChsaW5lYXIgbW9kZWw/KSB0byBhbnN3ZXIgaHlwb3RoZXNpcwogICAgQWdlIGdyb3VwcyBhbmQgZGVhdGggCiAgICBMaW5lYXIgTW9kZWwgKEIpCjYpIEdsb3NzYXJ5IG9mIEZ1bmN0aW9ucyBhbmQgc3RhdGlzdGljYWwgYW5hbHlzZXMgKEErQitNKQoKIyMjIyBQcm9qZWN0IENvbnRlbnQgIyMjIyMKCgoKIyBDb2RlIGZvciBSYW5raW5nIG5ldCBEZWF0aHMgYnkgU3RhdGUKCmBgYHtyfQpsaWJyYXJ5KHJlYWRyKQpDb3ZpZF8xOTwtcmVhZF9jc3YoIkRhdGEvUHJvdmlzaW9uYWxfQ09WSUQtMTlfRGVhdGhzX2J5X1NleF9hbmRfQWdlLmNzdiIpCiNeQ2FuIGJlIGRlbGV0ZWQgb25jZSB3ZSBjZW1lbnQgb3VyIGRhdGFzZXQKCmxpYnJhcnkoZHBseXIpCgojTG9va2luZyBhdCBvcmlnaW5hbCBkYXRhc2V0IGFuZCBlbnN1cmluZyBTdGF0ZSA9IGNvZGVkIGFzIGEgZmFjdG9yCkNvdmlkXzE5JFN0YXRlPC1hc19mYWN0b3IoQ292aWRfMTkkU3RhdGUpCm5sZXZlbHMoQ292aWRfMTkkU3RhdGUpCnN1bW1hcnkoQ292aWRfMTkkU3RhdGUpCiM1NCBzdGF0ZXMsIG5lZWQgdG8gcmVtb3ZlIG5vbi1zdGF0ZXMKCiNGaWx0ZXIgZnVuY3Rpb25zIChvbmUgdG8gYmUgdXNlZCBhcyBhbiBleGFtcGxlIG9mICE9IGFuZCBvbmUgdG8gYmUgdXNlZCBhcyBhbiBleGFtcGxlIG9mID09KQpDb3ZpZF8xOS5TPC1maWx0ZXIoQ292aWRfMTksIFN0YXRlICE9ICJVbml0ZWQgU3RhdGVzIiAmIFN0YXRlICE9ICJEaXN0cmljdCBvZiBDb2x1bWJpYSIgJiBTdGF0ZSAhPSAiTmV3IFlvcmsgQ2l0eSIgJiBTdGF0ZSAhPSAiUHVlcnRvIFJpY28iKQpDb3ZpZF8xOS5TLlQuWC5BPC1maWx0ZXIoQ292aWRfMTkuUywgR3JvdXAgPT0gIkJ5IFRvdGFsIiAmIFNleCA9PSAiQWxsIFNleGVzIiAmIGBBZ2UgR3JvdXBgID09ICJBbGwgQWdlcyIpCgojZW5zdXJpbmcgZmlsdGVyIHByb2Nlc3Mgd29ya2VkCnRhYmxlKENvdmlkXzE5LlMuVC5YLkEkU3RhdGUpCm5sZXZlbHMoQ292aWRfMTkuUy5ULlguQSRTdGF0ZSkKCiNkYXRhIGRpc3BsYXkKYXJyYW5nZShDb3ZpZF8xOS5TLlQuWC5BLGRlc2MoYENPVklELTE5IERlYXRoc2ApKQpgYGAKCgoKCgoKIyMjIyBQcm9qZWN0IERldGFpbHMgIyMjIyMKCgpUaGlzIHByb2plY3Qgd2lsbCByZXF1aXJlIHlvdSB0byBkZXZlbG9wIGEgdHV0b3JpYWwgdG8gdGVhY2ggQnVja25lbGwgc3R1ZGVudHMgaG93IHRvIHVzZSBSIGZvciBncmFwaGluZyBhbmQgZGF0YSBhbmFseXNpcy4gCgojIyBUYXJnZXQgQXVkaWVuY2UKCkRpc2N1c3Mgd2l0aCB5b3VyIGdyb3VwIHRoZSB0YXJnZXQgYXVkaWVuY2UgZm9yIHRoZSB0dXRvcmlhbC4gCkV4YW1wbGVzIGNvdWxkIGJlIG9uZSBvZiB0aGUgbmV3IGNvcmUgQmlvbG9neSBjbGFzc2VzLCBhbm90aGVyIDMwMC1sZXZlbCBjb3Vyc2UgKG5vdCAzNjQpLCBvciBhIHJlc2VhcmNoIGdyb3VwLiAKCmBgYHtyIGVjaG89RkFMU0V9CgpgYGAKCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCmBgYHtyIExvYWQgTGlicmFyaWVzLCBpbmNsdWRlPUZBTFNFfQojIExvYWQgb3RoZXIgcGFja2FnZXMgaGVyZS4KaWYgKCFyZXF1aXJlKCJkYXRhc2F1UnVzIikpIGluc3RhbGwucGFja2FnZXMoImRhdGFzYXVSdXMiKTsgbGlicmFyeShkYXRhc2F1UnVzKQppZiAoIXJlcXVpcmUoInRpZHl2ZXJzZSIpKSBpbnN0YWxsLnBhY2thZ2VzKCJ0aWR5dmVyc2UiKTsgbGlicmFyeSh0aWR5dmVyc2UpCmBgYAoKYGBge3J9CmxpYnJhcnkocmVhZHIpCkNvdmlkXzE5PC1yZWFkX2NzdigiLi9EYXRhL1Byb3Zpc2lvbmFsX0NPVklELTE5X0RlYXRoc19ieV9TZXhfYW5kX0FnZS5jc3YiKQpzdHIoQ292aWRfMTkpCmBgYAoKCiMjIEdyYWRpbmcKCkVhY2ggc3R1ZGVudCB3aWxsIGJlIGV4cGVjdGVkIHRvIGNvbXBsZXRlIHRoZSBmb2xsb3dpbmcgdGFza3MgdG8gZWFybiA4NSUgb2YgdGhlIHBvaW50cyBhdmFpbGFibGUgZm9yIHRoaXMgYXNzaWdubWVudCAoMjEvMjUpLgoKLSBJZGVudGlmeSBhbmQgb2J0YWluIHN1aXRhYmxlIGRhdGFzZXQKLSBVc2UgYSBHaXRodWIgcmVwb3NpdG9yeSBhbmQgdmVyc2lvbiBjb250cm9sIHRvIGNvbGxhYm9yYXRlIG9uIHRoZSBwcm9qZWN0Ci0gU3BlbmQgNC02IGhvdXJzIHByZXBhcmluZywgY29kaW5nLCBhbmQgdGVzdGluZyB0dXRvcmlhbAogICsgRGF0YSBleHBsb3JhdGlvbgogICsgRGF0YSB2aXN1YWxpemF0aW9uCiAgKyBIeXBvdGhlc2lzIHRlc3RpbmcKLSBQcmVzZW50IHR1dG9yaWFsIGluIGNsYXNzCi0gUHJvdmlkZSBwdWJsaWMgYXJjaGl2ZSBzdWl0YWJsZSBmb3Igc2hhcmluZyB0byBzdHVkZW50cy9mYWN1bHR5CgpUdXRvcmlhbHMgZnJvbSBwcmV2aW91cyBjbGFzc2VzIGNhbiBiZSB2aWV3ZWQgYXQgb3VyIHB1YmxpYyBnaXRodWIgc2l0ZTogaHR0cHM6Ly9naXRodWIuY29tL0J1Y2tuZWxsLUJpb2wzNjQKCkVhY2ggZ3JvdXAgc2hvdWxkIHVzZSBhbiAqQWNrbm93bGVkZ2VtZW50cyogc2VjdGlvbiB0byBkb2N1bWVudCB0aGUgcGFydGljaXBhdGlvbiBvZiBlYWNoIG1lbWJlciBhbmQgdGhlIGNvbGxhYm9yYXRpb24gd2l0aGluIGFuZCBiZXR3ZWVuIGdyb3Vwcy4KCkFkZGl0aW9uYWwgY3JlZGl0IHdpbGwgYmUgYXdhcmRlZCBmb3IgcHJvdmlkaW5nIGFzc2lzdGFuY2UgdG8gb3RoZXIgZ3JvdXBzIGFuZCBmb3IgdGhlIGRldmVsb3BtZW50IG9mIGEgdHV0b3JpYWwgdGhhdCBnb2VzIGJleW9uZCB0aGUgbWluaW1hbCBleHBlY3RhdGlvbnMgbGlzdGVkIGFib3ZlLgoKCgpgYGB7cn0KCmBgYAoKCmBgYHtyfQoKYGBgCgpgYGB7cn0KCmBgYAoKCmBgYHtyfQoKYGBgCgoKCmBgYHtyfQoKYGBgCgojIEFja25vd2xlZGdlbWVudHMKCgo=</div>
 
 
 

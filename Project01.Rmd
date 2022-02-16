@@ -5,6 +5,72 @@ output: html_notebook
 author: Prof. Ken Field
 date: 9 Feb 2022
 ---
+#### Project Outline #####
+Data set we are using: https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku/data
+
+Outline:
+1) Introduction to class
+2) Introduction to R (M)
+    Define RMD vs Regular R
+    Loading Data Set
+    Load Packages
+    Refer to glossary for a function/stats overview…
+3) Explore Data Set (with function explanations) (A)
+    Formulate a question
+    Read data
+    Check packaging 
+    Run structure
+    Look at top and bottom of data
+    Check your n’s
+4) Visualize Data Set
+    Timeline vs death (M)
+    Rank net deaths by state (B - Coding Done)
+    West coast vs east coast (A)
+    Male female histogram with death (A)
+    Do older people have higher death rates than younger (B)
+5) Statistical analysis (linear model?) to answer hypothesis
+    Age groups and death 
+    Linear Model (B)
+6) Glossary of Functions and statistical analyses (A+B+M)
+
+#### Project Content #####
+
+
+
+# Code for Ranking net Deaths by State
+
+```{r}
+library(readr)
+Covid_19<-read_csv("Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+#^Can be deleted once we cement our dataset
+
+library(dplyr)
+
+#Looking at original dataset and ensuring State = coded as a factor
+Covid_19$State<-as_factor(Covid_19$State)
+nlevels(Covid_19$State)
+summary(Covid_19$State)
+#54 states, need to remove non-states
+
+#Filter functions (one to be used as an example of != and one to be used as an example of ==)
+Covid_19.S<-filter(Covid_19, State != "United States" & State != "District of Columbia" & State != "New York City" & State != "Puerto Rico")
+Covid_19.S.T.X.A<-filter(Covid_19.S, Group == "By Total" & Sex == "All Sexes" & `Age Group` == "All Ages")
+
+#ensuring filter process worked
+table(Covid_19.S.T.X.A$State)
+nlevels(Covid_19.S.T.X.A$State)
+
+#data display
+arrange(Covid_19.S.T.X.A,desc(`COVID-19 Deaths`))
+```
+
+
+
+
+
+
+#### Project Details #####
+
 
 This project will require you to develop a tutorial to teach Bucknell students how to use R for graphing and data analysis. 
 
