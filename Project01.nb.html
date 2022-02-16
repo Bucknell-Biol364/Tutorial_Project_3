@@ -219,8 +219,6 @@ pre code {
 
 
 <!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-text-begin -->
 <p>This project will require you to develop a tutorial to teach Bucknell students how to use R for graphing and data analysis.</p>
 <div id="target-audience" class="section level2">
 <h2>Target Audience</h2>
@@ -229,37 +227,68 @@ pre code {
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-</div>
-<div id="groups" class="section level2">
-<h2>Groups</h2>
-<p>You will work with the same groups as for the Homework 2 Peer review.</p>
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuUGVlckdyb3VwczEgPC0gcmVhZF9jc3YoXCJQZWVyR3JvdXBzMS5jc3ZcIilcbmBgYCJ9 -->
-<pre class="r"><code>PeerGroups1 &lt;- read_csv(&quot;PeerGroups1.csv&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkcilcbkNvdmlkXzE5PC1yZWFkX2NzdihcIi4vRGF0YS9Qcm92aXNpb25hbF9DT1ZJRC0xOV9EZWF0aHNfYnlfU2V4X2FuZF9BZ2UuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>library(readr)
+Covid_19&lt;-read_csv(&quot;./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMjQgQ29sdW1uczogN1xu4pSA4pSAIENvbHVtbiBzcGVjaWZpY2F0aW9uIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxuRGVsaW1pdGVyOiBcIixcIlxuY2hyICg1KTogTkFNRSwgRU1BTCwgTUFKUiwgQ0xBUywgR0lUSFVCXG5kYmwgKDIpOiBTRUNUSU9OLCBQZWVyR3JvdXBcblxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
-<pre><code>Rows: 24 Columns: 7
-── Column specification ────────────────────────────────────────────────────────────────────────────────────────
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogODI2MjAgQ29sdW1uczogMTZcbuKUgOKUgCBDb2x1bW4gc3BlY2lmaWNhdGlvbiDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcbkRlbGltaXRlcjogXCIsXCJcbmNociAoOCk6IERhdGEgQXMgT2YsIFN0YXJ0IERhdGUsIEVuZCBEYXRlLCBHcm91cCwgU3RhdGUsIFNleCwgQWdlIEdyb3VwLCBGb290bm90ZVxuZGJsICgyKTogWWVhciwgTW9udGhcblxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Rows: 82620 Columns: 16
+── Column specification ───────────────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
-chr (5): NAME, EMAL, MAJR, CLAS, GITHUB
-dbl (2): SECTION, PeerGroup
+chr (8): Data As Of, Start Date, End Date, Group, State, Sex, Age Group, Footnote
+dbl (2): Year, Month
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuUGVlckdyb3VwczEgJT4lIFxuICBzZWxlY3QoLU1BSlIsIC1DTEFTLCApICU+JVxuICBwcmludCgpXG5gYGAifQ== -->
-<pre class="r"><code>PeerGroups1 %&gt;% 
-  select(-MAJR, -CLAS, ) %&gt;%
-  print()</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKENvdmlkXzE5KVxuYGBgIn0= -->
+<pre class="r"><code>str(Covid_19)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MjQsIm5jb2wiOjUsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMjQgw5cgNSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUE1VldUMWZiT0JCM1U5SkN0alQ4TzNEWWd6NUF5Rk1TMnRKVFNVZ1dVZ2psQVgzdFZiWkZyRmlXOG1RYm1sc1AvV0Q3Y2ZhNG42RHN5TGFjNE5xdmIvT2VHV2xHODVzWmFmUkQxOE92dmNiWGhtVlp6NjIxWnpYcmVSMkdWdjN6N1Y4SFI1YTFWb1BKTTJ2TjJ0RHlHeXphMVZiNHR1RGJ6d3pOWVN4RUM1MVRIbEtLSnUxTXZUdVFZc3JrUFd1aFQ1emRNNEl1akducm1ybFV0ZEFObzBvUjFEZjY1aUJXVVFzTmxKUitpRDR1a1pSOGdBZ25KQXlKY01Iakt2ZTRvaEhOZ1M2TmVtY2dWVWdqcjRYNm9jZnBBZzJNNWZXdEl2Y3NoQ0JVb0ZPajNZYmthVUFoeG9Td2NMRUUyajZsUkhsRVo5VzM3UlhEeGxuY1FtTkZCVFVydjNnc2lvaWYxRVdDWmZZNzU1d3lRVFhFa0NqQXlNdmRIblBPaUpBdDlER0d3ZEt3TjNGT0pPZHhBRkFlRVVJS05NcjM3bHl3cWFmQnFLSSsrcEp2MGhWUmlpVmdOQXlaczdJYnpRRjFmRjJhbXNwb2VRbzdFMmRJN3lGcGNDRUxRZEZKN2pCYzZESitPYmFKbElJdWRIMktlTXVVOW00Y1QvSTdScm5iUXFPQThRVzZOclpYRTZLUGJrd0VPbHNKZkVHWWJobkNJczZFN3BtbkxiWHJCeTQrN0IzYnNlTUx5bm1idXJFeFNXNWozQzAxaFVUaDNsR3B5WjdadUlkTFRjN2N4cDNEY2tBeHg3ZzhEV0tEVjBXc2FWVGxGUWdmNHpmbGdHS0tPNTB5MHc3enF2REMyUVB1bHBmbEVoLzNTdkYyWjRSaC9MNGNrQWE0OTY0YzhNSEhuZkxjWjdCUG5mSTBBaml1TitXQU15ZkFiOHNCSlhjeExrOCt5ZkJ0cVltcUVIZkx6NFI1UWRVZStrR0FEd3RlUUJTNkhULzhheVUvSTQ5Ly9KMUt5M29xamI1Zy84Vy80UGM3ZTNIZC8vVzNubDZyRittMXltYU56cEdkVUxUa3hwNWVvR3oyUjhyREI1cVV6WUwwcmhpQU1LSGRPVkJ3cGxrbmRrcThab1VkSlhUN0hwdWdMLzFBTTZ4dllwQnBSckNkcmxuaHhXeUZWemVCVEdQS0UzYnRZc08rcnArUnFnbWNNT2k0YTBDYVljcWJnZU1rUkdyeUVUSnkvWVJBVFVWcDY1cFoycTJHdTJhQjR5WU0yY0ZteFRwMEpwQmo3dkVxMUZ4SWc0UVpqUTc2TUdmRVRGZG5BUkRoOGh4MHkxa1ZYZmE3YmpoZXI1QmJGWEt2UXU1WHlEOHJKQ3FYaFlkQ1haQ0FobGJhZXZWTXVYYlpuNHpNZURUcFg1alR2aG1kM0k0L1hacWRPUjNmbm4wZW1HTytvbFNkS2huUEN5RTI0RUhRTm1FMjRhdDloeitQajQvL0ZITnhPRHdhc2x5TXN1R1NpTFR2RlBqRDdHZkI1YVdjUjB3S2NLcXR2bmJ5WjVBcUtKcncrZ0VrOThEeFl1RWZIT29BaVRuOWJXYmovWlZ4UFExWmV5eHMwZ3NLMXpIdi9Eb25OalZYODdWK0F1bUMyM1A0TDIrNnR3SGFzQjNKaUpoMURlaDNvMGxxczM3K0I4aDYwVDdrQ1FBQSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["NAME"],"name":[1],"type":["chr"],"align":["left"]},{"label":["EMAL"],"name":[2],"type":["chr"],"align":["left"]},{"label":["SECTION"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["GITHUB"],"name":[4],"type":["chr"],"align":["left"]},{"label":["PeerGroup"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Dunn, Kelsee M.","2":"kmd043@bucknell.edu","3":"1","4":"kmd043","5":"1"},{"1":"Bongiovi, Olivia L.","2":"olb002@bucknell.edu","3":"1","4":"18bongiool","5":"1"},{"1":"Rider, Sierra A.","2":"sar038@bucknell.edu","3":"664","4":"sar038","5":"1"},{"1":"Burt, Brooks J.","2":"bjb030@bucknell.edu","3":"2","4":"Brooks-Burt","5":"2"},{"1":"Brown, Cassandra P.","2":"cpb014@bucknell.edu","3":"2","4":"cpb014","5":"2"},{"1":"Pete, Sierra N.","2":"snp003@bucknell.edu","3":"664","4":"sierrapete","5":"2"},{"1":"Borseth, Ashley B.","2":"abb018@bucknell.edu","3":"664","4":"aborseth","5":"3"},{"1":"Travis, Ben G.","2":"bgt003@bucknell.edu","3":"2","4":"btravis903","5":"3"},{"1":"Kelemen, Maisy N.","2":"mnk005@bucknell.edu","3":"1","4":"kmaisyk","5":"3"},{"1":"Gearhart, Abby N.","2":"ang011@bucknell.edu","3":"1","4":"agearhart12","5":"4"},{"1":"Hu, Irene","2":"ih003@bucknell.edu","3":"2","4":"huirene","5":"4"},{"1":"Whittaker, Sam J.","2":"sjw020@bucknell.edu","3":"2","4":"SamuelWhitt20","5":"4"},{"1":"Kleinert, Darby A.","2":"dak031@bucknell.edu","3":"1","4":"dkleinert","5":"5"},{"1":"Illiano, Julia A.","2":"jai009@bucknell.edu","3":"1","4":"JuliaI22","5":"5"},{"1":"McCollum, Shannon E.","2":"sem037@bucknell.edu","3":"2","4":"shannonmccollum","5":"5"},{"1":"Knight, Derek W.","2":"dwk015@bucknell.edu","3":"2","4":"notdknight","5":"6"},{"1":"Parrino, Jessica N.","2":"jnp010@bucknell.edu","3":"2","4":"jnp010","5":"6"},{"1":"Beck, Margot L.","2":"mlb057@bucknell.edu","3":"1","4":"mlb057","5":"6"},{"1":"McDevitt, Jayne C.","2":"jcm065@bucknell.edu","3":"2","4":"jmcdevitt100","5":"7"},{"1":"Dyer, Olivia L.","2":"old001@bucknell.edu","3":"2","4":"oldyer10","5":"7"},{"1":"Mooney, Sarah E.","2":"sem036@bucknell.edu","3":"1","4":"sarahemooney","5":"7"},{"1":"Scholfield, Emily R.","2":"ers028@bucknell.edu","3":"1","4":"erscholfield","5":"8"},{"1":"Mawn, Ian H.","2":"ihm003@bucknell.edu","3":"2","4":"imawn","5":"8"},{"1":"McLain, Kaitlin M.","2":"kmm048@bucknell.edu","3":"2","4":"kmm048","5":"8"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[24]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
+<!-- rnb-output-begin eyJkYXRhIjoic3BlY190YmxfZGYgWzgyLDYyMCDDlyAxNl0gKFMzOiBzcGVjX3RibF9kZi90YmxfZGYvdGJsL2RhdGEuZnJhbWUpXG4gJCBEYXRhIEFzIE9mICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBjaHIgWzE6ODI2MjBdIFwiMDIvMDkvMjAyMlwiIFwiMDIvMDkvMjAyMlwiIFwiMDIvMDkvMjAyMlwiIFwiMDIvMDkvMjAyMlwiIC4uLlxuICQgU3RhcnQgRGF0ZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogY2hyIFsxOjgyNjIwXSBcIjAxLzAxLzIwMjBcIiBcIjAxLzAxLzIwMjBcIiBcIjAxLzAxLzIwMjBcIiBcIjAxLzAxLzIwMjBcIiAuLi5cbiAkIEVuZCBEYXRlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXCIwMi8wNS8yMDIyXCIgXCIwMi8wNS8yMDIyXCIgXCIwMi8wNS8yMDIyXCIgXCIwMi8wNS8yMDIyXCIgLi4uXG4gJCBHcm91cCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBjaHIgWzE6ODI2MjBdIFwiQnkgVG90YWxcIiBcIkJ5IFRvdGFsXCIgXCJCeSBUb3RhbFwiIFwiQnkgVG90YWxcIiAuLi5cbiAkIFllYXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IG51bSBbMTo4MjYyMF0gTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgTkEgLi4uXG4gJCBNb250aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBudW0gWzE6ODI2MjBdIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIE5BIC4uLlxuICQgU3RhdGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogY2hyIFsxOjgyNjIwXSBcIlVuaXRlZCBTdGF0ZXNcIiBcIlVuaXRlZCBTdGF0ZXNcIiBcIlVuaXRlZCBTdGF0ZXNcIiBcIlVuaXRlZCBTdGF0ZXNcIiAuLi5cbiAkIFNleCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXCJBbGwgU2V4ZXNcIiBcIkFsbCBTZXhlc1wiIFwiQWxsIFNleGVzXCIgXCJBbGwgU2V4ZXNcIiAuLi5cbiAkIEFnZSBHcm91cCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gXCJBbGwgQWdlc1wiIFwiVW5kZXIgMSB5ZWFyXCIgXCIwLTE3IHllYXJzXCIgXCIxLTQgeWVhcnNcIiAuLi5cbiAkIENPVklELTE5IERlYXRocyAgICAgICAgICAgICAgICAgICAgICAgICA6IG51bSBbMTo4MjYyMF0gODk4Njk5IDIwMyA3OTUgOTMgMjQ0IC4uLlxuICQgVG90YWwgRGVhdGhzICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSA3MDcwMDA1IDM5NDczIDcwMDgyIDczNzcgMTE3NTYgLi4uXG4gJCBQbmV1bW9uaWEgRGVhdGhzICAgICAgICAgICAgICAgICAgICAgICAgOiBudW0gWzE6ODI2MjBdIDc5ODYwNSA0NTYgMTM0NSAyNzEgMzkwIC4uLlxuICQgUG5ldW1vbmlhIGFuZCBDT1ZJRC0xOSBEZWF0aHMgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSA0NjY5NDggMjYgMjIzIDI1IDg0IC4uLlxuICQgSW5mbHVlbnphIERlYXRocyAgICAgICAgICAgICAgICAgICAgICAgIDogbnVtIFsxOjgyNjIwXSAxMDIyOSAyNCAxOTMgNjUgODEgLi4uXG4gJCBQbmV1bW9uaWEsIEluZmx1ZW56YSwgb3IgQ09WSUQtMTkgRGVhdGhzOiBudW0gWzE6ODI2MjBdIDEyMzkxMTIgNjU3IDIxMTAgNDA0IDYzMSAuLi5cbiAkIEZvb3Rub3RlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IGNociBbMTo4MjYyMF0gTkEgTkEgTkEgTkEgLi4uXG4gLSBhdHRyKCosIFwic3BlY1wiKT1cbiAgLi4gY29scyhcbiAgLi4gICBgRGF0YSBBcyBPZmAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYFN0YXJ0IERhdGVgID0gY29sX2NoYXJhY3RlcigpLFxuICAuLiAgIGBFbmQgRGF0ZWAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgR3JvdXAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgWWVhciA9IGNvbF9kb3VibGUoKSxcbiAgLi4gICBNb250aCA9IGNvbF9kb3VibGUoKSxcbiAgLi4gICBTdGF0ZSA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgLi4gICBTZXggPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYEFnZSBHcm91cGAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIC4uICAgYENPVklELTE5IERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYFRvdGFsIERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYFBuZXVtb25pYSBEZWF0aHNgID0gY29sX251bWJlcigpLFxuICAuLiAgIGBQbmV1bW9uaWEgYW5kIENPVklELTE5IERlYXRoc2AgPSBjb2xfbnVtYmVyKCksXG4gIC4uICAgYEluZmx1ZW56YSBEZWF0aHNgID0gY29sX251bWJlcigpLFxuICAuLiAgIGBQbmV1bW9uaWEsIEluZmx1ZW56YSwgb3IgQ09WSUQtMTkgRGVhdGhzYCA9IGNvbF9udW1iZXIoKSxcbiAgLi4gICBGb290bm90ZSA9IGNvbF9jaGFyYWN0ZXIoKVxuICAuLiApXG4gLSBhdHRyKCosIFwicHJvYmxlbXNcIik9PGV4dGVybmFscHRyPiBcbiJ9 -->
+<pre><code>spec_tbl_df [82,620 × 16] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ Data As Of                              : chr [1:82620] &quot;02/09/2022&quot; &quot;02/09/2022&quot; &quot;02/09/2022&quot; &quot;02/09/2022&quot; ...
+ $ Start Date                              : chr [1:82620] &quot;01/01/2020&quot; &quot;01/01/2020&quot; &quot;01/01/2020&quot; &quot;01/01/2020&quot; ...
+ $ End Date                                : chr [1:82620] &quot;02/05/2022&quot; &quot;02/05/2022&quot; &quot;02/05/2022&quot; &quot;02/05/2022&quot; ...
+ $ Group                                   : chr [1:82620] &quot;By Total&quot; &quot;By Total&quot; &quot;By Total&quot; &quot;By Total&quot; ...
+ $ Year                                    : num [1:82620] NA NA NA NA NA NA NA NA NA NA ...
+ $ Month                                   : num [1:82620] NA NA NA NA NA NA NA NA NA NA ...
+ $ State                                   : chr [1:82620] &quot;United States&quot; &quot;United States&quot; &quot;United States&quot; &quot;United States&quot; ...
+ $ Sex                                     : chr [1:82620] &quot;All Sexes&quot; &quot;All Sexes&quot; &quot;All Sexes&quot; &quot;All Sexes&quot; ...
+ $ Age Group                               : chr [1:82620] &quot;All Ages&quot; &quot;Under 1 year&quot; &quot;0-17 years&quot; &quot;1-4 years&quot; ...
+ $ COVID-19 Deaths                         : num [1:82620] 898699 203 795 93 244 ...
+ $ Total Deaths                            : num [1:82620] 7070005 39473 70082 7377 11756 ...
+ $ Pneumonia Deaths                        : num [1:82620] 798605 456 1345 271 390 ...
+ $ Pneumonia and COVID-19 Deaths           : num [1:82620] 466948 26 223 25 84 ...
+ $ Influenza Deaths                        : num [1:82620] 10229 24 193 65 81 ...
+ $ Pneumonia, Influenza, or COVID-19 Deaths: num [1:82620] 1239112 657 2110 404 631 ...
+ $ Footnote                                : chr [1:82620] NA NA NA NA ...
+ - attr(*, &quot;spec&quot;)=
+  .. cols(
+  ..   `Data As Of` = col_character(),
+  ..   `Start Date` = col_character(),
+  ..   `End Date` = col_character(),
+  ..   Group = col_character(),
+  ..   Year = col_double(),
+  ..   Month = col_double(),
+  ..   State = col_character(),
+  ..   Sex = col_character(),
+  ..   `Age Group` = col_character(),
+  ..   `COVID-19 Deaths` = col_number(),
+  ..   `Total Deaths` = col_number(),
+  ..   `Pneumonia Deaths` = col_number(),
+  ..   `Pneumonia and COVID-19 Deaths` = col_number(),
+  ..   `Influenza Deaths` = col_number(),
+  ..   `Pneumonia, Influenza, or COVID-19 Deaths` = col_number(),
+  ..   Footnote = col_character()
+  .. )
+ - attr(*, &quot;problems&quot;)=&lt;externalptr&gt; </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -307,7 +336,7 @@ dbl (2): SECTION, PeerGroup
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3JvdXAgUHJvamVjdCAxIgpzdWJ0aXRsZTogIkJpb2xvZ3kgMzY4LzY2NCBCdWNrbmVsbCBVbml2ZXJzaXR5IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKYXV0aG9yOiBQcm9mLiBLZW4gRmllbGQKZGF0ZTogOSBGZWIgMjAyMgotLS0KCmBgYHtyIExvYWQgTGlicmFyaWVzLCBpbmNsdWRlPUZBTFNFfQojIExvYWQgb3RoZXIgcGFja2FnZXMgaGVyZS4KaWYgKCFyZXF1aXJlKCJkYXRhc2F1UnVzIikpIGluc3RhbGwucGFja2FnZXMoImRhdGFzYXVSdXMiKTsgbGlicmFyeShkYXRhc2F1UnVzKQppZiAoIXJlcXVpcmUoInRpZHl2ZXJzZSIpKSBpbnN0YWxsLnBhY2thZ2VzKCJ0aWR5dmVyc2UiKTsgbGlicmFyeSh0aWR5dmVyc2UpCmBgYAoKVGhpcyBwcm9qZWN0IHdpbGwgcmVxdWlyZSB5b3UgdG8gZGV2ZWxvcCBhIHR1dG9yaWFsIHRvIHRlYWNoIEJ1Y2tuZWxsIHN0dWRlbnRzIGhvdyB0byB1c2UgUiBmb3IgZ3JhcGhpbmcgYW5kIGRhdGEgYW5hbHlzaXMuIAoKIyMgVGFyZ2V0IEF1ZGllbmNlCgpEaXNjdXNzIHdpdGggeW91ciBncm91cCB0aGUgdGFyZ2V0IGF1ZGllbmNlIGZvciB0aGUgdHV0b3JpYWwuIApFeGFtcGxlcyBjb3VsZCBiZSBvbmUgb2YgdGhlIG5ldyBjb3JlIEJpb2xvZ3kgY2xhc3NlcywgYW5vdGhlciAzMDAtbGV2ZWwgY291cnNlIChub3QgMzY0KSwgb3IgYSByZXNlYXJjaCBncm91cC4gCgpgYGB7ciBlY2hvPUZBTFNFfQoKYGBgCgojIyBHcm91cHMKCllvdSB3aWxsIHdvcmsgd2l0aCB0aGUgc2FtZSBncm91cHMgYXMgZm9yIHRoZSBIb21ld29yayAyIFBlZXIgcmV2aWV3LiAKCmBgYHtyfQpQZWVyR3JvdXBzMSA8LSByZWFkX2NzdigiUGVlckdyb3VwczEuY3N2IikKUGVlckdyb3VwczEgJT4lIAogIHNlbGVjdCgtTUFKUiwgLUNMQVMsICkgJT4lCiAgcHJpbnQoKQpgYGAKCiMjIEdyYWRpbmcKCkVhY2ggc3R1ZGVudCB3aWxsIGJlIGV4cGVjdGVkIHRvIGNvbXBsZXRlIHRoZSBmb2xsb3dpbmcgdGFza3MgdG8gZWFybiA4NSUgb2YgdGhlIHBvaW50cyBhdmFpbGFibGUgZm9yIHRoaXMgYXNzaWdubWVudCAoMjEvMjUpLgoKLSBJZGVudGlmeSBhbmQgb2J0YWluIHN1aXRhYmxlIGRhdGFzZXQKLSBVc2UgYSBHaXRodWIgcmVwb3NpdG9yeSBhbmQgdmVyc2lvbiBjb250cm9sIHRvIGNvbGxhYm9yYXRlIG9uIHRoZSBwcm9qZWN0Ci0gU3BlbmQgNC02IGhvdXJzIHByZXBhcmluZywgY29kaW5nLCBhbmQgdGVzdGluZyB0dXRvcmlhbAogICsgRGF0YSBleHBsb3JhdGlvbgogICsgRGF0YSB2aXN1YWxpemF0aW9uCiAgKyBIeXBvdGhlc2lzIHRlc3RpbmcKLSBQcmVzZW50IHR1dG9yaWFsIGluIGNsYXNzCi0gUHJvdmlkZSBwdWJsaWMgYXJjaGl2ZSBzdWl0YWJsZSBmb3Igc2hhcmluZyB0byBzdHVkZW50cy9mYWN1bHR5CgpUdXRvcmlhbHMgZnJvbSBwcmV2aW91cyBjbGFzc2VzIGNhbiBiZSB2aWV3ZWQgYXQgb3VyIHB1YmxpYyBnaXRodWIgc2l0ZTogaHR0cHM6Ly9naXRodWIuY29tL0J1Y2tuZWxsLUJpb2wzNjQKCkVhY2ggZ3JvdXAgc2hvdWxkIHVzZSBhbiAqQWNrbm93bGVkZ2VtZW50cyogc2VjdGlvbiB0byBkb2N1bWVudCB0aGUgcGFydGljaXBhdGlvbiBvZiBlYWNoIG1lbWJlciBhbmQgdGhlIGNvbGxhYm9yYXRpb24gd2l0aGluIGFuZCBiZXR3ZWVuIGdyb3Vwcy4KCkFkZGl0aW9uYWwgY3JlZGl0IHdpbGwgYmUgYXdhcmRlZCBmb3IgcHJvdmlkaW5nIGFzc2lzdGFuY2UgdG8gb3RoZXIgZ3JvdXBzIGFuZCBmb3IgdGhlIGRldmVsb3BtZW50IG9mIGEgdHV0b3JpYWwgdGhhdCBnb2VzIGJleW9uZCB0aGUgbWluaW1hbCBleHBlY3RhdGlvbnMgbGlzdGVkIGFib3ZlLgoKCgpgYGB7cn0KCmBgYAoKCmBgYHtyfQoKYGBgCgpgYGB7cn0KCmBgYAoKCmBgYHtyfQoKYGBgCgoKCmBgYHtyfQoKYGBgCgojIEFja25vd2xlZGdlbWVudHMKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3JvdXAgUHJvamVjdCAxIgpzdWJ0aXRsZTogIkJpb2xvZ3kgMzY4LzY2NCBCdWNrbmVsbCBVbml2ZXJzaXR5IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKYXV0aG9yOiBQcm9mLiBLZW4gRmllbGQKZGF0ZTogOSBGZWIgMjAyMgotLS0KClRoaXMgcHJvamVjdCB3aWxsIHJlcXVpcmUgeW91IHRvIGRldmVsb3AgYSB0dXRvcmlhbCB0byB0ZWFjaCBCdWNrbmVsbCBzdHVkZW50cyBob3cgdG8gdXNlIFIgZm9yIGdyYXBoaW5nIGFuZCBkYXRhIGFuYWx5c2lzLiAKCiMjIFRhcmdldCBBdWRpZW5jZQoKRGlzY3VzcyB3aXRoIHlvdXIgZ3JvdXAgdGhlIHRhcmdldCBhdWRpZW5jZSBmb3IgdGhlIHR1dG9yaWFsLiAKRXhhbXBsZXMgY291bGQgYmUgb25lIG9mIHRoZSBuZXcgY29yZSBCaW9sb2d5IGNsYXNzZXMsIGFub3RoZXIgMzAwLWxldmVsIGNvdXJzZSAobm90IDM2NCksIG9yIGEgcmVzZWFyY2ggZ3JvdXAuIAoKYGBge3IgZWNobz1GQUxTRX0KCmBgYAoKCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmBgYAoKYGBge3IgTG9hZCBMaWJyYXJpZXMsIGluY2x1ZGU9RkFMU0V9CiMgTG9hZCBvdGhlciBwYWNrYWdlcyBoZXJlLgppZiAoIXJlcXVpcmUoImRhdGFzYXVSdXMiKSkgaW5zdGFsbC5wYWNrYWdlcygiZGF0YXNhdVJ1cyIpOyBsaWJyYXJ5KGRhdGFzYXVSdXMpCmlmICghcmVxdWlyZSgidGlkeXZlcnNlIikpIGluc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIpOyBsaWJyYXJ5KHRpZHl2ZXJzZSkKYGBgCgpgYGB7cn0KbGlicmFyeShyZWFkcikKQ292aWRfMTk8LXJlYWRfY3N2KCIuL0RhdGEvUHJvdmlzaW9uYWxfQ09WSUQtMTlfRGVhdGhzX2J5X1NleF9hbmRfQWdlLmNzdiIpCnN0cihDb3ZpZF8xOSkKYGBgCgoKIyMgR3JhZGluZwoKRWFjaCBzdHVkZW50IHdpbGwgYmUgZXhwZWN0ZWQgdG8gY29tcGxldGUgdGhlIGZvbGxvd2luZyB0YXNrcyB0byBlYXJuIDg1JSBvZiB0aGUgcG9pbnRzIGF2YWlsYWJsZSBmb3IgdGhpcyBhc3NpZ25tZW50ICgyMS8yNSkuCgotIElkZW50aWZ5IGFuZCBvYnRhaW4gc3VpdGFibGUgZGF0YXNldAotIFVzZSBhIEdpdGh1YiByZXBvc2l0b3J5IGFuZCB2ZXJzaW9uIGNvbnRyb2wgdG8gY29sbGFib3JhdGUgb24gdGhlIHByb2plY3QKLSBTcGVuZCA0LTYgaG91cnMgcHJlcGFyaW5nLCBjb2RpbmcsIGFuZCB0ZXN0aW5nIHR1dG9yaWFsCiAgKyBEYXRhIGV4cGxvcmF0aW9uCiAgKyBEYXRhIHZpc3VhbGl6YXRpb24KICArIEh5cG90aGVzaXMgdGVzdGluZwotIFByZXNlbnQgdHV0b3JpYWwgaW4gY2xhc3MKLSBQcm92aWRlIHB1YmxpYyBhcmNoaXZlIHN1aXRhYmxlIGZvciBzaGFyaW5nIHRvIHN0dWRlbnRzL2ZhY3VsdHkKClR1dG9yaWFscyBmcm9tIHByZXZpb3VzIGNsYXNzZXMgY2FuIGJlIHZpZXdlZCBhdCBvdXIgcHVibGljIGdpdGh1YiBzaXRlOiBodHRwczovL2dpdGh1Yi5jb20vQnVja25lbGwtQmlvbDM2NAoKRWFjaCBncm91cCBzaG91bGQgdXNlIGFuICpBY2tub3dsZWRnZW1lbnRzKiBzZWN0aW9uIHRvIGRvY3VtZW50IHRoZSBwYXJ0aWNpcGF0aW9uIG9mIGVhY2ggbWVtYmVyIGFuZCB0aGUgY29sbGFib3JhdGlvbiB3aXRoaW4gYW5kIGJldHdlZW4gZ3JvdXBzLgoKQWRkaXRpb25hbCBjcmVkaXQgd2lsbCBiZSBhd2FyZGVkIGZvciBwcm92aWRpbmcgYXNzaXN0YW5jZSB0byBvdGhlciBncm91cHMgYW5kIGZvciB0aGUgZGV2ZWxvcG1lbnQgb2YgYSB0dXRvcmlhbCB0aGF0IGdvZXMgYmV5b25kIHRoZSBtaW5pbWFsIGV4cGVjdGF0aW9ucyBsaXN0ZWQgYWJvdmUuCgoKCmBgYHtyfQoKYGBgCgoKYGBge3J9CgpgYGAKCmBgYHtyfQoKYGBgCgoKYGBge3J9CgpgYGAKCgoKYGBge3J9CgpgYGAKCiMgQWNrbm93bGVkZ2VtZW50cwoKCg==</div>
 
 
 
