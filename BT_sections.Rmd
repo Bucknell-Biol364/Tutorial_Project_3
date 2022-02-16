@@ -9,22 +9,60 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
+if (!require("readr")) install.packages("readr"); library(readr)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+library(readr)
+Covid_19<-read_csv("Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+str(Covid_19)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+library(dplyr)
+Covid_19$State<-as_factor(Covid_19$State)
+nlevels(Covid_19$State)
+summary(Covid_19$State)
+
+```
+
+```{r}
+Covid_19.Alltime<-filter(Covid_19, Group == "By Total")
+Covid_19.Alltime.State1<-filter(Covid_19.Alltime, State != "United States")
+Covid_19.Alltime.State2<-filter(Covid_19.Alltime.State1, State != "District of Columbia")
+Covid_19.Alltime.State3<-filter(Covid_19.Alltime.State2, State != "New York City")
+Covid_19.Alltime.State4<-filter(Covid_19.Alltime.State3, State != "Puerto Rico")
+table(Covid_19.Alltime.State4$State)
+nlevels(Covid_19.Alltime.State4$State) #why do the factor levels stay in the data set but the values disappear
+
+#why doesnt something like this work:
+#Covid_19.Alltime.State1<-filter(Covid_19.Alltime, State != c("United States", "District of Columbia", "New York City", "Puerto Rico"))
+#am I missing an %in% symbol? Because this works to pull values, just not remove
+```
+
+```{r}
+Covid_19.AT.S4.A<-filter(Covid_19.Alltime.State4, Sex == "All Sexes")
+Covid_19.AT.S4.B<-filter(Covid_19.AT.S4.A, `Age Group` == "All Ages")
+
+#Covid_19.AT.S4.All<-filter(Covid_19.Alltime.State4, Sex == "All Sexes") %>%
+  #filter(Covid_19.Alltime.State4, `Age Group` == "All Ages")
+#why wouldnt this pipeline work
+```
+
+
+```{r}
+library(dplyr)
+arrange(Covid_19.AT.S4.B,desc(`COVID-19 Deaths`))
+head(Covid_19.AT.S4.B, 10)
+
+```
+
+
+
+
+
+
+
+
