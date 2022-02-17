@@ -41,6 +41,34 @@ INTRODUCTION TO R:
 
 EXPLORATION OF DATASET:
 
+##For the checking N's section potentially? (BT)
+Checking if the total deaths match for each time division (by month, by year, total)
+```{r}
+sum(Covid_19.S.T.X.A$`COVID-19 Deaths`)
+# All US total deaths (from the 50 states) from "by total" time catagory
+
+Covid_19.S %>%
+  filter(Sex == "All Sexes") %>%
+  filter(Group == "By Year") %>%
+  filter(`Age Group` == "All Ages") %>%
+  summarize(Group, State, Sex,`Age Group`, `COVID-19 Deaths`) ->Covid_19.Deaths.byY
+sum(Covid_19.Deaths.byY$`COVID-19 Deaths`)
+#all US total deaths (from the 50 states) from "By Year" time category
+
+Covid_19.S %>%
+  filter(Sex == "All Sexes") %>%
+  filter(Group == "By Month") %>%
+  filter(`Age Group` == "All Ages") %>%
+  summarize(Group, State, Sex,`Age Group`, `COVID-19 Deaths`) ->Covid_19.Deaths.byM
+sum(Covid_19.Deaths.byM$`COVID-19 Deaths`, na.rm = TRUE)
+#all US total deaths (from the 50 states) from "By Month" time catagory
+
+
+```
+
+
+
+
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
 
 Renaming some columns in the dataframe because they have spaces and cause call issues:
@@ -186,17 +214,44 @@ plot(Coast2)
 ```{r}
 ```
 
+## Code for Visualizing "do older people have higher death rates than younger people?" (BT)
+```{r}
+library(dplyr)
+Covid_19$`Age Group`<-as.factor(Covid_19$`Age Group`)
+#age group = factor
 
-STATISTICAL ANALYSIS:
+Covid_19 %>%
+  filter(State == "United States") %>%
+  filter(Sex == "All Sexes") %>%
+  filter(Group == "By Total") %>%
+  summarize(State, Sex,`Age Group`, `COVID-19 Deaths`) -> Covid_19.Deaths.by.Age
+#Isolates total Covid deaths in the country regardless of sex in its own Data set (filter and sumarize function example)
 
-GlOSSARY:
+table(Covid_19.Deaths.by.Age$`Age Group`)
+```
+
+```{r}
+Covid_19.Deaths.by.Age %>%
+  filter(`Age Group` != "0-17 years" & `Age Group` != "All Ages" & `Age Group` != "55-64 years") ->Covid_19.Deaths.by.Age
+#removing 0-17 years and All Ages and 55 - 64 years
+
+Covid_19.Deaths.by.Age$`Age Group`<-recode_factor(Covid_19.Deaths.by.Age$`Age Group`, `Under 1 year` = "0-1 years", `1-4 years` = "01-4 years", `5-14 years` = "05-14 years")
+ #renaming under 1 year to 0-1 year
+table(Covid_19.Deaths.by.Age$`Age Group`)
+#validating change
+```
+```{r}
+library(ggplot2)
+plot_Ds.by.Age<-ggplot(data=Covid_19.Deaths.by.Age, aes(x=`Age Group`, y=`COVID-19 Deaths`)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle = 50, vjust = 0.7, hjust=0.5))
+plot_Ds.by.Age
+#plotting the data
+
+```
 
 
-
-
-
-
-# Code for Ranking net Deaths by State
+## Code for Ranking net Deaths by State (BT)
 
 ```{r}
 library(readr)
@@ -224,6 +279,10 @@ arrange(Covid_19.S.T.X.A,desc(`COVID-19 Deaths`))
 ```
 
 
+
+STATISTICAL ANALYSIS:
+
+GlOSSARY:
 
 
 
