@@ -3,9 +3,34 @@ title: "Maisy"
 output: html_document
 ---
 
+INTRODUCTION TO R:
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+This code helps set up the R markdown document to make a nice clean html file for sharing. 
+Click the green triangle to run the code chunk. 
+Note that all of your packages should be installed in the first code chunk.
+Tidyverse should generally be the last package installed.
+
+```{r Load Libraries, include=FALSE}
+# Load other packages here.
+if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
+if (!require("dplyr")) install.packages("dplyr"); library(dplyr)
+if (!require("ggplot2")) install.packages("ggplot2"); library(ggplot2)
+if (!require("readr")) install.packages("readr"); library(readr)
+if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
+if (!require("vioplot")) install.packages("vioplot"); library(vioplot)
+if (!require("car")) install.packages("car"); library(car)
+```
+
+Click this green arrow to run a chunk of code that produces output.
+```{r Load in Data Set}
+Covid_19<-read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+```
+
+
 
 ## R Markdown
 
@@ -26,3 +51,57 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+Renaming any categories that have a space in them. RStudio does not like spaces and therefore it is easier to just rename them. 
+
+```{r}
+# Below is a very handy way to eliminate those annoying spaces in the column names!
+names(Covid_19) <- make.names(names(Covid_19))
+```
+
+```{r}
+library(readr)
+summary(Covid_19)
+str(Covid_19)
+```
+
+Start.Date, End.Date,  State, Sex, Month, Year, Age.Group  are listed as characters but they should be factors. 
+```{r}
+Covid_19$Start.Date <- as.factor(Covid_19$Start.Date)
+Covid_19$End.Date <- as.factor(Covid_19$End.Date)
+Covid_19$State <- as.factor(Covid_19$State)
+Covid_19$Sex <- as.factor(Covid_19$Sex)
+Covid_19$Month <- as.factor(Covid_19$Month)
+
+Covid_19$Age.Group <- as.factor(Covid_19$Age.Group)
+
+summary(Covid_19)
+```
+
+
+
+## Visualize Data Set
+Plot of timeline vs death
+```{r}
+ggplot(Covid_19) +
+  geom_jitter() + 
+  aes(x= Year, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Year") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+```
+
+```{r}
+ggplot(Covid_19) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+```
+
+
