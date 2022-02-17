@@ -91,11 +91,65 @@ When a dataset is uploaded, there is an informal checklist to complete before vi
   16.Footnotes
 These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This dataframe includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this dataframe, there are 82620 observations that can be inferred as points of collection. 
 
+##Forumating a Question: 
+
 Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can be limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables.
 
 The hypothesis(s) we should be interested in for this R tutorial are: 
 1. 
 2.
+
+##Read Data:
+
+The next step in exploratory data analysis is to read in a portion of data. The purpose of this task is to determine in the data is messy and should be cleaned. Messy data with often times be orderly, have missing values, and is not suitable for immediate data visualization. As the data provided was from the CDC, we can expect relatively "clean" data. 
+
+```{r}
+library(readr)
+Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv") 
+summary(Covid_19)
+```
+
+The readr package is used here because it can read and analyze large dataframes fast. The summary of the "Covid-19" dataframe was performed to get a general idea of what type of data is included in the data frame (character, interger, numeric) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
+
+Here, we can also note that there are spaces in the some of the column names. Space often interfere with coding functions, and should be taken out for convenience. We can remove the spaces in the columns of interest by using the rename function. The general struction of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe change, new column name="column with spaces)
+
+```{r}
+Covid_19<- rename(Covid_19, COVIDDeaths = "COVID-19 Deaths")
+Covid_19<- rename(Covid_19, AgeGroup = "Age Group")
+```
+
+##Check Packaging
+
+Next, the packaging of the dataframe should be assessed. This validates that the dataframe is complete and is properly loaded. This can be complete using simple R commands. We can look at the number of columns and rows that the dataframe has. 
+
+```{r}
+ncol(Covid_19)
+nrow(Covid_19)
+```
+
+As the output of this code chuck matches the expected number of variables and observation, it can be assumed that the dataframe was uploaded correctly. 
+
+##Run str()
+
+Another general exploration tool that should be completed before analysis is running the structure of the dataframe. The output of this command replicates some knowledge we already have, however, it is another clean visual of the composition of the data and method to catch potential problems before analysis. 
+
+```{r}
+str(Covid_19)
+```
+
+As there are no apparent issues, we can move to the next step in the checklsit.
+
+##Check Top and Bottom of Data
+
+Assessing the beginning and end of the dataframe is a useful tool to assure the data was loaded in property, the data is properly formatted, and that all expected data is present. Should dates be present in the dataframe, this technique is useful to check the ordering. As 
+
+
+
+```{r}
+
+```
+
+
 
 
 
@@ -129,13 +183,6 @@ sum(Covid_19.Deaths.byM$`COVID-19 Deaths`, na.rm = TRUE)
 
 
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
-
-Renaming some columns in the dataframe because they have spaces and cause call issues:
-
-```{r}
-Covid_19<- rename(Covid_19, COVIDDeaths = "COVID-19 Deaths")
-Covid_19<- rename(Covid_19, AgeGroup = "Age Group")
-```
 
 1. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
 As there is such a large dataset, a specified dataframe with an area of interest is best for data visualization. Due to relevance, Pennsylvania is a good state to pick. Pennsylvania can be filtered from the larger dataset. 
