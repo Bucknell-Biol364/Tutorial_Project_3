@@ -1,5 +1,5 @@
 ---
-title: "Group Project 1"
+title: "Group Project 3"
 subtitle: "Biology 368/664 Bucknell University"
 output: html_notebook
 author: Prof. Ken Field
@@ -35,8 +35,19 @@ Outline:
 
 #### Project Content #####
 
-INTRODUCTION:
+INTRODUCTION TO EPIDEMIOLOGY:
 
+Epidemiology is the "study of distribution and determinants of health related states among specified populations and the application of that study to control health problems" (A Dictionary of Epidemiology). The purpose of epidemiology in public health practice is to: (1) discover and analyze agents that affect heath, (2) determining causes of illness, disability, and death, (3) identification of populations at risk, and (4) develop effective programs and services to to improve population health. Many epidemiologists solve health problems through a formal scientific approach that includes data collection, assessment, hypothesis testing, and action.  
+
+The employment of epidemiology has been notably publicized by the COVID-19 epidemic. As many people have been impacted by the virus in various capacities, this has sparked curiosity into how professionals identify, measure, and represent the epidemiology of such infections. In this R tutorial, we will assume the role of an epidemiologist and conduct a formal scientific method using a COVID-19 dataset provided by the CDC.
+
+At the conclusion of this project, the following should be accomplished:
+  1. Relate epidemiology data collection to data science/analysis
+  2. Carry out scientific method
+      a.Perform an exploration of dataset using R 
+      b. Perform basic data analysis using R
+      c. Draw conclusions from analysis
+  
 INTRODUCTION TO R:
 
 ```{r setup, include=FALSE}
