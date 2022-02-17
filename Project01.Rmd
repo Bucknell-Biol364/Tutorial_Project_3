@@ -55,8 +55,9 @@ if (!require("car")) install.packages("car"); library(car)
 ```
 
 ```{r Load in Data Set}
-CovidData <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+Covid_19<-read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 ```
+
 
 EXPLORATION OF DATASET:
 
@@ -142,7 +143,6 @@ PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVIDDeaths)) +
 plot(PennMonth)
 ```
 
-
 General Data Exploration of Monthly COVID-19 Deaths Female/Male in Pennsylvania
 
 ```{r}
@@ -163,10 +163,8 @@ PM2<-ggplot(CovidDataPennMonth) +
   theme_cowplot()
   
   
-  
 plot_grid(PM1,PM2, ncol=1)
 ```
-
 
 Plotting Data of COVID-19 Deaths from Pennsylvania (By Year)
 
