@@ -69,6 +69,12 @@ if (!require("car")) install.packages("car"); library(car)
 Covid_19<-read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 ```
 
+Renaming any categories that have a space in them. RStudio does not like spaces and therefore it is easier to just rename them. 
+```{r}
+# Below is a very handy way to eliminate those annoying spaces in the column names!
+names(Covid_19) <- make.names(names(Covid_19))
+```
+
 
 EXPLORATION OF DATASET:
 
@@ -206,7 +212,32 @@ After an initial check over the dataframe has been complete, there are other fac
 
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
 
-1. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
+1. Plotting Data of COVID-19 Deaths per year and month. 
+This is a great way to start looking at the data set. Here we can get a visualization of how the data is spread out over years and then narrow in per month. 
+This first plot shows COVID-19 Deaths per year.
+```{r}
+ggplot(Covid_19) +
+  geom_jitter() + 
+  aes(x= Year, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Year") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+```
+Here we can visualize if there is a difference in COVID-19 Deaths per month
+```{r}
+ggplot(Covid_19) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+```
+
+2. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
 As there is such a large dataset, a specified dataframe with an area of interest is best for data visualization. Due to relevance, Pennsylvania is a good state to pick. Pennsylvania can be filtered from the larger dataset. 
 
 ```{r}
@@ -294,7 +325,7 @@ PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVIDDeaths)) +
 plot(PennYear)
 ```
 
-2. West Coast vs East Coast COVID-19 Death Exploration 
+3. West Coast vs East Coast COVID-19 Death Exploration 
 
 Creation of dataframe with binary value (TRUE/FALSE) to sort East from West Coast Sates
 ```{r}
