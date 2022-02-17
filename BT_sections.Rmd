@@ -22,8 +22,6 @@ str(Covid_19)
 getwd()
 ```
 
-
-
 ## Code for Ranking net Deaths by State
 
 ```{r}
@@ -48,11 +46,48 @@ arrange(Covid_19.S.T.X.A,desc(`COVID-19 Deaths`))
 ```
 
 
-```{r}
+
 library(dplyr)
 Covid_19.AT.S4.B %>%
   mutate(EC = State %in% c("Alabama", "New York")) -> Covid_19.AT.S4.B
+
+
+## Code for Visualizing "do older people have higher death rates than younger people?"
+```{r}
+library(dplyr)
+Covid_19$`Age Group`<-as.factor(Covid_19$`Age Group`)
+#age group = factor
+
+Covid_19 %>%
+  filter(State == "United States") %>%
+  filter(Sex == "All Sexes") %>%
+  filter(Group == "By Total") %>%
+  summarize(State, Sex,`Age Group`, `COVID-19 Deaths`) -> Covid_19.Deaths.by.Age
+#Isolates total Covid deaths in the country regardless of sex in its own Data set (filter and sumarize function example)
+
+table(Covid_19.Deaths.by.Age$`Age Group`)
+
+
 ```
+
+
+
+```{r}
+sum(Covid_19.S.T.X.A$`COVID-19 Deaths`)
+# All state total deaths from "by total" time catagory
+
+Covid_19.S %>%
+  filter(Sex == "All Sexes") %>%
+  filter(Group == "By Year") %>%
+  filter(`Age Group` == "All Ages") %>%
+  summarize(State, Sex,`Age Group`, `COVID-19 Deaths`) ->Covid_19.Deaths.byY
+
+  sum(Covid_19.Deaths.byY$`COVID-19 Deaths`)
+
+
+```
+
+
 
 
 

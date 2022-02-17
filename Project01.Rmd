@@ -35,6 +35,165 @@ Outline:
 
 #### Project Content #####
 
+INTRODUCTION:
+
+INTRODUCTION TO R:
+
+EXPLORATION OF DATASET:
+
+VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
+
+Renaming some columns in the dataframe because they have spaces and cause call issues:
+
+```{r}
+Covid_19<- rename(Covid_19, COVIDDeaths = "COVID-19 Deaths")
+Covid_19<- rename(Covid_19, AgeGroup = "Age Group")
+```
+
+1. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
+As there is such a large dataset, a specified dataframe with an area of interest is best for data visualization. Due to relevance, Pennsylvania is a good state to pick. Pennsylvania can be filtered from the larger dataset. 
+
+```{r}
+PennData<-filter(Covid_19, Sex!="NA" & Sex!="All Sexes" & State=="Pennsylvania")
+```
+
+This dataframe can be further refined using the filter function to explore COVID-19 deaths by Age, Group, and Year.
+
+```{r}
+CovidDataPennTotal<-filter(PennData, Group=="By Total" & AgeGroup!="All Ages" & AgeGroup!="Under 1 year" & AgeGroup!="1-4 years" & AgeGroup!="5-14 years" & AgeGroup!="15-24 years" & AgeGroup!="25-34 years" & AgeGroup!="35-44 years" & AgeGroup!="45-54 years" & AgeGroup!="55-64 years")
+PennTotal<-ggplot(CovidDataPennTotal, aes(x = AgeGroup, y = COVIDDeaths)) +
+  geom_point(aes(colour = factor(Sex)), 
+             position = "jitter", 
+             alpha = 0.8,
+             size=0.05) +
+  geom_smooth(formula = y ~ x,method='lm',aes(group = factor(Sex), 
+                              colour = factor(Sex))) + 
+  theme(legend.position = "right") + 
+  ggtitle('Covid-19 Deaths by Age in Pennsylvania (Total) ') +
+  labs(x= "Age Group", y= "COVID-19 Deaths") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
+  theme_cowplot()
+plot(PennTotal)
+```
+
+Plotting Data of COVID-19 Deaths from Pennsylvania (By Month)
+
+```{r}
+CovidDataPennMonth<-filter(PennData, Group=="By Month" & AgeGroup=="All Ages")
+PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVIDDeaths)) +
+  geom_point(aes(colour = factor(Year)), 
+             position = "jitter", 
+             alpha = 0.8,
+             size=0.05) +
+  geom_smooth(formula = y ~ x,method='lm',aes(group = factor(Year), 
+                              colour = factor(Year))) + 
+  theme(legend.position = "right") + 
+  ggtitle('Covid-19 Deaths by Month in Pennsylvania ') +
+  labs(x= "Month", y= "COVID-19 Deaths") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
+  theme_cowplot()
+plot(PennMonth)
+```
+
+
+General Data Exploration of Monthly COVID-19 Deaths Female/Male in Pennsylvania
+
+```{r}
+PM1<-ggplot(CovidDataPennMonth) +
+  aes(x=Sex , y=COVIDDeaths) +
+  geom_boxplot() +
+  geom_jitter(width=.15, aes(color=Sex)) +
+  ggtitle("Monthly Covid-19 Death vs Sex In Pennsylvania")+
+  labs(x="Sex", y="COVID-19 Deaths")
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust=0.5))
+  
+PM2<-ggplot(CovidDataPennMonth) +
+  aes(x = COVIDDeaths, fill = Sex) + 
+  geom_density(alpha=.3) +
+  xlab("Deaths") + ylab("Density") +
+  labs(title="Density vs Monthly Covid-19 Deaths In Pennsylvania")
+  theme_cowplot()
+  
+  
+  
+plot_grid(PM1,PM2, ncol=1)
+```
+
+
+Plotting Data of COVID-19 Deaths from Pennsylvania (By Year)
+
+```{r}
+CovidDataPennYear<-filter(PennData, Group=="By Year" & AgeGroup=="All Ages")
+PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVIDDeaths)) +
+  geom_point(aes(colour = factor(Sex)), 
+             position = "jitter", 
+             alpha = 0.8,
+             size=0.05) +
+  geom_smooth(formula = y ~ x,method='lm',aes(group = factor(Sex), 
+                              colour = factor(Sex))) + 
+  theme(legend.position = "right") + 
+  ggtitle('Covid-19 Deaths by Month in Pennsylvania ') +
+  labs(x= "Year", y= "COVID-19 Deaths") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
+  theme_cowplot()
+  
+plot(PennYear)
+```
+
+2. West Coast vs East Coast COVID-19 Death Exploration 
+
+Creation of dataframe with binary value (TRUE/FALSE) to sort East from West Coast Sates
+```{r}
+Covid_19%>%
+  mutate(WC= State %in% c("Alaska","Arizona","Arkansas","California","Colorado","Hawaii","Idaho","Iowa","Kansas","Louisiana","Minnesota","Missouri","Oregon","South Dakota","Texas","Utah","Washington","Wyoming"))->Covid_19
+```
+
+West Coast vs East Coast COVID-19 Death by Sex
+
+```{r}
+CovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex!="All Sexes" & AgeGroup=="All Ages" & State!="United States" & State!="Puerto Rico")
+Coast1<-ggplot(CovidDataCoasts) +
+  aes(x=WC , y=COVIDDeaths) +
+  geom_boxplot() +
+  geom_jitter(width=.15, aes(color=Sex)) +
+  ggtitle("Total Covid-19 Death vs East/West Coast") +
+  labs(x="Coast", y="COVID-19 Deaths") +
+  scale_x_discrete(labels = c('East', 'West')) +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust=0.5))
+plot(Coast1)
+```
+West Coast vs East Coast Deaths by Age Range
+
+```{r}
+CovidDataCoasts1<-filter(Covid_19, Group=="By Total" & AgeGroup!="All Ages" & AgeGroup!="Under 1 year" & AgeGroup!="1-4 years" & AgeGroup!="5-14 years" & AgeGroup!="15-24 years" & AgeGroup!="25-34 years" & AgeGroup!="35-44 years" & AgeGroup!="45-54 years" & AgeGroup!="55-64 years" & State!="United States" & State!="Puerto Rico", Sex!="Male" & Sex!="Female")
+Coast2<-ggplot(CovidDataCoasts1, aes(x = AgeGroup, y = COVIDDeaths)) +
+  geom_point(aes(colour = factor(WC)), 
+             position = "jitter", 
+             alpha = 0.8,
+             size=0.05) +
+  geom_smooth(formula = y ~ x,method='lm',aes(group = factor(WC), 
+                              colour = factor(WC))) + 
+  theme(legend.position = "right") + 
+  ggtitle('Covid-19 Deaths by Age Group (Total) ') +
+  labs(x= "Age Group", y= "COVID-19 Deaths") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
+  theme_cowplot()
+plot(Coast2)
+```
+
+```{r}
+```
+
+
+STATISTICAL ANALYSIS:
+
+GlOSSARY:
+
+
+
+
 
 
 # Code for Ranking net Deaths by State
