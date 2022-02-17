@@ -39,6 +39,25 @@ INTRODUCTION:
 
 INTRODUCTION TO R:
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Load Libraries, include=FALSE}
+# Load other packages here.
+if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
+if (!require("dplyr")) install.packages("dplyr"); library(dplyr)
+if (!require("ggplot2")) install.packages("ggplot2"); library(ggplot2)
+if (!require("readr")) install.packages("readr"); library(readr)
+if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
+if (!require("vioplot")) install.packages("vioplot"); library(vioplot)
+if (!require("car")) install.packages("car"); library(car)
+```
+
+```{r Load in Data Set}
+CovidData <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+```
+
 EXPLORATION OF DATASET:
 
 ##For the checking N's section potentially? (BT)
@@ -302,21 +321,8 @@ Examples could be one of the new core Biology classes, another 300-level course 
 ```
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-```{r Load Libraries, include=FALSE}
-# Load other packages here.
-if (!require("datasauRus")) install.packages("datasauRus"); library(datasauRus)
-if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
-```
 
-```{r}
-library(readr)
-Covid_19<-read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
-str(Covid_19)
-```
 
 
 ## Grading
