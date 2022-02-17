@@ -72,6 +72,34 @@ Covid_19<-read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 
 EXPLORATION OF DATASET:
 
+When a dataset is uploaded, there is an informal checklist to complete before visualization and anlaysis. One should become familiar with the elements in the dataset. The "Covid_19" dataframe provides epidemiological data that is inclusive of: 
+  1.Data "as of" date
+  2.Start dates of data collection
+  3.End dates of data collection
+  4.Grouped data by month, year, or total
+  5.Year of collected data (if applicable)
+  6.Month of data collection (if applicable)
+  7.State of data collection, or the entire United States
+  8.Sex divided into male, female, or total
+  9.Varied age groups or total collections 
+  10.COVID-19 Deaths 
+  11.Total Deaths
+  12.Pneumonia Deaths
+  13.Pneumonia Deaths and COVID-19 Deaths
+  14.Influenza Deaths
+  15.Pneumonia, Influenza, or COVID-19 Deaths
+  16.Footnotes
+These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This dataframe includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this dataframe, there are 82620 observations that can be inferred as points of collection. 
+
+Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can be limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables.
+
+The hypothesis(s) we should be interested in for this R tutorial are: 
+1. 
+2.
+
+
+
+
 ##For the checking N's section potentially? (BT)
 Checking if the total deaths match for each time division (by month, by year, total)
 ```{r}
