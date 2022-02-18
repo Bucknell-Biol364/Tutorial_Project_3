@@ -9,6 +9,9 @@ output: html_document
     Refer to glossary for a function/stats overview…
     
 #INTRODUCTION TO R:
+At the bottom of this file there is a glossary that you can refer to. 
+It includes an overview of the stats and functions that will be used. 
+
 First it is important to understand the different types of files you can use in RStudio. 
 Today we will go over R Markdown and R Notebook
 
@@ -22,6 +25,7 @@ To create headers in the text you place a single hash tag (#) in front of the te
 
 If you want your text to be italicized, surround the text with asterisk (*). 
 In order for the text to be bolded surround it with two asterisks (**)
+To create a list place on asterisk (*) in front of each line.
 
 Rendering is when you transform the markdown file into a HTML, PDF, or word document and this can be done by clicking on the knit button. When you press knit it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, like I have done below. 
 
@@ -60,6 +64,16 @@ Here we will walk through how to load your data set in and what each part of the
 Click this green arrow to run a chunk of code that produces output.
 ```{r Load in Data Set}
 Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+```
+
+Before you start exploring your data set you should check to see if any column names have spaces in them. 
+Once you have run the code chunk above, press the environment tab in the upper right hand box. You can then click on your data and it will pull up a tab for you to view it.
+Rstudio does not like spaces and therefore it is just easier to rename the columns.
+
+In the code chunk below we are changing all of the spaces in the column names to periods (.). This will make the data much easier to work with.
+```{r}
+# Below is a very handy way to eliminate those annoying spaces in the column names!
+names(Covid_19) <- make.names(names(Covid_19))
 ```
 
 

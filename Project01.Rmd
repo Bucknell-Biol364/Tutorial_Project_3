@@ -35,7 +35,7 @@ Outline:
 
 #### Project Content #####
 
-INTRODUCTION TO EPIDEMIOLOGY:
+#INTRODUCTION TO EPIDEMIOLOGY:
 
 Epidemiology is the "study of distribution and determinants of health related states among specified populations and the application of that study to control health problems" (A Dictionary of Epidemiology). The purpose of epidemiology in public health practice is to: (1) discover and analyze agents that affect heath, (2) determining causes of illness, disability, and death, (3) identification of populations at risk, and (4) develop effective programs and services to to improve population health. Many epidemiologists solve health problems through a formal scientific approach that includes data collection, assessment, hypothesis testing, and action.  
 
@@ -48,28 +48,69 @@ At the conclusion of this project, the following should be accomplished:
       b. Perform basic data analysis using R
       c. Draw conclusions from analysis
   
-INTRODUCTION TO R:
+#INTRODUCTION TO R:
+At the bottom of this file there is a glossary that you can refer to. 
+It includes an overview of the stats and functions that will be used. 
 
+First it is important to understand the different types of files you can use in RStudio. 
+Today we will go over R Markdown and R Notebook
+
+R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text,code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
+
+R Notebook is quite similar to R Markdown except in a notebook only one line is sent at a time. In contrast R Markdown executes the entire code chunk at once. Another large difference is when a R Notebook file is rendered no code is re-run, only the code that has already been run will be presented in produced document. Whereas when an R Markdown file is rendered all code chunks are re-run and it will not allow you to convert it to a document if there is an error in a code chunk.  
+
+##Lets talk about a few of the basics to get you set up to use R. 
+
+To create headers in the text you place a single hash tag (#) in front of the text and for subheaders use 2 hash tags (##).
+
+If you want your text to be italicized, surround the text with asterisk (*). 
+In order for the text to be bolded surround it with two asterisks (**)
+To create a list place on asterisk (*) in front of each line.
+
+Rendering is when you transform the markdown file into a HTML, PDF, or word document and this can be done by clicking on the knit button. When you press knit it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, like I have done below. 
+
+This code helps set up the R markdown document to make a nice clean html file for sharing. 
+Click the green triangle to run the code chunk.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Packages are collections of R functions, data, and compiled code which are stored in the library. The require function is used to ensure we actually get the package we want and if R is unable to receive it, the code will come back with an error or FALSE.
+
+Note that all of your packages should be installed in the first code chunk. If you are coding and realize you need another package you should go back up to your first chunk and add it in. 
+
+Normally the r setup chunk can be included in the load libraries chunk but I separated them today to allow for proper explanation.
+
+You should always load tidyverse library, which includes *dplyr*, *ggplot2*, *readr*, and other packages.
+
+Tidyverse should generally be the last package installed.
 ```{r Load Libraries, include=FALSE}
 # Load other packages here.
-if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
-if (!require("dplyr")) install.packages("dplyr"); library(dplyr)
-if (!require("ggplot2")) install.packages("ggplot2"); library(ggplot2)
-if (!require("readr")) install.packages("readr"); library(readr)
 if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
 if (!require("vioplot")) install.packages("vioplot"); library(vioplot)
 if (!require("car")) install.packages("car"); library(car)
+if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 ```
 
+Now we will load in the data set that we will be using today. 
+
+Here we will walk through how to load your data set in and what each part of the code means
+* First on the left you put the name you want for your data set. 
+* < - This assigns the data frame to a variable 
+* read_csv reads the data into RStudio as a data frame
+* within the parentheses is how you tell it where to find your data 
+* the period (.) indicates that the data is located one folder or click away from your rmd file
+
+Click this green arrow to run a chunk of code that produces output.
 ```{r Load in Data Set}
-Covid_19<-read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 ```
 
-Renaming any categories that have a space in them. RStudio does not like spaces and therefore it is easier to just rename them. 
+Before you start exploring your data set you should check to see if any column names have spaces in them. 
+Once you have run the code chunk above, press the environment tab in the upper right hand box. You can then click on your data and it will pull up a tab for you to view it.
+Rstudio does not like spaces and therefore it is just easier to rename the columns.
+
+In the code chunk below we are changing all of the spaces in the column names to periods (.). This will make the data much easier to work with.
 ```{r}
 # Below is a very handy way to eliminate those annoying spaces in the column names!
 names(Covid_19) <- make.names(names(Covid_19))
@@ -97,7 +138,7 @@ When a dataset is uploaded, there is an informal checklist to complete before vi
   16.Footnotes
 These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This dataframe includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this dataframe, there are 82620 observations that can be inferred as points of collection. 
 
-##Forumating a Question: 
+##Formulating a Question: 
 
 Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can be limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables.
 
