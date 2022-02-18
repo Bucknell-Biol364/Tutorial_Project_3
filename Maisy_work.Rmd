@@ -2,32 +2,64 @@
 title: "Maisy"
 output: html_document
 ---
+2) Introduction to R (M)
+    Define RMD vs Regular R
+    Loading Data Set
+    Load Packages
+    Refer to glossary for a function/stats overview…
+    
+#INTRODUCTION TO R:
+First it is important to understand the different types of files you can use in RStudio. 
+Today we will go over R Markdown and R Notebook
 
-INTRODUCTION TO R:
+R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text,code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
 
+R Notebook is quite similar to R Markdown except in a notebook only one line is sent at a time. In contrast R Markdown executes the entire code chunk at once. Another large difference is when a R Notebook file is rendered no code is re-run, only the code that has already been run will be presented in produced document. Whereas when an R Markdown file is rendered all code chunks are re-run and it will not allow you to convert it to a document if there is an error in a code chunk.  
+
+##Lets talk about a few of the basics to get you set up to use R. 
+
+To create headers in the text you place a single hash tag (#) in front of the text and for subheaders use 2 hash tags (##).
+
+If you want your text to be italicized, surround the text with asterisk (*). 
+In order for the text to be bolded surround it with two asterisks (**)
+
+Rendering is when you transform the markdown file into a HTML, PDF, or word document and this can be done by clicking on the knit button. When you press knit it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, like I have done below. 
+
+This code helps set up the R markdown document to make a nice clean html file for sharing. 
+Click the green triangle to run the code chunk.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This code helps set up the R markdown document to make a nice clean html file for sharing. 
-Click the green triangle to run the code chunk. 
-Note that all of your packages should be installed in the first code chunk.
-Tidyverse should generally be the last package installed.
+Packages are collections of R functions, data, and compiled code which are stored in the library. The require function is used to ensure we actually get the package we want and if R is unable to receive it, the code will come back with an error or FALSE.
 
+Note that all of your packages should be installed in the first code chunk. If you are coding and realize you need another package you should go back up to your first chunk and add it in. 
+
+Normally the r setup chunk can be included in the load libraries chunk but I separated them today to allow for proper explanation.
+
+You should always load tidyverse library, which includes *dplyr*, *ggplot2*, *readr*, and other packages.
+
+Tidyverse should generally be the last package installed.
 ```{r Load Libraries, include=FALSE}
 # Load other packages here.
-if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
-if (!require("dplyr")) install.packages("dplyr"); library(dplyr)
-if (!require("ggplot2")) install.packages("ggplot2"); library(ggplot2)
-if (!require("readr")) install.packages("readr"); library(readr)
 if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
 if (!require("vioplot")) install.packages("vioplot"); library(vioplot)
 if (!require("car")) install.packages("car"); library(car)
+if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 ```
+
+Now we will load in the data set that we will be using today. 
+
+Here we will walk through how to load your data set in and what each part of the code means
+* First on the left you put the name you want for your data set. 
+* < - This assigns the data frame to a variable 
+* read_csv reads the data into RStudio as a data frame
+* within the parentheses is how you tell it where to find your data 
+* the period (.) indicates that the data is located one folder or click away from your rmd file
 
 Click this green arrow to run a chunk of code that produces output.
 ```{r Load in Data Set}
-Covid_19<-read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 ```
 
 
