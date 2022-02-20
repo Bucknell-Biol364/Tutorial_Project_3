@@ -305,7 +305,7 @@ Listed above are simply introductory commands that are used in conjunction with 
 PennData<-filter(Covid_19, Sex!="All Sexes" & State=="Pennsylvania")
 ```
 
-After runnning this new code chuck, the new dataframe "PennData" was created from the previous "Covis_19" dataframe, and is present in the "Global Environment". In this dataframe, one will notice 1020 observations and 16 variables. Our columns remained the same, however, all the observations are only from the state of Pennsylvania. Furthermore, notice how "State=="Pennsylvania"" command kept data from that one particular state. Additionally, note how != removed "All Sexes" observations from the Sex column. These observations were removed because they would have been repetitive data as Male+Female obdervations=All sexes observations. 
+After running this new code chuck, the new dataframe "PennData" was created from the previous "Covis_19" dataframe, and is present in the "Global Environment". In this dataframe, one will notice 1020 observations and 16 variables. Our columns remained the same, however, all the observations are only from the state of Pennsylvania. Furthermore, notice how "State=="Pennsylvania"" command kept data from that one particular state. Additionally, note how != removed "All Sexes" observations from the Sex column. These observations were removed because they would have been repetitive data as Male+Female obdervations=All sexes observations. 
 
 This general theme of grouped data, as mentioned earlier in the project, is something to beware of. Be cautious when analyzing data and filtering data for statistical analysis. 
 
@@ -367,7 +367,7 @@ plot(PennTotal)
 
 A great, refined, visualization was created! Lets take the same code structure from the previous code chunk and look at COVID-19 Deaths from Pennsylvania by month. The creation of a new dataframe, filtering, and creation of a new plot name should be applied. The next plot is a manipulation of the x axis (change to Month) and factor (change to Year). Of course, dress the plot up by changing the titles of everything. 
 
-One additional line of code, however, should be included to change the x axis numeric categories (which represent the numberic month) to a character (month name). This can be applished using the alread loaded package "Stat2Data". The command structure is as follows: scale_x_continuous(breaks = seq_along(month.name), labels = month.name). This line changes the month observation of "2" to display as February on the X axis.
+One additional line of code, however, should be included to change the x axis numeric categories (which represent the numberic month) to a character (month name). This can be accomplished using the alread loaded package "Stat2Data". The command structure is as follows: scale_x_continuous(breaks = seq_along(month.name), labels = month.name). This line changes the month observation of "2" to display as February on the X axis.
 
 (Line taken from https://stackoverflow.com/questions/69411847/changing-month-from-number-to-full-month-name-in-r)
 
@@ -445,10 +445,10 @@ Looking at differences in COVID-19 deaths between the East and West coast create
 
 The creation of a new data frame with an additional column that segretates the East and West coast states can be accomplished using the mutate command. A new column can be created that creates binary values of "TRUE" or "FALSE" where, for example, "TURE" is equivalent to states on the West coast and "FALSE" is equivalent to states on the East coast. 
 
-One can use the dpylr package to mutate their dataframe. This package is already preloaded into our RMD. Dplyr uses the operators %>% to pipeline commands. This is a close equivalent to useing +.
+One can use the dpylr package to mutate their dataframe. This package is already preloaded into our RMD. Dplyr uses the operators %>% to pipeline commands. This is a close equivalent to using +.
 
-The structure of the mutate command is as follows: dataframe%>% mutate(Added column=Column manipulated %in%c(specification of desired data))
-This, almost filted data, should be replaced into dataframe (new or old)-> dataframe.
+The structure of the mutate command is as follows: dataframe%>% mutate(Added column=Column manipulated %in% c(specification of desired data))
+This, almost filtered data, should be replaced into dataframe (new or old)-> dataframe.
 
 Note <- and -> are the same function, but placement at the begging or end of code specify usage. 
 
@@ -488,7 +488,6 @@ Colors can be represented numerous ways in R. However, they can be conveniently 
 http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 
 This cheat sheet was created by Dr. Ying Wei.
-
 
 ```{r}
 CovidDataCoasts1<-filter(Covid_19, Group=="By Total" & Age.Group!="All Ages" & Age.Group!="Under 1 year" & Age.Group!="1-4 years" & Age.Group!="5-14 years" & Age.Group!="15-24 years" & Age.Group!="25-34 years" & Age.Group!="35-44 years" & Age.Group!="45-54 years" & Age.Group!="55-64 years" & State!="United States" & State!="Puerto Rico", Sex!="Male" & Sex!="Female")
@@ -576,6 +575,21 @@ arrange(Covid_19.S.T.X.A,desc(`COVID-19 Deaths`))
 
 
 STATISTICAL ANALYSIS:
+
+```{r}
+shapiro.test(CovidDataPennMonth$COVID.19.Deaths)
+shapiro.test(CovidDataCoasts1$COVID.19.Deaths)
+shapiro.test(CovidDataCoasts$COVID.19.Deaths)
+
+```
+
+```{r}
+CovidDataPennMonth1<-filter(PennData, Group=="By Month" & Age.Group=="All Ages" & Year!="2022")
+lmCDM1 <- lm(COVID.19.Deaths ~ Sex, data=CovidDataPennMonth1)
+summary(lmCDM1)
+plot(lmCDM1)
+```
+
 
 GlOSSARY:
 
