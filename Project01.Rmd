@@ -144,9 +144,18 @@ These variables are all divided into their own column. Just by initially looking
 
 Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables.
 
-The hypothesis(s) we should be interested in for this R tutorial are: 
-1. 
-2. 
+
+=======
+Questions we are interested in for this R tutorial: 
+1. Do males or females have more COVID-19 deaths per month? (Pennsylvania data)
+2. Does west or east coast have more COVID-19 deaths?
+3. Do older people have higher COVID-19 deaths?
+
+The hypothesis(s) we are interested in for this R tutorial are: 
+1. We hypothesize that there will be no difference in COVID-19 deaths between the to genders.
+2. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
+3. We hypothesize that there will be more COVID-19 deaths reported for older individuals.
+>>>>>>> 22011d2bb9f90978d5db70b6baded904dd943feb
 
 ##Read Data:
 
