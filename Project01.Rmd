@@ -259,6 +259,7 @@ VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
 1. Plotting Data of COVID-19 Deaths per year and month. 
 This is a great way to start looking at the data set. Here we can get a visualization of how the data is spread out over years and then narrow in per month. 
 This first plot shows COVID-19 Deaths per year.
+
 ```{r}
 ggplot(Covid_19) +
   geom_jitter() + 
@@ -282,7 +283,7 @@ ggplot(Covid_19) +
 ```
 
 2. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
-As there is such a large dataset, a specified dataframe with an area of interest is best for data visualization. Due to relevance, Pennsylvania is a good state to pick. Pennsylvania can be filtered from the larger dataset. 
+As there is such a large dataset, a specified dataframe with an area of interest may be best for data visualization. Due to relevance, Pennsylvania is a good state to pick. Pennsylvania can be filtered from the larger dataset. 
 
 ```{r}
 PennData<-filter(Covid_19, Sex!="NA" & Sex!="All Sexes" & State=="Pennsylvania")
@@ -291,8 +292,8 @@ PennData<-filter(Covid_19, Sex!="NA" & Sex!="All Sexes" & State=="Pennsylvania")
 This dataframe can be further refined using the filter function to explore COVID-19 deaths by Age, Group, and Year.
 
 ```{r}
-CovidDataPennTotal<-filter(PennData, Group=="By Total" & AgeGroup!="All Ages" & AgeGroup!="Under 1 year" & AgeGroup!="1-4 years" & AgeGroup!="5-14 years" & AgeGroup!="15-24 years" & AgeGroup!="25-34 years" & AgeGroup!="35-44 years" & AgeGroup!="45-54 years" & AgeGroup!="55-64 years")
-PennTotal<-ggplot(CovidDataPennTotal, aes(x = AgeGroup, y = COVIDDeaths)) +
+CovidDataPennTotal<-filter(PennData, Group=="By Total" & Age.Group!="All Ages" & Age.Group!="Under 1 year" & Age.Group!="1-4 years" & Age.Group!="5-14 years" & Age.Group!="15-24 years" & Age.Group!="25-34 years" & Age.Group!="35-44 years" & Age.Group!="45-54 years" & Age.Group!="55-64 years")
+PennTotal<-ggplot(CovidDataPennTotal, aes(x = Age.Group, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(Sex)), 
              position = "jitter", 
              alpha = 0.8,
@@ -301,36 +302,38 @@ PennTotal<-ggplot(CovidDataPennTotal, aes(x = AgeGroup, y = COVIDDeaths)) +
                               colour = factor(Sex))) + 
   theme(legend.position = "right") + 
   ggtitle('Covid-19 Deaths by Age in Pennsylvania (Total) ') +
-  labs(x= "Age Group", y= "COVID-19 Deaths") +
+  labs(x= "Age Group", y= "COVID-19 Deaths", color= "Gender") +
   theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
   theme_cowplot()
 plot(PennTotal)
 ```
-
 Plotting Data of COVID-19 Deaths from Pennsylvania (By Month)
 
 ```{r}
-CovidDataPennMonth<-filter(PennData, Group=="By Month" & AgeGroup=="All Ages")
-PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVIDDeaths)) +
+install.packages("Stat2Data")
+library(Stat2Data)
+
+CovidDataPennMonth<-filter(PennData, Group=="By Month" & Age.Group=="All Ages")
+PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(Year)), 
              position = "jitter", 
              alpha = 0.8,
              size=0.05) +
   geom_smooth(formula = y ~ x,method='lm',aes(group = factor(Year), 
                               colour = factor(Year))) + 
+  scale_x_continuous(breaks = seq_along(month.name), labels = month.name) +
   theme(legend.position = "right") + 
   ggtitle('Covid-19 Deaths by Month in Pennsylvania ') +
-  labs(x= "Month", y= "COVID-19 Deaths") +
+  labs(x= "Month", y= "COVID-19 Deaths", color="Year") +
   theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
   theme_cowplot()
 plot(PennMonth)
 ```
-
 General Data Exploration of Monthly COVID-19 Deaths Female/Male in Pennsylvania
 
 ```{r}
 PM1<-ggplot(CovidDataPennMonth) +
-  aes(x=Sex , y=COVIDDeaths) +
+  aes(x=Sex , y=COVID.19.Deaths) +
   geom_boxplot() +
   geom_jitter(width=.15, aes(color=Sex)) +
   ggtitle("Monthly Covid-19 Death vs Sex In Pennsylvania")+
@@ -339,7 +342,7 @@ PM1<-ggplot(CovidDataPennMonth) +
   theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust=0.5))
   
 PM2<-ggplot(CovidDataPennMonth) +
-  aes(x = COVIDDeaths, fill = Sex) + 
+  aes(x = COVID.19.Deaths, fill = Sex) + 
   geom_density(alpha=.3) +
   xlab("Deaths") + ylab("Density") +
   labs(title="Density vs Monthly Covid-19 Deaths In Pennsylvania")
@@ -352,8 +355,8 @@ plot_grid(PM1,PM2, ncol=1)
 Plotting Data of COVID-19 Deaths from Pennsylvania (By Year)
 
 ```{r}
-CovidDataPennYear<-filter(PennData, Group=="By Year" & AgeGroup=="All Ages")
-PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVIDDeaths)) +
+CovidDataPennYear<-filter(PennData, Group=="By Year" & Age.Group=="All Ages")
+PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(Sex)), 
              position = "jitter", 
              alpha = 0.8,
@@ -362,7 +365,7 @@ PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVIDDeaths)) +
                               colour = factor(Sex))) + 
   theme(legend.position = "right") + 
   ggtitle('Covid-19 Deaths by Month in Pennsylvania ') +
-  labs(x= "Year", y= "COVID-19 Deaths") +
+  labs(x= "Year", y= "COVID-19 Deaths", color="Gender") +
   theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
   theme_cowplot()
   
@@ -380,9 +383,9 @@ Covid_19%>%
 West Coast vs East Coast COVID-19 Death by Sex
 
 ```{r}
-CovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex!="All Sexes" & AgeGroup=="All Ages" & State!="United States" & State!="Puerto Rico")
+CovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex!="All Sexes" & Age.Group=="All Ages" & State!="United States" & State!="Puerto Rico")
 Coast1<-ggplot(CovidDataCoasts) +
-  aes(x=WC , y=COVIDDeaths) +
+  aes(x=WC , y=COVID.19.Deaths) +
   geom_boxplot() +
   geom_jitter(width=.15, aes(color=Sex)) +
   ggtitle("Total Covid-19 Death vs East/West Coast") +
@@ -392,11 +395,12 @@ Coast1<-ggplot(CovidDataCoasts) +
   theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust=0.5))
 plot(Coast1)
 ```
+
 West Coast vs East Coast Deaths by Age Range
 
 ```{r}
-CovidDataCoasts1<-filter(Covid_19, Group=="By Total" & AgeGroup!="All Ages" & AgeGroup!="Under 1 year" & AgeGroup!="1-4 years" & AgeGroup!="5-14 years" & AgeGroup!="15-24 years" & AgeGroup!="25-34 years" & AgeGroup!="35-44 years" & AgeGroup!="45-54 years" & AgeGroup!="55-64 years" & State!="United States" & State!="Puerto Rico", Sex!="Male" & Sex!="Female")
-Coast2<-ggplot(CovidDataCoasts1, aes(x = AgeGroup, y = COVIDDeaths)) +
+CovidDataCoasts1<-filter(Covid_19, Group=="By Total" & Age.Group!="All Ages" & Age.Group!="Under 1 year" & Age.Group!="1-4 years" & Age.Group!="5-14 years" & Age.Group!="15-24 years" & Age.Group!="25-34 years" & Age.Group!="35-44 years" & Age.Group!="45-54 years" & Age.Group!="55-64 years" & State!="United States" & State!="Puerto Rico", Sex!="Male" & Sex!="Female")
+Coast2<-ggplot(CovidDataCoasts1, aes(x = Age.Group, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(WC)), 
              position = "jitter", 
              alpha = 0.8,
@@ -405,13 +409,11 @@ Coast2<-ggplot(CovidDataCoasts1, aes(x = AgeGroup, y = COVIDDeaths)) +
                               colour = factor(WC))) + 
   theme(legend.position = "right") + 
   ggtitle('Covid-19 Deaths by Age Group (Total) ') +
-  labs(x= "Age Group", y= "COVID-19 Deaths") +
+  labs(x= "Age Group", y= "COVID-19 Deaths", color="Legend") +
+  scale_colour_manual(labels=c("East", "West"), values= c("darkblue", "red")) +
   theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=0.5))
   theme_cowplot()
 plot(Coast2)
-```
-
-```{r}
 ```
 
 ## Code for Visualizing "do older people have higher death rates than younger people?" (BT)
