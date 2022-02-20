@@ -583,6 +583,8 @@ shapiro.test(CovidDataCoasts$COVID.19.Deaths)
 
 ```
 
+
+
 ```{r}
 CovidDataPennMonth1<-filter(PennData, Group=="By Month" & Age.Group=="All Ages" & Year!="2022")
 lmCDM1 <- lm(COVID.19.Deaths ~ Sex, data=CovidDataPennMonth1)
