@@ -89,6 +89,7 @@ Tidyverse should generally be the last package installed.
 if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
 if (!require("vioplot")) install.packages("vioplot"); library(vioplot)
 if (!require("car")) install.packages("car"); library(car)
+if (!require("Stat2Data")) install.packages("Stat2Data"); library("Stat2Data")
 if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 ```
 
@@ -278,7 +279,7 @@ ggplot(Covid_19) +
     ggtitle("Covid 19 Deaths per Year") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
-  geom_point() + 
+  geom_point()+
   theme_cowplot()
 ```
 
@@ -310,9 +311,6 @@ plot(PennTotal)
 Plotting Data of COVID-19 Deaths from Pennsylvania (By Month)
 
 ```{r}
-install.packages("Stat2Data")
-library(Stat2Data)
-
 CovidDataPennMonth<-filter(PennData, Group=="By Month" & Age.Group=="All Ages")
 PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(Year)), 
