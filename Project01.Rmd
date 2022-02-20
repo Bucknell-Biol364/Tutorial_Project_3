@@ -367,7 +367,7 @@ plot(PennTotal)
 
 A great, refined, visualization was created! Lets take the same code structure from the previous code chunk and look at COVID-19 Deaths from Pennsylvania by month. The creation of a new dataframe, filtering, and creation of a new plot name should be applied. The next plot is a manipulation of the x axis (change to Month) and factor (change to Year). Of course, dress the plot up by changing the titles of everything. 
 
-One additional line of code, however, should be included to change the x axis numeric categories (which represent the numberic month) to a character (month name). This can be applished using the alread loaded package "Stat2Data". The command structure is as follows: scale_x_continuous(breaks = seq_along(month.name), labels = month.name). This line changes the month observation of 2 to display as Febuary on the X axis.
+One additional line of code, however, should be included to change the x axis numeric categories (which represent the numberic month) to a character (month name). This can be applished using the alread loaded package "Stat2Data". The command structure is as follows: scale_x_continuous(breaks = seq_along(month.name), labels = month.name). This line changes the month observation of "2" to display as February on the X axis.
 
 (Line taken from https://stackoverflow.com/questions/69411847/changing-month-from-number-to-full-month-name-in-r)
 
@@ -389,30 +389,33 @@ PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVID.19.Deaths)) +
   theme_cowplot()
 plot(PennMonth)
 ```
-General Data Exploration of Monthly COVID-19 Deaths Female/Male in Pennsylvania
+This is a neat visual. Notice how the year 2022 only has two months of data collection. If statistical analysis were to be completed with this graph, the year 2022 would likely be removed as no informative comparison can be made using a variable that has incomplete data collection.
+
+We can also take a look at monthly COVID-19 deaths between Female/Males in Pennsylvania. Again, the same formula of data visualization will be utilized, however, this time we will try using boxplots and density plots. Boxplots are a great graphing tool to apply to look for outlying data. Density plots are beneficial for looking at the representation of the distribution of a numeric variable. 
+
+Specify the geom_ of the plots by inserting geom_boxplot or geom_density into the code. Finally, theme_cowplot() allows users to plot the graphs in specified frames using the function: plot_grid(name, name, ..., ncol=#).
 
 ```{r}
 PM1<-ggplot(CovidDataPennMonth) +
   aes(x=Sex , y=COVID.19.Deaths) +
   geom_boxplot() +
   geom_jitter(width=.15, aes(color=Sex)) +
-  ggtitle("Monthly Covid-19 Death vs Sex In Pennsylvania")+
-  labs(x="Sex", y="COVID-19 Deaths")
+  ggtitle("Monthly Covid-19 Death vs Sex In Pennsylvania") +
+  labs(x="Sex", y="COVID-19 Deaths") +
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust=0.5))
   
 PM2<-ggplot(CovidDataPennMonth) +
   aes(x = COVID.19.Deaths, fill = Sex) + 
   geom_density(alpha=.3) +
-  xlab("Deaths") + ylab("Density") +
-  labs(title="Density vs Monthly Covid-19 Deaths In Pennsylvania")
+  labs(x= "Deaths", y="Density", title="Density vs Monthly Covid-19 Deaths In Pennsylvania")
   theme_cowplot()
   
   
 plot_grid(PM1,PM2, ncol=1)
 ```
 
-Plotting Data of COVID-19 Deaths from Pennsylvania (By Year)
+Finally, lets plot COVID-19 Deaths from Pennsylvania by year to see if we can improve on our intial plots from section 1. 
 
 ```{r}
 CovidDataPennYear<-filter(PennData, Group=="By Year" & Age.Group=="All Ages")
@@ -431,6 +434,8 @@ PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVID.19.Deaths)) +
   
 plot(PennYear)
 ```
+
+Using the coding techniques of data visualization acquired in section 2, we were able to improve upon our plots. Perhaps a statistical analysis could be done using this plot. 
 
 3. West Coast vs East Coast COVID-19 Death Exploration 
 
