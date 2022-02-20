@@ -55,13 +55,13 @@ It includes an overview of the stats and functions that will be used.
 First it is important to understand the different types of files you can use in RStudio. 
 Today we will go over R Markdown and R Notebook
 
-R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text,code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
+R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text, code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
 
 R Notebook is quite similar to R Markdown except in a notebook only one line is sent at a time. In contrast R Markdown executes the entire code chunk at once. Another large difference is when a R Notebook file is rendered no code is re-run, only the code that has already been run will be presented in produced document. Whereas when an R Markdown file is rendered all code chunks are re-run and it will not allow you to convert it to a document if there is an error in a code chunk.  
 
 ##Lets talk about a few of the basics to get you set up to use R. 
 
-To create headers in the text you place a single hash tag (#) in front of the text and for subheaders use 2 hash tags (##).
+To create headers in the text, you place a single hash tag (#) in front of the text. For subheaders, use 2 hash tags (##).
 
 If you want your text to be italicized, surround the text with asterisk (*). 
 In order for the text to be bolded surround it with two asterisks (**)
@@ -79,7 +79,7 @@ Packages are collections of R functions, data, and compiled code which are store
 
 Note that all of your packages should be installed in the first code chunk. If you are coding and realize you need another package you should go back up to your first chunk and add it in. 
 
-Normally the r setup chunk can be included in the load libraries chunk but I separated them today to allow for proper explanation.
+Normally the R setup chunk can be included in the load libraries chunk, but I separated them today to allow for proper explanation.
 
 You should always load tidyverse library, which includes *dplyr*, *ggplot2*, *readr*, and other packages.
 
@@ -99,7 +99,7 @@ Here we will walk through how to load your data set in and what each part of the
 * < - This assigns the data frame to a variable 
 * read_csv reads the data into RStudio as a data frame
 * within the parentheses is how you tell it where to find your data 
-* the period (.) indicates that the data is located one folder or click away from your rmd file
+* the period (.) indicates that the data is located one folder or click away from your RMD file
 
 Click this green arrow to run a chunk of code that produces output.
 ```{r Load in Data Set}
@@ -108,7 +108,7 @@ Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 
 Before you start exploring your data set you should check to see if any column names have spaces in them. 
 Once you have run the code chunk above, press the environment tab in the upper right hand box. You can then click on your data and it will pull up a tab for you to view it.
-Rstudio does not like spaces and therefore it is just easier to rename the columns.
+Rstudio does not like spaces, thus, it is just easier to rename the columns.
 
 In the code chunk below we are changing all of the spaces in the column names to periods (.). This will make the data much easier to work with.
 ```{r}
@@ -116,10 +116,9 @@ In the code chunk below we are changing all of the spaces in the column names to
 names(Covid_19) <- make.names(names(Covid_19))
 ```
 
-
 EXPLORATION OF DATASET:
 
-When a dataset is uploaded, there is an informal checklist to complete before visualization and anlaysis. One should become familiar with the elements in the dataset. The "Covid_19" dataframe provides epidemiological data that is inclusive of: 
+When a dataset is uploaded, there is an informal checklist to complete before visualization and analysis. One should become familiar with the elements in the dataset. Begin by clicking and viewing the "Covid_19" dataframe in the "Global environment" spcae to the right. The dataframe provides epidemiological data that is inclusive of: 
   1.Data "as of" date
   2.Start dates of data collection
   3.End dates of data collection
@@ -136,11 +135,12 @@ When a dataset is uploaded, there is an informal checklist to complete before vi
   14.Influenza Deaths
   15.Pneumonia, Influenza, or COVID-19 Deaths
   16.Footnotes
-These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This dataframe includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this dataframe, there are 82620 observations that can be inferred as points of collection. 
+
+These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This dataframe includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this dataframe, there are 82620 observations that can be inferred as individual points of collection. 
 
 ##Formulating a Question: 
 
-Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can be limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables.
+Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables.
 
 The hypothesis(s) we should be interested in for this R tutorial are: 
 1. 
@@ -148,7 +148,7 @@ The hypothesis(s) we should be interested in for this R tutorial are:
 
 ##Read Data:
 
-The next step in exploratory data analysis is to read in a portion of data. The purpose of this task is to determine in the data is messy and should be cleaned. Messy data with often times be orderly, have missing values, and is not suitable for immediate data visualization. As the data provided was from the CDC, we can expect relatively "clean" data. 
+The next step in exploratory data analysis is to read in a portion of data. The purpose of this task is to determine if the data is messy and should be cleaned. Messy data will often times not be orderly, have missing values, and is not suitable for immediate data visualization. As the data provided was from the CDC, we can expect relatively "clean" data. 
 
 ```{r}
 library(readr)
@@ -156,13 +156,14 @@ Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 summary(Covid_19)
 ```
 
-The readr package is used here because it can read and analyze large dataframes fast. The summary of the "Covid-19" dataframe was performed to get a general idea of what type of data is included in the data frame (character, interger, numeric) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
+The readr package is used here because it can read and analyze large dataframes fast. The summary of the "Covid_19" dataframe was performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
 
-Here, we can also note that there are spaces in the some of the column names. Space often interfere with coding functions, and should be taken out for convenience. We can remove the spaces in the columns of interest by using the rename function. The general struction of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe change, new column name="column with spaces)
+At the beginning of this project, we removed the spaces in the column names. Should they be changed at anypoint, the renamne function can be used. The general struction of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe, new column name="column with spaces/Old name")
+
+Run the example below. This example will be preformed using a column *not* of interest to our question(s)/hypothesis(s).
 
 ```{r}
-Covid_19<- rename(Covid_19, COVIDDeaths = "COVID-19 Deaths")
-Covid_19<- rename(Covid_19, AgeGroup = "Age Group")
+Covid_19<- rename(Covid_19, Influenza = "Influenza Deaths")
 ```
 
 ##Check Packaging
@@ -174,17 +175,20 @@ ncol(Covid_19)
 nrow(Covid_19)
 ```
 
-As the output of this code chuck matches the expected number of variables and observation, it can be assumed that the dataframe was uploaded correctly. 
+As the output of this code chuck matches the expected number of variables and observations (as displayed in the Global Environment), it can be assumed that the dataframe was uploaded correctly. 
 
 ##Run str()
 
-Another general exploration tool that should be completed before analysis is running the structure of the dataframe. The output of this command replicates some knowledge we already have, however, it is another clean visual of the composition of the data and method to catch potential problems before analysis. 
+Another general exploration tool that should be completed before analysis is running the structure of the dataframe. The output of this command replicates some knowledge we already have, however, it is another clean visual of the composition of the data and is an additional method to catch potential problems in the dataframe before analysis. 
 
 ```{r}
 str(Covid_19)
 ```
 
-As there are no apparent issues, we can move to the next step in the checklsit.
+
+Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" dataframe, we can note that these NA values come from data that has been grouped. Grouped data as such makes the year and month values obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
+
+Beyond the NA values in the dataframe, there appears to be no other apparent issues. For furutre analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that cannt be used.
 
 ##Check Top and Bottom of Data
 
@@ -202,13 +206,14 @@ tail(Covid_19[, c(1:3, 10)])
 
 By looking at the start dates, we can see that the dataframe is logical. At the head (first ten rows), the data collection start date began in January of 2020. At the tail of the dataframe (last ten rows), the start date began in February of 2022. 
 
-Additionally, the tail command can be useful for identifying extraneous values or information placed at the end of the dataframe. 
+Additionally, the tail command can be useful for identifying extraneous values or information placed at the end of the dataframe.
 
 ##For the checking N's section potentially? (BT)
 
-For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be number a number of ways, but simply, a table can be made. As the Covid-19 dataframe uses counts people, this variable can be used to check ot mkae sure the expected amount of observations are present. The same can be done by evaluating the "State" variable.
+For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be number a number of ways, but simply, a table can be made. As the "Covid_19" dataframe uses counts people, this variable can be used to check to make sure that the expected amount of observations are present. The same can be done by evaluating the "State" variable.
 
-The function table can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign here is used to evaluate a particular viaribale from a particular dataframe. 
+The function table can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign 
+can be used to narrow analysis by column within a dataframe.
 
 ```{r}
 table(Covid_19$Sex)
@@ -216,9 +221,6 @@ table(Covid_19$State)
 ```
 
 By counting the number of observations from each variable category (whether sex or state), the number equals the amount of observations present in the dataframe. By looking at the states, however, we note that Puerto Rico and District of Columbia are included on the dataset. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis. 
-
-
-
 
 Checking if the total deaths match for each time division (by month, by year, total)
 ```{r}
@@ -245,10 +247,11 @@ sum(Covid_19.Deaths.byM$`COVID-19 Deaths`, na.rm = TRUE)
 ```
 
 
-
 ##Other Checks to Consider
 
-After an initial check over the dataframe has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed, but rather highlighted as things to be consider when conducting ones own data analysis. The first additional rule of thumb is to validate your data with an external source. The CDC is very reliable, but say you had your own data. One would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. Furthermore, it may be beneficial to try to answer your question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered and does not need to be further explored. The solution to those questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (just as an example, not in this dataframe). The purpose of this section us to riase the point that not all questions need a deep dive into data analysis, rather, just a basic R exploration. Questions that compare variables are look at causality, however, do require a lengthier analysis. 
+After an initial check over the dataframe has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed, but rather highlighted as things to be consider when conducting data analysis beyond this project. The first additional rule of thumb to consider is the validation of ones own data via a comparison with an external source. The CDC is very reliable, thus, the observations in this dataframe does not necessarily have be check. Say, however, one is using their own research data. They would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. Furthermore, it may be beneficial to try to answer your question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered out using a table. Certain questions like these do not need further exploration. The solution to these questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (this is one such example, but this problem is not present in the "Covid_19" dataframe).
+
+The purpose of this concluding paragraph on exploration of a dataset is to raise the point that not all questions require a deep dive into data analysis, rather, just a basic R exploration. Questions that compare variables, look at causality, and evlauate relationships, however, do require a lengthier analysis. 
 
 
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
