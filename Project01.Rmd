@@ -257,7 +257,7 @@ The purpose of this concluding paragraph on exploration of a dataset is to raise
 
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
 
-1. Plotting Data of COVID-19 Deaths per year and month. 
+1. Plotting Data of COVID-19 Deaths by year and month. 
 
 This is a great way to start looking at the data set. Here we can get a visualization of how the data is spread out over years and then narrow in per month. 
 
@@ -389,6 +389,7 @@ PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVID.19.Deaths)) +
   theme_cowplot()
 plot(PennMonth)
 ```
+
 This is a neat visual. Notice how the year 2022 only has two months of data collection. If statistical analysis were to be completed with this graph, the year 2022 would likely be removed as no informative comparison can be made using a variable that has incomplete data collection.
 
 We can also take a look at monthly COVID-19 deaths between Female/Males in Pennsylvania. Again, the same formula of data visualization will be utilized, however, this time we will try using boxplots and density plots. Boxplots are a great graphing tool to apply to look for outlying data. Density plots are beneficial for looking at the representation of the distribution of a numeric variable. 
@@ -435,17 +436,34 @@ PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVID.19.Deaths)) +
 plot(PennYear)
 ```
 
-Using the coding techniques of data visualization acquired in section 2, we were able to improve upon our plots. Perhaps a statistical analysis could be done using this plot. 
+Using the coding techniques of data visualization acquired in section 2, we were able to improve upon our plots. 
+
 
 3. West Coast vs East Coast COVID-19 Death Exploration 
 
-Creation of dataframe with binary value (TRUE/FALSE) to sort East from West Coast Sates
+Looking at differences in COVID-19 deaths between the East and West coast creates a problem in our original dataset. We have no segregation between these two variables. Thus, we must do so ourselves, and this can be completed via the creation of a new column in our original "Covid_19" dataframe. 
+
+The creation of a new data frame with an additional column that segretates the East and West coast states can be accomplished using the mutate command. A new column can be created that creates binary values of "TRUE" or "FALSE" where, for example, "TURE" is equivalent to states on the West coast and "FALSE" is equivalent to states on the East coast. 
+
+One can use the dpylr package to mutate their dataframe. This package is already preloaded into our RMD. Dplyr uses the operators %>% to pipeline commands. This is a close equivalent to useing +.
+
+The structure of the mutate command is as follows: dataframe%>% mutate(Added column=Column manipulated %in%c(specification of desired data))
+This, almost filted data, should be replaced into dataframe (new or old)-> dataframe.
+
+Note <- and -> are the same function, but placement at the begging or end of code specify usage. 
+
+Lets add a new column into the "Covid_19" dataframe and call it WC for West Coast.
+
 ```{r}
 Covid_19%>%
   mutate(WC= State %in% c("Alaska","Arizona","Arkansas","California","Colorado","Hawaii","Idaho","Iowa","Kansas","Louisiana","Minnesota","Missouri","Oregon","South Dakota","Texas","Utah","Washington","Wyoming"))->Covid_19
 ```
 
-West Coast vs East Coast COVID-19 Death by Sex
+**Check to make sure new column as been added by opening up "Covid_19" from the environment.
+
+Now, lets utilize this new column and plot West coast vs East coast COVID-19 death by sex while applying the same coding techniques learned from previous sections. We should make a boxplot. In this code chuck, we will exclude data from the grouped "United States" data and from the state of Puerto Rico. Washington DC data will remain included based on preference. 
+
+Finally, we will add one new line of code. We can change the x axis labels by incorporating the function: scale_x_discrete(labels = c('Title', 'Title')). We will want to specify East from West coast. Without this code, the lables will show up as "FLASE" and "TRUE".
 
 ```{r}
 CovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex!="All Sexes" & Age.Group=="All Ages" & State!="United States" & State!="Puerto Rico")
@@ -461,7 +479,16 @@ Coast1<-ggplot(CovidDataCoasts) +
 plot(Coast1)
 ```
 
-West Coast vs East Coast Deaths by Age Range
+Additionally, we can plot West coast vs East coast deaths by age range. Again, we will filter the age groups we wish to represent. 
+
+One additional line of code can be included. We can specify the labels of the legend and the color of the represented binary factor. This can be accomplished via the command:scale_colour_manual(labels=c("Title", "Title"), values= c("color", "color"))
+
+Colors can be represented numerous ways in R. However, they can be conveniently picked by utilizing this provided respurce from Columbia University.
+
+http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+
+This cheat sheet was created by Dr. Ying Wei.
+
 
 ```{r}
 CovidDataCoasts1<-filter(Covid_19, Group=="By Total" & Age.Group!="All Ages" & Age.Group!="Under 1 year" & Age.Group!="1-4 years" & Age.Group!="5-14 years" & Age.Group!="15-24 years" & Age.Group!="25-34 years" & Age.Group!="35-44 years" & Age.Group!="45-54 years" & Age.Group!="55-64 years" & State!="United States" & State!="Puerto Rico", Sex!="Male" & Sex!="Female")
@@ -481,7 +508,8 @@ Coast2<-ggplot(CovidDataCoasts1, aes(x = Age.Group, y = COVID.19.Deaths)) +
 plot(Coast2)
 ```
 
-## Code for Visualizing "do older people have higher death rates than younger people?" (BT)
+4. Code for Visualizing "do older people have higher death rates than younger people?" (BT)
+
 ```{r}
 library(dplyr)
 Covid_19$`Age Group`<-as.factor(Covid_19$`Age Group`)
@@ -518,7 +546,7 @@ plot_Ds.by.Age
 ```
 
 
-## Code for Ranking net Deaths by State (BT)
+5. Code for Ranking net Deaths by State (BT)
 
 ```{r}
 library(readr)
@@ -592,31 +620,6 @@ Each group should use an *Acknowledgements* section to document the participatio
 
 Additional credit will be awarded for providing assistance to other groups and for the development of a tutorial that goes beyond the minimal expectations listed above.
 
-
-
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-
-
-```{r}
-
-```
 
 # Acknowledgements
 
