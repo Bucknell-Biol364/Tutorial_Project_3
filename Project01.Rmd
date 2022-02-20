@@ -31,6 +31,7 @@ Outline:
 5) Statistical analysis (linear model?) to answer hypothesis
     Age groups and death 
     Linear Model (B)
+    Coast and Death (A)
 6) Glossary of Functions and statistical analyses (A+B+M)
 
 #### Project Content #####
@@ -145,7 +146,7 @@ Once the variables of the dataframe have been assessed, one should formulate a q
 
 The hypothesis(s) we should be interested in for this R tutorial are: 
 1. 
-2.
+2. 
 
 ##Read Data:
 
