@@ -258,7 +258,9 @@ The purpose of this concluding paragraph on exploration of a dataset is to raise
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
 
 1. Plotting Data of COVID-19 Deaths per year and month. 
+
 This is a great way to start looking at the data set. Here we can get a visualization of how the data is spread out over years and then narrow in per month. 
+
 This first plot shows COVID-19 Deaths per year.
 
 ```{r}
@@ -271,6 +273,7 @@ ggplot(Covid_19) +
   geom_point() + 
   theme_cowplot()
 ```
+
 Here we can visualize if there is a difference in COVID-19 Deaths per month
 ```{r}
 ggplot(Covid_19) +
@@ -284,13 +287,66 @@ ggplot(Covid_19) +
 ```
 
 2. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
-As there is such a large dataset, a specified dataframe with an area of interest may be best for data visualization. Due to relevance, Pennsylvania is a good state to pick. Pennsylvania can be filtered from the larger dataset. 
+
+To narrow analysis, we can further look at the number of COVID-19 deaths per year and month in Pennsylvania. The state of Pennsylvania was chosen for epidemiological relevance. Furthermore, refining the dataset to a single state is beneficial for improved data visualization. The graphs above yielded general distributions of the dataframe, but limited information can be collected from them. 
+
+
+Data collection from Pennsylvania can be filtered from the "Covid_19" dataframe. This can be completed using the highly useful "filter" command. The structure of the filter command is as follows: new dataframe name<-filter(old dataframe name, column==/!=/>=/<= "Info from column")
+
+Filtering can be accomplished by specifying what one would like to take/remove from the original dataframe. One can use the following to: 
+  ==: Specify data that is equivalent to (think keep data)
+  !=: Specify data that is not equal to (think remove data)
+  <=: Specify data less than desired numeric data (use greater than sign for reverse process)
+  &: Multiple filter commands; make a string of commands
+  
+Listed above are simply introductory commands that are used in conjunction with the filter command. Keep in mind, however, there are additional commands like is.na(), between(), and near() that can be used for advanced filtration. For the purpose of this project, we will mainly focus on the introductory commands. 
 
 ```{r}
-PennData<-filter(Covid_19, Sex!="NA" & Sex!="All Sexes" & State=="Pennsylvania")
+PennData<-filter(Covid_19, Sex!="All Sexes" & State=="Pennsylvania")
 ```
 
-This dataframe can be further refined using the filter function to explore COVID-19 deaths by Age, Group, and Year.
+After runnning this new code chuck, the new dataframe "PennData" was created from the previous "Covis_19" dataframe, and is present in the "Global Environment". In this dataframe, one will notice 1020 observations and 16 variables. Our columns remained the same, however, all the observations are only from the state of Pennsylvania. Furthermore, notice how "State=="Pennsylvania"" command kept data from that one particular state. Additionally, note how != removed "All Sexes" observations from the Sex column. These observations were removed because they would have been repetitive data as Male+Female obdervations=All sexes observations. 
+
+This general theme of grouped data, as mentioned earlier in the project, is something to beware of. Be cautious when analyzing data and filtering data for statistical analysis. 
+
+This dataframe can be further refined using the filter function to explore COVID-19 deaths by Age, Group, and Year. Lets also make a graph. 
+
+FIRST, lets use the filter function and narrow down the "PennData" dataframe further. Lets create a new dataframe called "CovidDataPennTotal".We will be using the same structure as before. Did you notice anything about the age group column? There are many observations that are repetitive data. By taking a moment, one can think about that data one might actually want. There are both "All Ages" and "Under 1 year" categories. Furthermore, there are age categories that are grouped by two different age ranges. We should trying to analyze age groups as cohesively as possible. 
+
+A small problem arises with this analysis. The adolescent observations collected data at a different age intervals that are not consistent with the way the adult age intervals collected. Thus, one is forced to look at age range 0-17 for children, followed by a consistent 10 year interval range for adults. 
+
+This is OKAY, but should be noted with analysis. There was simply inconsistency with data collection that is beyond our control.
+
+The filter command can be used to removed grouped data (i.e Age.Group!="All Ages") and can be used to remove undesired age ranges. Furthermore, the "Group=="By Total" should be applied to use inclusive grouped data that is comprised of all time data collected from 2020 to 2022 across our desired age ranges. 
+
+SECOND, in this same group of code, we can plot a graph for data visualization. The following steps take place which extend upon the steps used in part 1 of this data visualization section:
+  1. Create a graph name and graph using the ggplot package 
+    a. This graph will be titled "PennTotal". PennTotal can be defined by (<-) ggplot()
+    b. The structure of a basic plot is as possible ggplot(Dataframe, aes(x=column, y= column))
+      -Unless specified, R will choose the best fir plot with the given data (it might not be the desired plot you want)
+      -aes= axis. Define the x and y axis of your plot by the independent and dependent variable. 
+    c. Specify the plot you wish ggplot to create. Lets create a point plot with a line. The structure of this command is as             follows: geom_point(aes(colour=factor(binary variable)))
+        -Geom_point creates a line graph. You can leave it here or add a binary variable
+        -Binary variables can be distinguished by the function colour =factor(BV). Lets add sex into our graph/model
+        -All data points can be added via the jitter command. Add position= "jitter"
+        -The size and transparency of these data points can be defined using the commands alpha= and size=
+    d. Specify a line of best fit with standard deviation. Use command geom_smoooth. The structure of this command is as follows:
+        geom_smooth(formula = y ~ x,method='lm',aes(group = factor(BV), colour = factor(BV))) 
+        -The formula is specified as y~x as a linear line is desired
+        -Method='lm" to specify a linear model
+        -Group and colour should equal factor of the binary variable
+    e. Clean the graph up by changing:
+        -Change legend position by using theme function of ggplot: theme(legend.position = "right, left, top, bottom")
+        -Change title of plot via function: ggtitle("Title")
+        -Change name of x/y axis and legend title via function: labs(x= "X Title", y= "Y Title", color= "Legend Title")
+        -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric,            hjust=numeric))
+    f. Apply theme_cowplot() which provides a classical plot appearance with two axis lines and no background grid.
+    g. Plot using function plot(name of designated plot)
+    
+This is general outline of a plot can can be modified. Elements can be added or removed based on desired aesthetic appearance. ggplot packaged also plots more than line plots. A master list can be found at this link: 
+
+http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
+
 
 ```{r}
 CovidDataPennTotal<-filter(PennData, Group=="By Total" & Age.Group!="All Ages" & Age.Group!="Under 1 year" & Age.Group!="1-4 years" & Age.Group!="5-14 years" & Age.Group!="15-24 years" & Age.Group!="25-34 years" & Age.Group!="35-44 years" & Age.Group!="45-54 years" & Age.Group!="55-64 years")
@@ -308,7 +364,13 @@ PennTotal<-ggplot(CovidDataPennTotal, aes(x = Age.Group, y = COVID.19.Deaths)) +
   theme_cowplot()
 plot(PennTotal)
 ```
-Plotting Data of COVID-19 Deaths from Pennsylvania (By Month)
+
+A great, refined, visualization was created! Lets take the same code structure from the previous code chunk and look at COVID-19 Deaths from Pennsylvania by month. The creation of a new dataframe, filtering, and creation of a new plot name should be applied. The next plot is a manipulation of the x axis (change to Month) and factor (change to Year). Of course, dress the plot up by changing the titles of everything. 
+
+One additional line of code, however, should be included to change the x axis numeric categories (which represent the numberic month) to a character (month name). This can be applished using the alread loaded package "Stat2Data". The command structure is as follows: scale_x_continuous(breaks = seq_along(month.name), labels = month.name). This line changes the month observation of 2 to display as Febuary on the X axis.
+
+(Line taken from https://stackoverflow.com/questions/69411847/changing-month-from-number-to-full-month-name-in-r)
+
 
 ```{r}
 CovidDataPennMonth<-filter(PennData, Group=="By Month" & Age.Group=="All Ages")
