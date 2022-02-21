@@ -23,7 +23,7 @@ Outline:
     Look at top and bottom of data
     Check your n’s
 4) Visualize Data Set
-    Timeline vs death (M)
+    Timeline vs death (M) *****
     Rank net deaths by state (B - Coding Done)
     West coast vs east coast (A)
     Male female histogram with death (A)
@@ -44,10 +44,10 @@ The employment of epidemiology has been notably publicized by the COVID-19 epide
 
 At the conclusion of this project, the following should be accomplished:
   1. Relate epidemiology data collection to data science/analysis
-  2. Carry out scientific method
-      a. Perform an exploration of dataset using R 
+  2. Carry out the scientific method
+      a. Perform an exploration of the dataset using R 
       b. Perform basic data analysis using R
-      c. Draw conclusions from analysis
+      c. Draw conclusions from the analysis
   
 #INTRODUCTION TO R:
 At the bottom of this file there is a glossary that you can refer to. 
@@ -68,10 +68,15 @@ If you want your text to be italicized, surround the text with asterisk (*).
 In order for the text to be bolded surround it with two asterisks (**)
 To create a list place on asterisk (*) in front of each line.
 
+### ^These effects only work after rendering/knitting, right? We might want to explain knitting before this and say they arent implimented until the markdown is knit so they hypothetically wouldnt be confused when they didnt see any bold/italics popup right away (BT comment)
+
 Rendering is when you transform the markdown file into a HTML, PDF, or word document and this can be done by clicking on the knit button. When you press knit it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, like I have done below. 
 
 This code helps set up the R markdown document to make a nice clean html file for sharing. 
 Click the green triangle to run the code chunk.
+
+###potentially add a comment explaining what a chunk is? (BT comment)
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -96,6 +101,8 @@ if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 
 Now we will load in the data set that we will be using today. 
 
+###Consistency with dataset vs data set lingo? (BT comment) 
+
 Here we will walk through how to load your data set in and what each part of the code means
 * First on the left you put the name you want for your data set. 
 * < - This assigns the data frame to a variable 
@@ -103,16 +110,16 @@ Here we will walk through how to load your data set in and what each part of the
 * within the parentheses is how you tell it where to find your data 
 * the period (.) indicates that the data is located one folder or click away from your RMD file
 
-Click this green arrow to run a chunk of code that produces output.
+Click this green arrow to run a chunk of code that produces output. If this code is successful, you should see "Covid_19" appear as a dataframe in the top right box of the RStudio interface under the "Environment" tab.
 ```{r Load in Data Set}
 Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 ```
 
+Click on your dataset in the Environment tab and it will pull up a tab for you to view it.
 Before you start exploring your data set you should check to see if any column names have spaces in them. 
-Once you have run the code chunk above, press the environment tab in the upper right hand box. You can then click on your data and it will pull up a tab for you to view it.
 Rstudio does not like spaces, thus, it is just easier to rename the columns.
 
-In the code chunk below we are changing all of the spaces in the column names to periods (.). This will make the data much easier to work with.
+In the code chunk below we are changing all of the spaces in the column names to periods (.). This will make the data much easier to work with. After running the code chunk, check your dataframe to see that the change was successful.
 ```{r}
 # Below is a very handy way to eliminate those annoying spaces in the column names!
 names(Covid_19) <- make.names(names(Covid_19))
@@ -120,7 +127,7 @@ names(Covid_19) <- make.names(names(Covid_19))
 
 EXPLORATION OF DATASET:
 
-When a dataset is uploaded, there is an informal checklist to complete before visualization and analysis. One should become familiar with the elements in the dataset. Begin by clicking and viewing the "Covid_19" dataframe in the "Global environment" spcae to the right. The dataframe provides epidemiological data that is inclusive of: 
+When a dataset is uploaded, there is an informal checklist to complete before visualization and analysis. One should become familiar with the elements in the dataset. The dataframe provides epidemiological data that is inclusive of: 
   1.Data "as of" date
   2.Start dates of data collection
   3.End dates of data collection
@@ -142,8 +149,7 @@ These variables are all divided into their own column. Just by initially looking
 
 ##Formulating a Question: 
 
-Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables.
-
+Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables from the subsequential analysis.
 
 =======
 Questions we are interested in for this R tutorial: 
@@ -155,7 +161,6 @@ The hypothesis(s) we are interested in for this R tutorial are:
 1. We hypothesize that there will be no difference in COVID-19 deaths between the to genders.
 2. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
 3. We hypothesize that there will be more COVID-19 deaths reported for older individuals.
->>>>>>> 22011d2bb9f90978d5db70b6baded904dd943feb
 
 ##Read Data:
 
@@ -163,19 +168,22 @@ The next step in exploratory data analysis is to read in a portion of data. The 
 
 ```{r}
 library(readr)
-Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv") 
+#Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv") 
 summary(Covid_19)
 ```
+### I think we have to delete the code loading the package, since it was performed above and the rename was already performed. Might want to explain the summary function and library function (BT comment)
 
 The readr package is used here because it can read and analyze large dataframes fast. The summary of the "Covid_19" dataframe was performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
 
 At the beginning of this project, we removed the spaces in the column names. Should they be changed at anypoint, the renamne function can be used. The general struction of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe, new column name="column with spaces/Old name")
 
-Run the example below. This example will be preformed using a column *not* of interest to our question(s)/hypothesis(s).
+Run the example below, and then check to see if the column name is changed in the Covid_19 dataset. This example will be preformed using a column *not* of interest to our question(s)/hypothesis(s).
 
 ```{r}
-Covid_19<- rename(Covid_19, Influenza = "Influenza Deaths")
+Covid_19<- rename(Covid_19, Influenza = "Influenza.Deaths")
 ```
+
+###Suggestion: we could say "To practice, try renaming "Pneumonia Deaths" to "Pneumonia" with the same function"... (BT comment)
 
 ##Check Packaging
 
@@ -199,7 +207,7 @@ str(Covid_19)
 
 Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" dataframe, we can note that these NA values come from data that has been grouped. Grouped data as such makes the year and month values obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
 
-Beyond the NA values in the dataframe, there appears to be no other apparent issues. For furutre analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that cannt be used.
+Beyond the NA values in the dataframe, there appears to be no other apparent issues. For future analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that cant be used.
 
 ##Check Top and Bottom of Data
 
@@ -219,39 +227,45 @@ By looking at the start dates, we can see that the dataframe is logical. At the 
 
 Additionally, the tail command can be useful for identifying extraneous values or information placed at the end of the dataframe.
 
-##For the checking N's section potentially? (BT)
+##For the checking N's section potentially?
 
-For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be number a number of ways, but simply, a table can be made. As the "Covid_19" dataframe uses counts people, this variable can be used to check to make sure that the expected amount of observations are present. The same can be done by evaluating the "State" variable.
+For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be done a number of ways, but simply, a table can be made. As the "Covid_19" dataframe uses counts people, this variable can be used to check to make sure that the expected amount of observations are present. The same can be done by evaluating the "State" variable.
 
-The function table can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign 
-can be used to narrow analysis by column within a dataframe.
+###Im finding the above description a little confusing, but I may be missing something here (BT comment)
+
+The function table can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign can be used to narrow analysis by column within a dataframe.
 
 ```{r}
 table(Covid_19$Sex)
 table(Covid_19$State)
 ```
+### Should we ask field what "recursive gc invocation" means? (BT comment)
 
-By counting the number of observations from each variable category (whether sex or state), the number equals the amount of observations present in the dataframe. By looking at the states, however, we note that Puerto Rico and District of Columbia are included on the dataset. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis. 
+The net number of observations from each variable category (whether sex or state) should equals the amount of observations present in the dataframe, as there should be one entry for every observation. In this case, the numbers within each column matches the total number of observation, which is reassuring (27540 x 3 "sex categories = 82,620 observations, and 1,530 x 54 "states" = 82,620 observations). 
+
+By looking at the states, however, we note that Puerto Rico, District of Columbia, New York City, and United States area all included on the dataset. While these locations have been included because they are US territory, locations of interest, or lable data representative of the entire country instead of a state, this is important to take note of. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis depending on the question at hand, but this is a prime example of how exploring the dataset is an essential step when working with R Studio.
+###^made some slight changes to add New york city and United States to the description (because there are 54 states total) (BT comment)
 
 Checking if the total deaths match for each time division (by month, by year, total)
+
 ```{r}
-sum(Covid_19.S.T.X.A$`COVID-19 Deaths`)
+sum(Covid_19.S.T.X.A$COVID.19.Deaths)
 # All US total deaths (from the 50 states) from "by total" time catagory
 
 Covid_19.S %>%
   filter(Sex == "All Sexes") %>%
   filter(Group == "By Year") %>%
-  filter(`Age Group` == "All Ages") %>%
-  summarize(Group, State, Sex,`Age Group`, `COVID-19 Deaths`) ->Covid_19.Deaths.byY
-sum(Covid_19.Deaths.byY$`COVID-19 Deaths`)
+  filter(Age.Group == "All Ages") %>%
+  summarize(Group, State, Sex,Age.Group, COVID.19.Deaths) ->Covid_19.Deaths.byY
+sum(Covid_19.Deaths.byY$COVID.19.Deaths)
 #all US total deaths (from the 50 states) from "By Year" time category
 
 Covid_19.S %>%
   filter(Sex == "All Sexes") %>%
   filter(Group == "By Month") %>%
-  filter(`Age Group` == "All Ages") %>%
-  summarize(Group, State, Sex,`Age Group`, `COVID-19 Deaths`) ->Covid_19.Deaths.byM
-sum(Covid_19.Deaths.byM$`COVID-19 Deaths`, na.rm = TRUE)
+  filter(Age.Group == "All Ages") %>%
+  summarize(Group, State, Sex,Age.Group, COVID.19.Deaths) ->Covid_19.Deaths.byM
+sum(Covid_19.Deaths.byM$COVID.19.Deaths, na.rm = TRUE)
 #all US total deaths (from the 50 states) from "By Month" time catagory
 
 
@@ -263,6 +277,8 @@ sum(Covid_19.Deaths.byM$`COVID-19 Deaths`, na.rm = TRUE)
 After an initial check over the dataframe has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed, but rather highlighted as things to be consider when conducting data analysis beyond this project. The first additional rule of thumb to consider is the validation of ones own data via a comparison with an external source. The CDC is very reliable, thus, the observations in this dataframe does not necessarily have be check. Say, however, one is using their own research data. They would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. Furthermore, it may be beneficial to try to answer your question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered out using a table. Certain questions like these do not need further exploration. The solution to these questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (this is one such example, but this problem is not present in the "Covid_19" dataframe).
 
 The purpose of this concluding paragraph on exploration of a dataset is to raise the point that not all questions require a deep dive into data analysis, rather, just a basic R exploration. Questions that compare variables, look at causality, and evlauate relationships, however, do require a lengthier analysis. 
+### I think we should have them verify with an external source that total deaths match the same ball park as this dataset (BT comment)
+
 
 
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
@@ -274,6 +290,7 @@ This is a great way to start looking at the data set. Here we can get a visualiz
 This first plot shows COVID-19 Deaths per year.
 
 ```{r}
+Covid_19$Year<-as.factor(Covid_19$Year)
 ggplot(Covid_19) +
   geom_jitter() + 
   aes(x= Year, y= COVID.19.Deaths) + 
@@ -283,18 +300,23 @@ ggplot(Covid_19) +
   geom_point() + 
   theme_cowplot()
 ```
+###We actually should get rid of the .5 notation if possible ot makes it look like the data isnt reported yearly. I tried to do this by making it a factor (only thing dif above) and this was the result. This is because all the "by total" groups = NAs, which we could just say in a sentence to ignore, but also I think by doing it like this we are accidentally graphing the month Values too... (BT comment)  we might want to check that warning too
+
 
 Here we can visualize if there is a difference in COVID-19 Deaths per month
 ```{r}
 ggplot(Covid_19) +
   geom_jitter() + 
-  aes(x= Month, y= COVID.19.Deaths) + 
+  aes(x= factor(Month), y= COVID.19.Deaths) + 
     ggtitle("Covid 19 Deaths per Year") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
   geom_point()+
   theme_cowplot()
 ```
+###Also we have a problem here. I tired to make it a factor and the NAs are also present because they are also for the total deaths. Beyond this, grouping it only by month but not accounting for year means that january 2020, 2021, and 2022 are all grouped under january...(BT comment)
+###May need to explain factor() here
+
 
 2. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
 
@@ -315,13 +337,14 @@ Listed above are simply introductory commands that are used in conjunction with 
 PennData<-filter(Covid_19, Sex!="All Sexes" & State=="Pennsylvania")
 ```
 
-After running this new code chuck, the new dataframe "PennData" was created from the previous "Covis_19" dataframe, and is present in the "Global Environment". In this dataframe, one will notice 1020 observations and 16 variables. Our columns remained the same, however, all the observations are only from the state of Pennsylvania. Furthermore, notice how "State=="Pennsylvania"" command kept data from that one particular state. Additionally, note how != removed "All Sexes" observations from the Sex column. These observations were removed because they would have been repetitive data as Male+Female obdervations=All sexes observations. 
+After running this new code chuck, the new dataframe "PennData" was created from the previous "Covid_19" dataframe, and is present in the "Global Environment"/Enviroment tab. In this dataframe, one will notice 1020 observations and 16 variables. Our columns remained the same, however, all the observations are only from the state of Pennsylvania. Furthermore, notice how "State=="Pennsylvania"" command kept data from that one particular state. Additionally, note how != removed "All Sexes" observations from the Sex column. These observations were removed because they would have been repetitive data as Male+Female observations=All sexes observations. 
 
 This general theme of grouped data, as mentioned earlier in the project, is something to beware of. Be cautious when analyzing data and filtering data for statistical analysis. 
 
 This dataframe can be further refined using the filter function to explore COVID-19 deaths by Age, Group, and Year. Lets also make a graph. 
 
 FIRST, lets use the filter function and narrow down the "PennData" dataframe further. Lets create a new dataframe called "CovidDataPennTotal".We will be using the same structure as before. Did you notice anything about the age group column? There are many observations that are repetitive data. By taking a moment, one can think about that data one might actually want. There are both "All Ages" and "Under 1 year" categories. Furthermore, there are age categories that are grouped by two different age ranges. We should trying to analyze age groups as cohesively as possible. 
+### I think we should probably show these problems in a basic non-fancy graph, cause rn as someone who didnt do that to see it I dont really have the context to understand it. We could also consider breaking the filter and visualization into two chunks so its easier to follow (BT comment)
 
 A small problem arises with this analysis. The adolescent observations collected data at a different age intervals that are not consistent with the way the adult age intervals collected. Thus, one is forced to look at age range 0-17 for children, followed by a consistent 10 year interval range for adults. 
 
@@ -333,7 +356,7 @@ SECOND, in this same group of code, we can plot a graph for data visualization. 
   1. Create a graph name and graph using the ggplot package 
     a. This graph will be titled "PennTotal". PennTotal can be defined by (<-) ggplot()
     b. The structure of a basic plot is as possible ggplot(Dataframe, aes(x=column, y= column))
-      -Unless specified, R will choose the best fir plot with the given data (it might not be the desired plot you want)
+      -Unless specified, R will choose the best fit plot with the given data (it might not be the desired plot you want)
       -aes= axis. Define the x and y axis of your plot by the independent and dependent variable. 
     c. Specify the plot you wish ggplot to create. Lets create a point plot with a line. The structure of this command is as             follows: geom_point(aes(colour=factor(binary variable)))
         -Geom_point creates a line graph. You can leave it here or add a binary variable
@@ -360,6 +383,7 @@ http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
 ```{r}
 CovidDataPennTotal<-filter(PennData, Group=="By Total" & Age.Group!="All Ages" & Age.Group!="Under 1 year" & Age.Group!="1-4 years" & Age.Group!="5-14 years" & Age.Group!="15-24 years" & Age.Group!="25-34 years" & Age.Group!="35-44 years" & Age.Group!="45-54 years" & Age.Group!="55-64 years")
+
 PennTotal<-ggplot(CovidDataPennTotal, aes(x = Age.Group, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(Sex)), 
              position = "jitter", 
@@ -374,15 +398,17 @@ PennTotal<-ggplot(CovidDataPennTotal, aes(x = Age.Group, y = COVID.19.Deaths)) +
   theme_cowplot()
 plot(PennTotal)
 ```
+### Do you think it would be a good idea to increase the size of these jitter points? I changed it from .05 to 1 and it looks a little more visible when I was messing with it (BT Comment)
 
 A great, refined, visualization was created! Lets take the same code structure from the previous code chunk and look at COVID-19 Deaths from Pennsylvania by month. The creation of a new dataframe, filtering, and creation of a new plot name should be applied. The next plot is a manipulation of the x axis (change to Month) and factor (change to Year). Of course, dress the plot up by changing the titles of everything. 
 
-One additional line of code, however, should be included to change the x axis numeric categories (which represent the numberic month) to a character (month name). This can be accomplished using the alread loaded package "Stat2Data". The command structure is as follows: scale_x_continuous(breaks = seq_along(month.name), labels = month.name). This line changes the month observation of "2" to display as February on the X axis.
+One additional line of code, however, should be included to change the x axis numeric categories (which represent the numberic month) to a character (month name). This can be accomplished using the already loaded package "Stat2Data". The command structure is as follows: scale_x_continuous(breaks = seq_along(month.name), labels = month.name). This line changes the month observation of "2" to display as February on the X axis.
 
 (Line taken from https://stackoverflow.com/questions/69411847/changing-month-from-number-to-full-month-name-in-r)
 
 
 ```{r}
+library(Stat2Data)
 CovidDataPennMonth<-filter(PennData, Group=="By Month" & Age.Group=="All Ages")
 PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(Year)), 
@@ -399,6 +425,8 @@ PennMonth<-ggplot(CovidDataPennMonth, aes(x = Month, y = COVID.19.Deaths)) +
   theme_cowplot()
 plot(PennMonth)
 ```
+###Need month to be numeric going into this... just a note cause it took me like 30 min to figure that out because I had converted it to a factor for code at line ~316 at first
+
 
 This is a neat visual. Notice how the year 2022 only has two months of data collection. If statistical analysis were to be completed with this graph, the year 2022 would likely be removed as no informative comparison can be made using a variable that has incomplete data collection.
 
@@ -426,7 +454,7 @@ PM2<-ggplot(CovidDataPennMonth) +
 plot_grid(PM1,PM2, ncol=1)
 ```
 
-Finally, lets plot COVID-19 Deaths from Pennsylvania by year to see if we can improve on our intial plots from section 1. 
+Finally, lets plot COVID-19 Deaths from Pennsylvania by year to see if we can improve on our initial plots from section 1. 
 
 ```{r}
 CovidDataPennYear<-filter(PennData, Group=="By Year" & Age.Group=="All Ages")
@@ -445,6 +473,7 @@ PennYear<-ggplot(CovidDataPennYear, aes(x = Year, y = COVID.19.Deaths)) +
   
 plot(PennYear)
 ```
+###im confused what u mean for section 1 in the text above this chunk. Could we maybe add lines #s that go with the graph you are refering to
 
 Using the coding techniques of data visualization acquired in section 2, we were able to improve upon our plots. 
 
@@ -471,12 +500,14 @@ Covid_19%>%
 
 **Check to make sure new column as been added by opening up "Covid_19" from the environment.
 
-Now, lets utilize this new column and plot West coast vs East coast COVID-19 death by sex while applying the same coding techniques learned from previous sections. We should make a boxplot. In this code chuck, we will exclude data from the grouped "United States" data and from the state of Puerto Rico. Washington DC data will remain included based on preference. 
+Now, lets utilize this new column and plot West coast vs East coast COVID-19 death by sex while applying the same coding techniques learned from previous sections. We should make a boxplot. In this code chuck, we will exclude data from the grouped "United States" data and from the state of Puerto Rico. Washington DC data will remain included based on preference.
+### We should remove New york city from the east coast... I added this bc repetitive with NY (BT Comment)
+
 
 Finally, we will add one new line of code. We can change the x axis labels by incorporating the function: scale_x_discrete(labels = c('Title', 'Title')). We will want to specify East from West coast. Without this code, the lables will show up as "FLASE" and "TRUE".
 
 ```{r}
-CovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex!="All Sexes" & Age.Group=="All Ages" & State!="United States" & State!="Puerto Rico")
+CovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex!="All Sexes" & Age.Group=="All Ages" & State!="United States" & State!="Puerto Rico", State!= "New York City" )
 Coast1<-ggplot(CovidDataCoasts) +
   aes(x=WC , y=COVID.19.Deaths) +
   geom_boxplot() +
@@ -487,6 +518,7 @@ Coast1<-ggplot(CovidDataCoasts) +
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust=0.5))
 plot(Coast1)
+table(Covid_19$State)
 ```
 
 Additionally, we can plot West coast vs East coast deaths by age range. Again, we will filter the age groups we wish to represent. 
@@ -516,37 +548,39 @@ Coast2<-ggplot(CovidDataCoasts1, aes(x = Age.Group, y = COVID.19.Deaths)) +
   theme_cowplot()
 plot(Coast2)
 ```
+###I think we should delete this code because it shows the exact same thing that mine will show directly below it (BT comment)
+
 
 4. Code for Visualizing "do older people have higher death rates than younger people?" (BT)
 
 ```{r}
 library(dplyr)
-Covid_19$`Age Group`<-as.factor(Covid_19$`Age Group`)
+Covid_19$Age.Group<-as.factor(Covid_19$Age.Group)
 #age group = factor
 
 Covid_19 %>%
   filter(State == "United States") %>%
   filter(Sex == "All Sexes") %>%
   filter(Group == "By Total") %>%
-  summarize(State, Sex,`Age Group`, `COVID-19 Deaths`) -> Covid_19.Deaths.by.Age
+  summarize(State, Sex, Age.Group, COVID.19.Deaths) -> Covid_19.Deaths.by.Age
 #Isolates total Covid deaths in the country regardless of sex in its own Data set (filter and sumarize function example)
 
-table(Covid_19.Deaths.by.Age$`Age Group`)
+table(Covid_19.Deaths.by.Age$Age.Group)
 ```
 
 ```{r}
 Covid_19.Deaths.by.Age %>%
-  filter(`Age Group` != "0-17 years" & `Age Group` != "All Ages" & `Age Group` != "55-64 years") ->Covid_19.Deaths.by.Age
+  filter(Age.Group != "0-17 years" & Age.Group != "All Ages" & Age.Group != "55-64 years") ->Covid_19.Deaths.by.Age
 #removing 0-17 years and All Ages and 55 - 64 years
 
-Covid_19.Deaths.by.Age$`Age Group`<-recode_factor(Covid_19.Deaths.by.Age$`Age Group`, `Under 1 year` = "0-1 years", `1-4 years` = "01-4 years", `5-14 years` = "05-14 years")
+Covid_19.Deaths.by.Age$Age.Group<-recode_factor(Covid_19.Deaths.by.Age$Age.Group, `Under 1 year` = "0-1 years", `1-4 years` = "01-4 years", `5-14 years` = "05-14 years")
  #renaming under 1 year to 0-1 year
-table(Covid_19.Deaths.by.Age$`Age Group`)
+table(Covid_19.Deaths.by.Age$Age.Group)
 #validating change
 ```
 ```{r}
 library(ggplot2)
-plot_Ds.by.Age<-ggplot(data=Covid_19.Deaths.by.Age, aes(x=`Age Group`, y=`COVID-19 Deaths`)) +
+plot_Ds.by.Age<-ggplot(data=Covid_19.Deaths.by.Age, aes(x=Age.Group, y=COVID.19.Deaths)) +
   geom_bar(stat="identity") +
   theme(axis.text.x = element_text(angle = 50, vjust = 0.7, hjust=0.5))
 plot_Ds.by.Age
@@ -558,10 +592,6 @@ plot_Ds.by.Age
 5. Code for Ranking net Deaths by State (BT)
 
 ```{r}
-library(readr)
-Covid_19<-read_csv("Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
-#^Can be deleted once we cement our dataset
-
 library(dplyr)
 
 #Looking at original dataset and ensuring State = coded as a factor
@@ -572,14 +602,14 @@ summary(Covid_19$State)
 
 #Filter functions (one to be used as an example of != and one to be used as an example of ==)
 Covid_19.S<-filter(Covid_19, State != "United States" & State != "District of Columbia" & State != "New York City" & State != "Puerto Rico")
-Covid_19.S.T.X.A<-filter(Covid_19.S, Group == "By Total" & Sex == "All Sexes" & `Age Group` == "All Ages")
+Covid_19.S.T.X.A<-filter(Covid_19.S, Group == "By Total" & Sex == "All Sexes" & Age.Group == "All Ages")
 
 #ensuring filter process worked
 table(Covid_19.S.T.X.A$State)
 nlevels(Covid_19.S.T.X.A$State)
 
 #data display
-arrange(Covid_19.S.T.X.A,desc(`COVID-19 Deaths`))
+arrange(Covid_19.S.T.X.A,desc(COVID.19.Deaths))
 ```
 
 
