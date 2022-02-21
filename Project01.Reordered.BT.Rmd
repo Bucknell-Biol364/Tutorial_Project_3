@@ -287,6 +287,26 @@ This is a great way to start looking at the data set. Here we can get a visualiz
 
 This first plot shows COVID-19 Deaths per year.
 
+Plot of timeline vs death
+
+This is a great way to start looking at the data set. Here we can get a visualization of how the data is spread out over years and then narrow in per month. 
+
+This first plot shows COVID-19 Deaths per year.
+
+The first line we are specifying which column of the data set we would like to look at and altering the data to ensure the variables are handled properly. 
+When you look at the structure of the data set you can see that Year is listed as numerical but we would like it to be handled as a factor instead. 
+* dataset$column you want <-as.factor(dataset$column you want)
+* as.factor: used to convert data from numerical to a factor
+* $: used to specify the column we want to use
+* ggplot creates a quardinate system that you can add layers to. The first argument is where you input the dataset   to use in the graph
+* +: allows you to add layers to the plot
+* geom_jitter: a specific type of point plot that adds a small amount of variation in the location of each point. This is helpful when you are dealing with smaller data bases and you want to visualize each point.
+* aes: deals with the aesthetics of the graph. Use this to write which variables to map of the x and y axis
+* ggtitle: Allows us to put a title on the graph
+* xlab: Where we write the name of the x-axis
+* ylab: Write the name you want on the y-axis
+* geom_point: Makes a scatter plot
+* theme_cowplot: Makes the whole plot look prettier. Good to use the same theme for all of your plots within an     analysis 
 ```{r}
 Covid_19$Year<-as.factor(Covid_19$Year)
 ggplot(Covid_19) +
