@@ -152,7 +152,7 @@ These variables are all divided into their own column. Just by initially looking
 Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables from the subsequential analysis.
 
 =======
-Questions we are interested in for this R tutorial: 
+The questions we are interested in for this R tutorial: 
 1. Do males or females have more COVID-19 deaths per month? (Pennsylvania data)
 2. Does west or east coast have more COVID-19 deaths?
 3. Do older people have higher COVID-19 deaths?
@@ -168,22 +168,27 @@ The next step in exploratory data analysis is to read in a portion of data. The 
 
 ```{r}
 library(readr)
-#Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv") 
 summary(Covid_19)
 ```
-### I think we have to delete the code loading the package, since it was performed above and the rename was already performed. Might want to explain the summary function and library function (BT comment)
 
-The readr package is used here because it can read and analyze large dataframes fast. The summary of the "Covid_19" dataframe was performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
+The readr package is used here because it can read and analyze large dataframes fast. Also note the library notation of readr. This operation loads/attaches packages and stores them in the "System Library" located under the Packages tab. The checked packages in the system library are the ones in use for the duration of the coding project. They can either be manually added (as performed above) or checked here at the beginning of a project. 
 
-At the beginning of this project, we removed the spaces in the column names. Should they be changed at anypoint, the renamne function can be used. The general struction of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe, new column name="column with spaces/Old name")
+The summary of the "Covid_19" dataframe was performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
 
-Run the example below, and then check to see if the column name is changed in the Covid_19 dataset. This example will be preformed using a column *not* of interest to our question(s)/hypothesis(s).
+At the beginning of this project, we removed the spaces in the column names. Should they be changed at any point, the rename function can be used. The general structure of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe, new column name="column with spaces/Old name")
+
+Run the example below, and then check to see if the column name is changed in the "Covid_19" dataset. This example will be preformed using a column *not* of interest to our question(s)/hypothesis(s).
 
 ```{r}
 Covid_19<- rename(Covid_19, Influenza = "Influenza.Deaths")
 ```
 
-###Suggestion: we could say "To practice, try renaming "Pneumonia Deaths" to "Pneumonia" with the same function"... (BT comment)
+
+For practice, try renaming the "Pneumonia.Deaths" to "Pneumonia" using this structure outline. Furthermore, one can add a code chunck in the RMD markdown file by clicking the green square "C" in the above toolbar, or by using the keyboard shortcut of cmd+option+I on macOS.
+
+```{r}
+
+```
 
 ##Check Packaging
 
@@ -203,7 +208,6 @@ Another general exploration tool that should be completed before analysis is run
 ```{r}
 str(Covid_19)
 ```
-
 
 Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" dataframe, we can note that these NA values come from data that has been grouped. Grouped data as such makes the year and month values obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
 
@@ -227,13 +231,11 @@ By looking at the start dates, we can see that the dataframe is logical. At the 
 
 Additionally, the tail command can be useful for identifying extraneous values or information placed at the end of the dataframe.
 
-##For the checking N's section potentially?
+##Check Observations (N's)
 
-For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be done a number of ways, but simply, a table can be made. As the "Covid_19" dataframe uses counts people, this variable can be used to check to make sure that the expected amount of observations are present. The same can be done by evaluating the "State" variable.
+For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be done a number of ways, but simply, a table can be made. For example, the "Covid_19" dataframe has distinguished variables that look at Sex and State observations. These variables can be crosschecked by the analysist to assure that the expected amount of observations are present. 
 
-###Im finding the above description a little confusing, but I may be missing something here (BT comment)
-
-The function table can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign can be used to narrow analysis by column within a dataframe.
+The table function can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign can be used to narrow analysis by column within a dataframe.
 
 ```{r}
 table(Covid_19$Sex)
@@ -241,13 +243,11 @@ table(Covid_19$State)
 ```
 ### Should we ask field what "recursive gc invocation" means? (BT comment)
 
-The net number of observations from each variable category (whether sex or state) should equals the amount of observations present in the dataframe, as there should be one entry for every observation. In this case, the numbers within each column matches the total number of observation, which is reassuring (27540 x 3 "sex categories = 82,620 observations, and 1,530 x 54 "states" = 82,620 observations). 
+The net number of observations from each variable category (whether sex or state) should equals the amount of observations present in the dataframe, as there should be one entry for every observation. In this case, the numbers within each column matches the total number of observations, which is reassuring (27540 x 3 "sex categories = 82,620 observations, and 1,530 x 54 "states" = 82,620 observations). 
 
-By looking at the states, however, we note that Puerto Rico, District of Columbia, New York City, and United States area all included on the dataset. While these locations have been included because they are US territory, locations of interest, or lable data representative of the entire country instead of a state, this is important to take note of. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis depending on the question at hand, but this is a prime example of how exploring the dataset is an essential step when working with R Studio.
-###^made some slight changes to add New york city and United States to the description (because there are 54 states total) (BT comment)
+By looking at the states, however, we note that Puerto Rico, District of Columbia, New York City, and United States area all included on the dataset. While these locations have been included because they are US territory, locations of interest, or label data representative of the entire country instead of a state, this is important to take note of. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis depending on the question at hand, but this is a prime example of how exploring the dataset is an essential step when working with R Studio.
 
 Checking if the total deaths match for each time division (by month, by year, total)
-
 
 sum(Covid_19.S.T.X.A$COVID.19.Deaths)
 # All US total deaths (from the 50 states) from "by total" time catagory
@@ -269,16 +269,14 @@ sum(Covid_19.Deaths.byM$COVID.19.Deaths, na.rm = TRUE)
 #all US total deaths (from the 50 states) from "By Month" time catagory
 
 
-
-
-
 ##Other Checks to Consider
 
-After an initial check over the dataframe has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed, but rather highlighted as things to be consider when conducting data analysis beyond this project. The first additional rule of thumb to consider is the validation of ones own data via a comparison with an external source. The CDC is very reliable, thus, the observations in this dataframe does not necessarily have be check. Say, however, one is using their own research data. They would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. Furthermore, it may be beneficial to try to answer your question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered out using a table. Certain questions like these do not need further exploration. The solution to these questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (this is one such example, but this problem is not present in the "Covid_19" dataframe).
+After an initial check over the dataframe has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed in full, but rather highlighted as things to be consider when conducting data analysis beyond this project. The first additional rule of thumb to consider is the validation of ones own data via a comparison with an external source. The CDC is very reliable, thus, the observations in this dataframe do not necessarily have be check. However, should further investigation be complete, eternal sources to consider include datasets from Johns Hopkins or Our World in Data.
+If one is using their own reseach data, they would certainly attemp an external validation of data. They would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. 
 
-The purpose of this concluding paragraph on exploration of a dataset is to raise the point that not all questions require a deep dive into data analysis, rather, just a basic R exploration. Questions that compare variables, look at causality, and evlauate relationships, however, do require a lengthier analysis. 
-### I think we should have them verify with an external source that total deaths match the same ball park as this dataset (BT comment)
+An additional consideration is to try to answer ones question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered out using a table. Certain questions like these do not need further exploration. The solution to these questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (this is one such example, but this problem is not present in the "Covid_19" dataframe).
 
+The purpose of this concluding paragraph on exploration of a dataset is to raise the point that not all questions require a deep dive into data analysis, rather, just a basic R exploration. Questions that compare variables, look at causality, and evaluate relationships, however, do require a lengthier analysis. 
 
 
 VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
@@ -330,6 +328,7 @@ Filtering can be accomplished by specifying what one would like to take/remove f
 Listed above are simply introductory commands that are used in conjunction with the filter command. Keep in mind, however, there are additional commands like is.na(), between(), and near() that can be used for advanced filtration. For the purpose of this project, we will mainly focus on the introductory commands. 
 
 When running the code in the chunk below this text, notice the comments (denoted with a # and shown in green) walking you through step by step what each line is doing to the right of the code. Also, note that Dplyr uses the operator "%>%" to pipeline commands. This is a close equivalent to using "+" in ggplot.
+
 ```{r}
 library(dplyr) #Calls the dplyr package to run subsequential code
 Covid_19 %>% #Calls the Covid_19 dataset to be acted on by the following functions
@@ -345,7 +344,7 @@ After running this new code chuck, the new dataframe "Covid_19.Deaths.by.Age" wa
 
 This general theme of grouped data, as mentioned earlier in the project, is something to beware of. Be cautious when analyzing data and filtering data for statistical analysis. 
 
-However, as out table function shows above, our filtering process is not complete. Notice That some of the listed ages are repetitive, and if we want to make a coherent graph, we should not have overlap between age groups. In addition, note that the adolescent observations collected data at a different age intervals that are not consistent with the way the adult age intervals collected. Thus, one is forced to look at age range 0-1 years for newborns, 1-4 years for young children, followed by a consistent 9 year interval range through adult hood. 
+However, as oue table function shows above, our filtering process is not complete. Notice That some of the listed ages are repetitive, and if we want to make a coherent graph, we should not have overlap between age groups. In addition, note that the adolescent observations collected data at a different age intervals that are not consistent with the way the adult age intervals collected. Thus, one is forced to look at age range 0-1 years for newborns, 1-4 years for young children, followed by a consistent 9 year interval range through adult hood. 
 
 This is OKAY, but should be noted with analysis. There was simply inconsistency with data collection that is beyond our control.
 
