@@ -5,36 +5,7 @@ output: html_document
 author: Prof. Ken Field
 date: 9 Feb 2022
 ---
-#### Project Outline #####
 Dataset we are using: https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku/data
-
-Outline:
-1) Introduction to class
-2) Introduction to R (M - Done)
-    Define RMD vs Regular R
-    Loading dataset
-    Load Packages
-    Refer to glossary for a function/stats overview…
-3) Explore dataset (with function explanations) (A)
-    Formulate a question
-    Read data
-    Check packaging 
-    Run structure
-    Look at top and bottom of data
-    Check your n’s
-4) Visualize dataset
-    Timeline vs death (M) *****
-    Rank net deaths by state (B - Coding Done)
-    West coast vs east coast (A)
-    Male female histogram with death (A)
-    Do older people have higher death rates than younger (B)
-5) Statistical analysis (linear model?) to answer hypothesis
-    Age groups and death 
-    Linear Model (B)
-    Coast and Death (A)
-6) Glossary of Functions and statistical analyses (A+B+M)
-
-#### Project Content #####
 
 #INTRODUCTION TO EPIDEMIOLOGY:
 
@@ -247,29 +218,6 @@ table(Covid_19$State)
 The net number of observations from each variable category (whether sex or state) should equals the amount of observations present in the data frame, as there should be one entry for every observation. In this case, the numbers within each column matches the total number of observations, which is reassuring (27540 x 3 "sex categories = 82,620 observations, and 1,530 x 54 "states" = 82,620 observations). 
 
 By looking at the states, however, we note that Puerto Rico, District of Columbia, New York City, and United States area all included on the dataset. While these locations have been included because they are US territory, locations of interest, or label data representative of the entire country instead of a state, this is important to take note of. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis depending on the question at hand, but this is a prime example of how exploring the dataset is an essential step when working with R Studio.
-
-###I think we might just want to delete this check to keep the filter desciption as is... Or we can do it here, cause we may have to filter for Maisy's first graph in visualizing the data set (BT)
-Checking if the total deaths match for each time division (by month, by year, total)
-
-sum(Covid_19.S.T.X.A$COVID.19.Deaths)
-# All US total deaths (from the 50 states) from "by total" time catagory
-
-Covid_19.S %>%
-  filter(Sex == "All Sexes") %>%
-  filter(Group == "By Year") %>%
-  filter(Age.Group == "All Ages") %>%
-  summarize(Group, State, Sex,Age.Group, COVID.19.Deaths) ->Covid_19.Deaths.byY
-sum(Covid_19.Deaths.byY$COVID.19.Deaths)
-#all US total deaths (from the 50 states) from "By Year" time category
-
-Covid_19.S %>%
-  filter(Sex == "All Sexes") %>%
-  filter(Group == "By Month") %>%
-  filter(Age.Group == "All Ages") %>%
-  summarize(Group, State, Sex,Age.Group, COVID.19.Deaths) ->Covid_19.Deaths.byM
-sum(Covid_19.Deaths.byM$COVID.19.Deaths, na.rm = TRUE)
-#all US total deaths (from the 50 states) from "By Month" time catagory
-
 
 ##Other Checks to Consider
 
@@ -692,14 +640,34 @@ STATISTICAL ANALYSIS:
 
 As a reminder, the hypotheses we are interested in for this R tutorial are: 
 1. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
+2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
+3. We hypothesize that there will be no difference in COVID-19 deaths between the to genders in PA.
 
-Using CovidDataCoasts dataset, with all sexes, By total, All Ages, excluding "United States", "New York City", and "Peurto Rico". 
+In order to test these hypotheses, we will be creating linear models working solely with total deaths, or the "By Total" level of the "Group" column. This will allow is to avoid having to run a statistical analysis on a time series, which is something we are not covering in this tutorial.
+
+The first linear model we will be running will be used to determine if the total number of Covid-19 deaths on the East Coast is significantly different from those on the West Coast. The output of the linear model function will be used to explain the statistical analysis, but for now just follow along with the basic code format for a linear model:
+
+lm(Response/Dependent Variable ~ Predictor/Independent Variable, data=data.frame)
+
+Notice that the product of this function is assigned the identity "lmEvsW" for East vs. West Coast. This analysis is performed using the CovidDataCoasts dataset, with both male and female sexes, by total, All Ages, excluding "United States", "New York City", and "Peurto Rico". Only 102 observations are present within the data frame
+
 
 ```{r}
 lmEvsW <- lm(COVID.19.Deaths ~ WC, data=CovidDataCoasts)
 summary(lmEvsW)
 plot(lmEvsW)
 ```
+
+
+
+random distribution of variance
+residuals are normally distributed
+is line through all of those points straight\
+
+
+
+
+
 
 
 2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
@@ -718,7 +686,6 @@ plot(lmOvsY)
 ```
 
 3. We hypothesize that there will be no difference in COVID-19 deaths between the to genders in PA.
-
 
 ```{r}
 shapiro.test(CovidDataPennMonth$COVID.19.Deaths)
