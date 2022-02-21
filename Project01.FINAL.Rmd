@@ -52,7 +52,7 @@ To create headers in the text outside of the code chunk, once can place a single
 
 These additions will appear throughout the following project and will be more appearent if the RMD becomes knitted. The text will not appear italicised or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
 
-Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are currently loaded into the current project. Packages can either be mannually added (via instalation tab in "Packages") or coded in via a code chunck. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistant of the tidyverce library (and should be added last).
+Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are currently loaded into the current project. Packages can either be manually added (via instalation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistant of the tidyverce library (and should be added last).
 
 Uses of the tidyverse library:
   1.dplyr: Summarizes data quick and efficiently.
@@ -270,10 +270,9 @@ ggplot(CovidYear) +
   geom_point() + 
   theme_cowplot()
 ```
-###We actually should get rid of the .5 notation if possible ot makes it look like the data isnt reported yearly. I tried to do this by making it a factor (only thing dif above) and this was the result. This is because all the "by total" groups = NAs, which we could just say in a sentence to ignore, but also I think by doing it like this we are accidentally graphing the month Values too... (BT comment)  we might want to check that warning, and Should explain add factor probs as well
 
 
-Here we can visualize if there is a difference in COVID-19 Deaths per month
+Here we can visualize if there is a difference in COVID-19 Deaths per month. The graphs are organized per year so we can also look to see if the trends differ by year.
 ```{r}
 CovidFilterMonth1 <- filter(Covid_19, Group == "By Month", Year == "2020") #filter is used here to filter out all groups that are not organized by month. We also filtered by the Year so we will only see data for 2020.
 CovidMonth1 <- group_by(CovidFilterMonth1, Year, Month) #group_by is used to group the data into Year and Month
