@@ -279,7 +279,7 @@ CovidMonth1 <- group_by(CovidFilterMonth1, Year, Month) #group_by is used to gro
 # p# is used below to lable each graph to make it easier to visualize them together later.
 p1 <- ggplot(CovidMonth1) +
   geom_jitter() + 
-  aes(x= Month, y= COVID.19.Deaths) + 
+  aes(x= factor(Month), y= COVID.19.Deaths) + 
     ggtitle("Deaths per Month in 2020") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
@@ -291,7 +291,7 @@ CovidMonth2 <- group_by(CovidFilterMonth2, Year, Month)
 
 p2 <- ggplot(CovidMonth2) +
   geom_jitter() + 
-  aes(x= Month, y= COVID.19.Deaths) + 
+  aes(x= factor(Month), y= COVID.19.Deaths) + 
     ggtitle("Deaths per Month in 2021") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
@@ -303,7 +303,7 @@ CovidMonth3 <- group_by(CovidFilterMonth2, Year, Month)
 
 p3 <- ggplot(CovidMonth3) +
   geom_jitter() + 
-  aes(x= Month, y= COVID.19.Deaths) + 
+  aes(x= factor(Month), y= COVID.19.Deaths) + 
     ggtitle("Deaths per Month in 2022") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
