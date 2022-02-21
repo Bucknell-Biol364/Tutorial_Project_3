@@ -258,8 +258,10 @@ When you look at the structure of the data set you can see that Year is listed a
 * geom_point: Makes a scatter plot
 * theme_cowplot: Makes the whole plot look prettier. Good to use the same theme for all of your plots within an analysis 
 ```{r}
-Covid_19$Year<-as.factor(Covid_19$Year)
-ggplot(Covid_19) +
+CovidFilter <- filter(Covid_19, Group == "By Month")
+CovidYear <- group_by(CovidFilter, Year, Month)
+
+ggplot(CovidYear) +
   geom_jitter() + 
   aes(x= Year, y= COVID.19.Deaths) + 
     ggtitle("Covid 19 Deaths per Year") + 
@@ -279,7 +281,7 @@ CovidMonth1 <- group_by(CovidFilterMonth1, Year, Month) #group_by is used to gro
 # p# is used below to lable each graph to make it easier to visualize them together later.
 p1 <- ggplot(CovidMonth1) +
   geom_jitter() + 
-  aes(x= Month, y= COVID.19.Deaths) + 
+  aes(x= factor(Month), y= COVID.19.Deaths) + 
     ggtitle("Deaths per Month in 2020") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
@@ -291,7 +293,7 @@ CovidMonth2 <- group_by(CovidFilterMonth2, Year, Month)
 
 p2 <- ggplot(CovidMonth2) +
   geom_jitter() + 
-  aes(x= Month, y= COVID.19.Deaths) + 
+  aes(x= factor(Month), y= COVID.19.Deaths) + 
     ggtitle("Deaths per Month in 2021") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
@@ -303,7 +305,7 @@ CovidMonth3 <- group_by(CovidFilterMonth2, Year, Month)
 
 p3 <- ggplot(CovidMonth3) +
   geom_jitter() + 
-  aes(x= Month, y= COVID.19.Deaths) + 
+  aes(x= factor(Month), y= COVID.19.Deaths) + 
     ggtitle("Deaths per Month in 2022") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
@@ -664,9 +666,7 @@ plot(lmEvsW)
 
 random distribution of variance
 residuals are normally distributed
-is line through all of those points straight\
-
-
+is line through all of those points straight
 
 
 
