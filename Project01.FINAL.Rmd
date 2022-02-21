@@ -21,86 +21,89 @@ At the conclusion of this project, the following should be accomplished:
       c. Draw conclusions from the analysis
   
 #INTRODUCTION TO R:
-At the bottom of this file there is a glossary that you can refer to. 
-It includes an overview of the stats and functions that will be used. 
 
-First it is important to understand the different types of files you can use in RStudio. 
-Today we will go over R Markdown and R Notebook
+NOTE: At the bottom of this file there is a glossary that you can refer to. It includes an overview of the stats and functions that will be used. 
 
-R Markdown files allow you to include text with embedded R code chunks. This tutorial is written in an R Markdown file, and you will see "code chunks" are marked in a darker shade of grey as shown below. 
+For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is is to introduce the applyication of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
 
-```{r}
-#To create a code chunk, type "```{r}". To mark where you want this code chunk to end, type "```" as shown here.
-```
+First it is important to understand the different types of files you can use in R Studio. Today, we will go over R Markdown and R Notebook.
 
-When the document is finalized you will be able to see the text, code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
+R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text, code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
 
-R Notebook is quite similar to R Markdown except in a notebook only one line is sent at a time. In contrast R Markdown executes the entire code chunk at once. Another large difference is when a R Notebook file is rendered (explained below) no code is re-run, only the code that has already been run will be presented in produced document. Whereas when an R Markdown file is rendered all code chunks are re-run and it will not allow you to convert it to a document if there is an error in a code chunk.
+R Notebook is quite similar to R Markdown except in a notebook only one line is sent at a time. In contrast R Markdown executes the entire code chunk at once. Another large difference is when a R Notebook file is rendered no code is re-run, only the code that has already been run will be presented in produced document. Whereas when an R Markdown file is rendered all code chunks are re-run and it will not allow you to convert it to a document if there is an error in a code chunk.  
 
-##Lets talk about a few of the basics to get you set up to use R. 
-Rendering is when you transform the markdown file into a HTML, PDF, or word document and this can be done by clicking on the knit button at the top of this window. When you press knit it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, like I have done below. 
+##R Studio Basics. 
 
-To create headers in the text, you place a single hash tag (#) in front of the text. For subheaders, use 2 hash tags (##).
+Code chuncks can be created in the RMD file. This is where desired functions of anlaysis can be performed. The creation of a code chuck can be completed via clicking the green square "C" in the above toolbar, or by using the keyboard shortcut of cmd+option+I on macOS.
 
-If you want your text to be italicized, surround the text with asterisk (*). 
-In order for the text to be bolded surround it with two asterisks (**)
-To create a list place on asterisk (*) in front of each line.
-
-The effects I explained above will show up once you have knitted the document. The text wont appear italicized or bolded etc when you run your code, but when the document has been finalized the text will be altered accordingly.
-
+Additionally, one can transform their markdown file into a HTML, PDF, or word document. This is referred to as "rendering", and can be done by clicking on the Knit button up in the R Studio toolbar. When you press knit, it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, as shown below. 
 
 This code helps set up the R markdown document to make a nice clean html file for sharing. 
-Click the green triangle in the top right to run the code chunk.
+Click the green triangle to run the code chunk.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Packages are collections of R functions, data, and compiled code which are stored in the library. The require function is used to ensure we actually get the package we want and if R is unable to receive it, the code will come back with an error or FALSE.
+To create headers in the text outside of the code chunk, once can place a single hash tag (#) in front of the text. For subheaders, use two hash tags (##). The following additions can be used to improve upon text:
+  1.To italicized text, surround the text with asterisk (*).
+  2.To bold text, surround it with two asterisks (**)
+  3.To create a list, place on asterisk (*) in front of each line.
 
-Note that all of your packages should be installed in the first code chunk. If you are coding and realize you need another package you should go back up to your first chunk and add it in. 
+These additions will appear throughout the following project and will be more appearent if the RMD becomes knitted. The text will not appear italicised or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
+
+Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are currently loaded into the current project. Packages can either be mannually added (via instalation tab in "Packages") or coded in via a code chunck. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistant of the tidyverce library (and should be added last).
+
+Uses of the tidyverse library:
+  1.dplyr: Summarizes data quick and efficiently.
+  2.ggplot2: Data visualization 
+  3.readr: Used read_csv()
+
+In the example below, other packages are loaded into the project. These packages beyond tidyverse are:
+  1.Cowplot: Additional package to ggplot; includes features to make publish ready figures
+  2.Car: Used for statistical analysis; specifically linar models
+  3.Stat2Data: Used to organize data in dataframe
+
+Finally, the require function is used to ensure we actually get the package we want. If R Studio is unable to receive it, the code will come back with an error or FALSE.
 
 Normally the R setup chunk can be included in the load libraries chunk, but I separated them today to allow for proper explanation.
 
-You should always load tidyverse library, which includes *dplyr*, *ggplot2*, *readr*, and other packages.
-
-Tidyverse should generally be the last package installed.
 ```{r Load Libraries, include=FALSE}
 # Load other packages here.
 if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
-if (!require("vioplot")) install.packages("vioplot"); library(vioplot)
 if (!require("car")) install.packages("car"); library(car)
 if (!require("Stat2Data")) install.packages("Stat2Data"); library("Stat2Data")
-if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
+if (!require("tidyverse")) install.packages("tidyverse"); library("tidyverse")
 ```
 
-Now we will load in the dataset that we will be using today. 
+##Loading in Dataset
 
-Here we will walk through how to load your dataset in and what each part of the code means
-* First on the left you put the name you want for your dataset. 
-* < - This assigns the data frame to a variable 
-* read_csv reads the data into RStudio as a data frame
-* within the parentheses is how you tell it where to find your data 
-* the period (.) indicates that the data is located one folder or click away from your RMD file
+Here we will walk through how to load your data set in, and what each part of the code means.
+  First on the left you put the name you want for your data set. 
+  1. < - This assigns the data frame to a variable 
+  2. read_csv reads the data into RStudio as a data frame
+  3. within the parentheses is how you tell it where to find your data 
+  4. the period (.) indicates that the data is located one folder or click away from your RMD file
 
-Click this green arrow to run a chunk of code that produces output. If this code is successful, you should see "Covid_19" appear as a data frame in the top right box of the RStudio interface under the "Environment" tab.
-```{r Load in dataset}
+Click this green arrow to run a chunk of code that produces output. If this code is successful, you should see "Covid_19" appear as a dataframe in the top right box of the R Studio interface under the "Environment" tab.
+
+```{r Load in Data Set}
 Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 ```
 
-Click on your dataset in the Environment tab and it will pull up a tab for you to view it.
-Before you start exploring your dataset you should check to see if any column names have spaces in them. 
-Rstudio does not like spaces, thus, it is just easier to rename the columns.
+Click on the "Covid_19" dataset in the Environment tab and it will pull up a tab for you to view it. Before you start exploring your dataset, one should check to see if any column names have spaces in them. As R Studio has trouble reading spaces, it is easiest to rename these columns. 
 
-In the code chunk below we are changing all of the spaces in the column names to periods (.). This will make the data much easier to work with. After running the code chunk, check your data frame to see that the change was successful.
+In the code chunk below, the spaces in the column names are changed in incoorporate periods (.). This will make the data much easier to work with. After running the code chunk, check your dataframe to assure that the change was successful.
+
+The structure of this funciton is as follows: names(dataframe)<-make.names(names(dataframe))
+
 ```{r}
-# Below is a very handy way to eliminate those annoying spaces in the column names!
 names(Covid_19) <- make.names(names(Covid_19))
 ```
 
-EXPLORATION OF DATASET:
+#EXPLORATION OF DATASET:
 
-When a dataset is uploaded, there is an informal checklist to complete before visualization and analysis. One should become familiar with the elements in the dataset. The data frame provides epidemiological data that is inclusive of: 
+When a dataset is uploaded, there is an informal checklist to complete before visualization and analysis. One should become familiar with the elements in the dataset. The dataframe provides epidemiological data that is inclusive of: 
   1.Data "as of" date
   2.Start dates of data collection
   3.End dates of data collection
@@ -118,11 +121,11 @@ When a dataset is uploaded, there is an informal checklist to complete before vi
   15.Pneumonia, Influenza, or COVID-19 Deaths
   16.Footnotes
 
-These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This data frame includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this data frame, there are 82620 observations that can be inferred as individual points of collection. 
+These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This dataframe includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this dataframe, there are 82620 observations that can be inferred as individual points of collection. 
 
 ##Formulating a Question: 
 
-Once the variables of the data frame have been assessed, one should formulate a question. Assuming this data frame was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables from the subsequential analysis.
+Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables from the subsequential analysis.
 
 =======
 The questions we are interested in for this R tutorial: 
@@ -139,16 +142,17 @@ The hypothesis(s) we are interested in for this R tutorial are:
 
 The next step in exploratory data analysis is to read in a portion of data. The purpose of this task is to determine if the data is messy and should be cleaned. Messy data will often times not be orderly, have missing values, and is not suitable for immediate data visualization. As the data provided was from the CDC, we can expect relatively "clean" data. 
 
+
 ```{r}
 library(readr)
 summary(Covid_19)
 ```
 
-The readr package is used here because it can read and analyze large data frames fast. Also note the library notation of readr. This operation loads/attaches packages and stores them in the "System Library" located under the Packages tab. The checked packages in the system library are the ones in use for the duration of the coding project. They can either be manually added (as performed above) or checked here at the beginning of a project. 
+The readr package is used here because it can read and analyze large dataframes fast. Also note the library notation of readr. This operation loads/attaches packages and stores them in the "System Library" located under the Packages tab. The checked packages in the system library are the ones in use for the duration of the coding project. They can either be manually added (as performed above) or checked here at the beginning of a project. 
 
-The summary of the "Covid_19" data frame was performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
+The summary of the "Covid_19" dataframe was performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
 
-At the beginning of this project, we removed the spaces in the column names. Should they be changed at any point, the rename function can be used. The general structure of the rename function is as follows: data frame (can make new or use original)<-rename(data frame, new column name="column with spaces/Old name")
+At the beginning of this project, we removed the spaces in the column names. Should they be changed at any point, the rename function can be used. The general structure of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe, new column name="column with spaces/Old name")
 
 Run the example below, and then check to see if the column name is changed in the "Covid_19" dataset. This example will be preformed using a column *not* of interest to our question(s)/hypothesis(s).
 
@@ -156,75 +160,73 @@ Run the example below, and then check to see if the column name is changed in th
 Covid_19<- rename(Covid_19, Influenza = "Influenza.Deaths")
 ```
 
-
 For practice, try renaming the "Pneumonia.Deaths" to "Pneumonia" using this structure outline. Furthermore, one can add a code chunck in the RMD markdown file by clicking the green square "C" in the above toolbar, or by using the keyboard shortcut of cmd+option+I on macOS.
 
 ```{r}
 
 ```
 
-##Check Packaging
+##Check Packaging:
 
-Next, the packaging of the data frame should be assessed. This validates that the data frame is complete and is properly loaded. This can be complete using simple R commands. We can look at the number of columns and rows that the data frame has. 
+Next, the packaging of the dataframe should be assessed. This validates that the dataframe is complete and is properly loaded. This can be complete using simple R commands. We can look at the number of columns and rows that the dataframe has. 
 
 ```{r}
 ncol(Covid_19)
 nrow(Covid_19)
 ```
 
-As the output of this code chuck matches the expected number of variables and observations (as displayed in the Global Environment), it can be assumed that the data frame was uploaded correctly. 
+As the output of this code chuck matches the expected number of variables and observations (as displayed in the "Global Environment"), it can be assumed that the dataframe was uploaded correctly. 
 
 ##Run str()
 
-Another general exploration tool that should be completed before analysis is running the structure of the data frame. The output of this command replicates some knowledge we already have, however, it is another clean visual of the composition of the data and is an additional method to catch potential problems in the data frame before analysis. 
+Another general exploration tool that should be completed before analysis is running the structure of the dataframe. The output of this command replicates some knowledge we already have, however, it is another clean visual of the composition of the data and is an additional method to catch potential problems in the dataframe before analysis. 
 
 ```{r}
 str(Covid_19)
 ```
 
-Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" data frame, we can note that these NA values come from data that has been grouped. Grouped data as such makes the year and month values obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
+Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" dataframe, we can note that these NA values come from data that has been grouped. Grouped data as such makes the year and month values obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
 
-Beyond the NA values in the data frame, there appears to be no other apparent issues. For future analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that cant be used.
+Beyond the NA values in the dataframe, there appears to be no other apparent issues. For future analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that cant be used.
 
-##Check Top and Bottom of Data
+##Check Top and Bottom of Data:
 
-Assessing the beginning and end of the data frame is a useful tool to assure the data was loaded in property, the data is properly formatted, and that all expected data is present. Should dates be present in the data frame, this technique is useful to check the ordering of them.  
+Assessing the beginning and end of the dataframe is a useful tool to assure the data was loaded in property, the data is properly formatted, and that all expected data is present. Should dates be present in the dataframe, this technique is useful to check the ordering of them.  
 
-The "Covid_19" data frame has dates and the ordering should be evaluated. This can be completed via the head and tail R commands. The structure of this commands is as follows: head/tail(data frame[, c(column:column, #rows)]).
+The "Covid_19" dataframe has dates and the ordering should be evaluated. This can be completed via the head and tail R commands. The structure of this commands is as follows: head/tail(dataframe[, c(column:column, #rows)]).
 
-
-DESCRIBE BRACKETS and then "," and c(range)
+The brackets in this structure are a useful way to filter data via the use of a preloaded packaked (dplyr). An immediate comma is placed after the bracket to specify the filtering of data from a column. Typical use of brackets are structured as [row, column]. The c command allows for a string of commands. Finally, we can specify a range of columns of interest and the number of rows of data desired. 
 
 ```{r}
 head(Covid_19[, c(1:3, 10)])
 tail(Covid_19[, c(1:3, 10)])
 ```
 
-By looking at the start dates, we can see that the data frame is logical. At the head (first ten rows), the data collection start date began in January of 2020. At the tail of the data frame (last ten rows), the start date began in February of 2022. 
+By looking at the start dates, we can see that the dataframe is logical. At the head (first ten rows), the data collection start date began in January of 2020. At the tail of the dataframe (last ten rows), the start date began in February of 2022. 
 
-Additionally, the tail command can be useful for identifying extraneous values or information placed at the end of the data frame.
+Additionally, the tail command can be useful for identifying extraneous values or information placed at the end of the dataframe.
 
-##Check Observations (N's)
+##Check Observations (N's):
 
-For data exploration, it is helpful to identify landmarks within a data frame that can be used to check against the data being evaluated. This can be done a number of ways, but simply, a table can be made. For example, the "Covid_19" data frame has distinguished variables that look at Sex and State observations. These variables can be crosschecked by the analysist to assure that the expected amount of observations are present. 
+For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be done a number of ways, but simply, a table can be made. For example, the "Covid_19" dataframe has distinguished variables that look at Sex and State observations. These variables can be crosschecked by the analysist to assure that the expected amount of observations are present. 
 
-The table function can be utilized in R. The structure of the command is as follows: table(data.frame$variable). The dollar sign can be used to narrow analysis by column within a data frame.
+The table function can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign can be used to narrow analysis by column within a dataframe.
 
 ```{r}
 table(Covid_19$Sex)
 table(Covid_19$State)
 ```
 
-The net number of observations from each variable category (whether sex or state) should equals the amount of observations present in the data frame, as there should be one entry for every observation. In this case, the numbers within each column matches the total number of observations, which is reassuring (27540 x 3 "sex categories = 82,620 observations, and 1,530 x 54 "states" = 82,620 observations). 
+The net number of observations from each variable category (whether sex or state) should equals the amount of observations present in the dataframe, as there should be one entry for every observation. In this case, the numbers within each column matches the total number of observations, which is reassuring (27540 x 3 "sex categories = 82,620 observations, and 1,530 x 54 "states" = 82,620 observations). 
 
 By looking at the states, however, we note that Puerto Rico, District of Columbia, New York City, and United States area all included on the dataset. While these locations have been included because they are US territory, locations of interest, or label data representative of the entire country instead of a state, this is important to take note of. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis depending on the question at hand, but this is a prime example of how exploring the dataset is an essential step when working with R Studio.
 
-##Other Checks to Consider
+##Other Checks to Consider:
 
-After an initial check over the data frame has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed in full, but rather highlighted as things to be consider when conducting data analysis beyond this project. The first additional rule of thumb to consider is the validation of ones own data via a comparison with an external source. The CDC is very reliable, thus, the observations in this data frame do not necessarily have be check. However, should further investigation be complete, eternal sources to consider include datasets from Johns Hopkins or Our World in Data.
+After an initial check over the dataframe has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed in full, but rather highlighted as things to be consider when conducting data analysis beyond this project. The first additional rule of thumb to consider is the validation of ones own data via a comparison with an external source. The CDC is very reliable, thus, the observations in this dataframe do not necessarily have be check. However, should further investigation be complete, eternal sources to consider include datasets from Johns Hopkins or Our World in Data.
 If one is using their own reseach data, they would certainly attemp an external validation of data. They would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. 
 
-An additional consideration is to try to answer ones question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered out using a table. Certain questions like these do not need further exploration. The solution to these questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (this is one such example, but this problem is not present in the "Covid_19" data frame).
+An additional consideration is to try to answer ones question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered out using a table. Certain questions like these do not need further exploration. The solution to these questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (this is one such example, but this problem is not present in the "Covid_19" dataframe).
 
 The purpose of this concluding paragraph on exploration of a dataset is to raise the point that not all questions require a deep dive into data analysis, rather, just a basic R exploration. Questions that compare variables, look at causality, and evaluate relationships, however, do require a lengthier analysis. 
 
