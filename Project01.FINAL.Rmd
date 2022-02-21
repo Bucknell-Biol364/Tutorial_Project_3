@@ -653,8 +653,8 @@ The first linear model we will be running will be used to determine if the total
 
 lm(Response/Dependent Variable ~ Predictor/Independent Variable, data=data.frame)
 
-Notice that the product of this function is assigned the identity "lmEvsW" for East vs. West Coast. This analysis is performed using the CovidDataCoasts dataset, with both male and female sexes, by total, All Ages, excluding "United States", "New York City", and "Peurto Rico". Only 102 observations are present within the data frame
-
+Notice that the product of this function is assigned the identity "lmEvsW" for East vs. West Coast. This analysis is performed using the CovidDataCoasts dataset, with both male and female sexes, by total, All Ages, excluding "United States", "New York City", and "Peurto Rico". The 102 observations are present within the data frame are 2 per "state" (one for female deaths, one for male deaths) for 51 "states" (the traditional 50 states + the District of Columbia). The summary(lmEvsW)
+plot(lmEvsW) functions should always be ran in tandem with the execution of a linear model in order to ensure the model can be assessed. Briefly look at the output below after running the code chunk, and then follow the text below the output describing the results of a linear model.
 
 ```{r}
 lmEvsW <- lm(COVID.19.Deaths ~ WC, data=CovidDataCoasts)
@@ -662,14 +662,17 @@ summary(lmEvsW)
 plot(lmEvsW)
 ```
 
+The assumptions required to perform a linear model include the following
+1) A Random Distribution of Variance
 
 
-random distribution of variance
 residuals are normally distributed
-is line through all of those points straight
 
 
-
+Linearity: The relationship between X and the mean of Y is linear.
+Homoscedasticity: The variance of residual is the same for any value of X.
+Independence: Observations are independent of each other.
+Normality: For any fixed value of X, Y is normally distributed.
 
 
 2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
