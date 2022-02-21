@@ -136,7 +136,7 @@ The questions we are interested in for this R tutorial:
 The hypothesis(s) we are interested in for this R tutorial are: 
 1. We hypothesize that there will be no difference in COVID-19 deaths between the to genders.
 2. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
-3. We hypothesize that there will be more COVID-19 deaths reported for older individuals.
+3. We hypothesize that there will be more COVID-19 deaths reported for older individuals
 
 ##Read Data:
 
