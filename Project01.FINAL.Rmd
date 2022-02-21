@@ -503,7 +503,7 @@ Coast2<-ggplot(CovidDataCoasts1, aes(x = Age.Group, y = COVID.19.Deaths)) +
 plot(Coast2)
 ```
 
-5. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
+5. Plotting Data of COVID-19 Deaths from Pennsylvania (Total).
 
 To really narrow analysis, we can further look at the number of COVID-19 deaths per year and month in Pennsylvania. The state of Pennsylvania was chosen for epidemiological relevance. Furthermore, refining the dataset to a single state is beneficial for improved data visualization. 
 
