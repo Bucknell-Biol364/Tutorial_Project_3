@@ -246,11 +246,12 @@ The net number of observations from each variable category (whether sex or state
 By looking at the states, however, we note that Puerto Rico, District of Columbia, New York City, and United States area all included on the dataset. While these locations have been included because they are US territory, locations of interest, or lable data representative of the entire country instead of a state, this is important to take note of. It is up to the epidemiologist, in later sections, to determine whether these locations should be included in analysis depending on the question at hand, but this is a prime example of how exploring the dataset is an essential step when working with R Studio.
 ###^made some slight changes to add New york city and United States to the description (because there are 54 states total) (BT comment)
 
+###When I ran all of the code the chunk below had a problem with it. The sum(Covid_19.S.T.X.A)one was not found (MK comment)
 Checking if the total deaths match for each time division (by month, by year, total)
 
 ```{r}
 sum(Covid_19.S.T.X.A$COVID.19.Deaths)
-# All US total deaths (from the 50 states) from "by total" time catagory
+# All US total deaths (from the 50 states) from "by total" time category
 
 Covid_19.S %>%
   filter(Sex == "All Sexes") %>%
