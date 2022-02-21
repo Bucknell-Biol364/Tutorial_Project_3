@@ -205,6 +205,9 @@ ggplot(CovidMonth2) +
   theme_cowplot()
 ```
 ```{r}
+CovidFilter <- filter(Covid_19, Group == "By Month")
+CovidYear <- group_by(CovidFilter, Year, Month)
+
 ggplot(CovidYear) +
   geom_jitter() + 
   aes(x= Year, y= COVID.19.Deaths) + 
