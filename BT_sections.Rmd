@@ -118,6 +118,49 @@ sum(Covid_19.Deaths.byM$`COVID-19 Deaths`, na.rm = TRUE)
 
 
 
+VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
+
+1. Plotting Data of COVID-19 Deaths by year and month. 
+
+This is a great way to start looking at the data set. Here we can get a visualization of how the data is spread out over years and then narrow in per month. 
+
+This first plot shows COVID-19 Deaths per year. 
+```{r}
+Covid_19$Year<-as.numeric(Covid_19$Year)
+ggplot(Covid_19) +
+  geom_jitter() + 
+  aes(x= Year, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Year") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+```
+###We actually should get rid of the .5 notation if possible ot makes it look like the data isnt reported yearly. I tried to do this by making it a factor (only thing dif above) and this was the result. This is because all the "by total" groups = NAs, which we could just say in a sentence to ignore, but also I think by doing it like this we are accidentally graphing the month Values too... (BT comment)  we might want to check that warning too
+
+
+ggplot(Covid_19 = na.omit(Covid_19)) +
+  geom_jitter() + 
+  aes(x= Covid_19$Year, y= Covid_19$Covid.19.Deaths) + 
+  ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Year") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+###^my attempt to fix it, but it didn't work
+
+Here we can visualize if there is a difference in COVID-19 Deaths per month
+```{r}
+Covid_19$Month<-as.factor(Covid_19$Month)
+ggplot(Covid_19) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point()+
+  theme_cowplot()
+```
 
 
 
