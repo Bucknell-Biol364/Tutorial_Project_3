@@ -353,7 +353,7 @@ The code below shows how we can eliminate Ages that overlap with the "!=" operat
 
 ```{r}
 Covid_19.Deaths.by.Age %>%
-  filter(Age.Group != "0-17 years" & Age.Group != "All Ages" & Age.Group != "55-64 years") ->Covid_19.Deaths.by.Age #removing 0-17 years, All Ages and 55 - 64 years observations, and saves the resulting data frame over the preexisting one (note the number of observations decreasing to 14)
+  filter(Age.Group != "0-17 years" & Age.Group != "All Ages" & Age.Group != "50-64 years") ->Covid_19.Deaths.by.Age #removing 0-17 years, All Ages and 55 - 64 years observations, and saves the resulting data frame over the preexisting one (note the number of observations decreasing to 14)
 
 table(Covid_19.Deaths.by.Age$Age.Group)
 ```
@@ -643,22 +643,41 @@ Notice the first output frame shows that one observation (the data point represe
 
 
 STATISTICAL ANALYSIS:
+### I think we do age above 50 vs age below 50, W vs. E, no diff in the two genders
+
+As a reminder, the hypotheses we are interested in for this R tutorial are: 
+1. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
+###Need to ask Field a Q
+
+2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
+
+```{r}
+
+PennData$Age.Group<-recode_factor(PennData$Age.Group, `Under 1 year` = "0-1 years", `1-4 years` = "01-4 years", `5-14 years` = "05-14 years")
+
+PennData%>%
+  filter(Group=="By Month" & Year!="2022") %>%
+  filter(Age.Group != "0-17 years" & Age.Group != "All Ages" & Age.Group != "50-64 years") ->Covid_19PA.OldvsY
+
+lmOvsY <- lm(COVID.19.Deaths ~ Age.Group, data=Covid_19PA.OldvsY)
+summary(lmOvsY)
+plot(lmOvsY)
+```
+
+3. We hypothesize that there will be no difference in COVID-19 deaths between the to genders in PA.
+
 
 ```{r}
 shapiro.test(CovidDataPennMonth$COVID.19.Deaths)
 shapiro.test(CovidDataCoasts1$COVID.19.Deaths)
 shapiro.test(CovidDataCoasts$COVID.19.Deaths)
 
-```
-
-
-
-```{r}
 CovidDataPennMonth1<-filter(PennData, Group=="By Month" & Age.Group=="All Ages" & Year!="2022")
 lmCDM1 <- lm(COVID.19.Deaths ~ Sex, data=CovidDataPennMonth1)
 summary(lmCDM1)
 plot(lmCDM1)
 ```
+
 
 
 GlOSSARY:
@@ -679,7 +698,6 @@ Examples could be one of the new core Biology classes, another 300-level course 
 ```{r echo=FALSE}
 
 ```
-
 
 
 
