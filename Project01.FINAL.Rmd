@@ -281,23 +281,6 @@ Filtering can be accomplished by specifying what one would like to take/remove f
 Listed above are simply introductory commands that are used in conjunction with the filter command. Keep in mind, however, there are additional commands like is.na(), between(), and near() that can be used for advanced filtration. For the purpose of this project, we will mainly focus on the introductory commands. 
 
 
-<<<<<<< HEAD
-=======
-The first line we are specifying which column of the data set we would like to look at and altering the data to ensure the variables are handled properly. 
-When you look at the structure of the data set you can see that Year is listed as numerical but we would like it to be handled as a factor instead. 
-* dataset$column you want <-as.factor(dataset$column you want)
-* as.factor: used to convert data from numerical to a factor
-* $: used to specify the column we want to use
-* ggplot creates a quardinate system that you can add layers to. The first argument is where you input the dataset to use in the graph
-* +: allows you to add layers to the plot
-* geom_jitter: a specific type of point plot that adds a small amount of variation in the location of each point. This is helpful when you are dealing with smaller data bases and you want to visualize each point.
-* aes: deals with the aesthetics of the graph. Use this to write which variables to map of the x and y axis
-* ggtitle: Allows us to put a title on the graph
-* xlab: Where we write the name of the x-axis
-* ylab: Write the name you want on the y-axis
-* geom_point: Makes a scatter plot
-* theme_cowplot: Makes the whole plot look prettier. Good to use the same theme for all of your plots within an     analysis 
->>>>>>> 9bc07043bbb80f98f6075717bd72a91f02d49189
 ```{r}
 CovidFilter <- filter(Covid_19, Group == "By Month")
 CovidYear <- group_by(CovidFilter, Year, Month)
@@ -312,7 +295,7 @@ ggplot(CovidYear) +
   theme_cowplot()
 ```
 
-Here we can visualize if there is a difference in COVID-19 Deaths per month
+Here we can visualize if there is a difference in COVID-19 Deaths per month.
 
 Additional modifications to the plotting outline are needed. One can use the dplyr function group_by to group desired data from different columns/variables in a dataframe. In addition, we want to run the Month X-variable as a factor, instead of a numerical variable. This distinction is made within the aes() function, and is necessary to obtain the appropriate x-axis values. If you are curious about this functions effect, change "aes(x= factor(Month), y= COVID.19.Deaths)" to "aes(x= Month, y=COVID.19.Deaths)" for graph p1 and note the difference.
 
@@ -369,7 +352,7 @@ Covid_19 %>% #Calls the Covid_19 dataset to be acted on by the following functio
   filter(State == "United States") %>% #Selects only the data total deaths in the United States independent of State
   filter(Sex == "All Sexes") %>% #Selects deaths from all sexes, excluding repetitive Male/Female subdivisions
   filter(Group == "By Total") %>% #Selects total deaths to date, excluding repetitive by month/year subdivisions
-  summarise(State, Sex, Age.Group, COVID.19.Deaths) -> Covid_19.Deaths.by.Age #Selects only the relavent columns to our analysis and saves them to a new dataset titled "Covid_19.Deaths.by.Age"
+  summarize(State, Sex, Age.Group, COVID.19.Deaths) -> Covid_19.Deaths.by.Age #Selects only the relavent columns to our analysis and saves them to a new dataset titled "Covid_19.Deaths.by.Age"
 
 table(Covid_19.Deaths.by.Age$Age.Group)
 ```
@@ -604,7 +587,7 @@ PM2<-ggplot(CovidDataPennMonth) +
 plot_grid(PM1,PM2, ncol=1)
 ```
 
-Finally, lets plot COVID-19 Deaths from Pennsylvania by year
+Finally, lets plot COVID-19 Deaths from Pennsylvania by year.
 
 ```{r}
 CovidDataPennYear<-filter(PennData, Group=="By Year" & Age.Group=="All Ages")
@@ -625,13 +608,9 @@ plot(PennYear)
 ```
 
 
-<<<<<<< HEAD
 #STATISTICAL ANALYSIS:
 ### I think we do age above 50 vs age below 50, W vs. E, no diff in the two genders
 
-=======
-STATISTICAL ANALYSIS:
->>>>>>> 9bc07043bbb80f98f6075717bd72a91f02d49189
 As a reminder, the hypotheses we are interested in for this R tutorial are: 
 1. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
 2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
