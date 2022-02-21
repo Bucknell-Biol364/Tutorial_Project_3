@@ -344,11 +344,11 @@ After running this new code chuck, the new dataframe "Covid_19.Deaths.by.Age" wa
 
 This general theme of grouped data, as mentioned earlier in the project, is something to beware of. Be cautious when analyzing data and filtering data for statistical analysis. 
 
-However, as oue table function shows above, our filtering process is not complete. Notice That some of the listed ages are repetitive, and if we want to make a coherent graph, we should not have overlap between age groups. In addition, note that the adolescent observations collected data at a different age intervals that are not consistent with the way the adult age intervals collected. Thus, one is forced to look at age range 0-1 years for newborns, 1-4 years for young children, followed by a consistent 9 year interval range through adult hood. 
+However, as our table function shows above, our filtering process is not complete. Notice That some of the listed age ranges have repetitive data, and if we want to make a coherent graph, we should not have overlap between age groups. In addition, note that the adolescent observations collected data at a different age intervals that are not consistent with the way the adult age intervals collected. Thus, one is forced to look at age range 0-1 years for newborns, 1-4 years for young children, followed by a consistent 9 year interval range through adult hood. 
 
 This is OKAY, but should be noted with analysis. There was simply inconsistency with data collection that is beyond our control.
 
-The code below shows how we can eliminate Ages that overlap with the "!=" operator. 
+The code below shows how we can eliminate Ages that overlap with the "!=" operator in the filter command. 
 
 ```{r}
 Covid_19.Deaths.by.Age %>%
@@ -393,12 +393,14 @@ Additional information on the above code:
       -Unless specified, R will choose the best fit plot with the given data (it might not be the desired plot you want)
       -aes= axis. Define the x and y axis of your plot by the independent and dependent variable. 
     c. Specify the plot you wish ggplot to create with geom_bar (creates a bar graph)
-      - (stat="identity") is used to tell ggplot that the bar graph should have Y values that match the observational values in the dataset, or purely values that match the data. geom_bar expects to do some additional calculations to modify these Y values, and this prevents this
-    e. Clean the graph up by changing:
+      - (stat="identity") is used to tell ggplot that the bar graph should have Y values that match the observational values in        the dataset, or purely values that match the data. geom_bar expects to do some additional calculations to modify these Y         values, and this prevents this
+    d. Clean the graph up by changing:
         -Change title of plot via function: ggtitle("Title")
         -Change name of x/y axis and legend title via function: labs(x= "X Title", y= "Y Title", color= "Legend Title")
-        -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric, hjust=numeric))
-
+        -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric,             hjust=numeric))
+    
+This is general outline of a plot can can be modified. Elements can be added or removed based on desired aesthetic appearance which will be discussed more in section 3. The ggplot packaged also plots more than bar graphs. A master list can be found at this link: 
+http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
 3. Plotting Data of COVID-19 Deaths from Pennsylvania (Total)
 
@@ -410,7 +412,7 @@ PennData<-filter(Covid_19, Sex!="All Sexes" & State=="Pennsylvania")
 
 After running this new code chuck, note the new dataframe "PennData" created from the "Covid_19" dataframe, just as was done for the previous filtering process in section 2 of "Visualizing the Data".
 
-This dataframe can be further refined using the filter function to explore COVID-19 deaths by Age, Group, and Year similarly to as was previously done. Note that the filtered "PennData" dataframe called is now being saved as "CovidDataPennTotal", and that the number of observations in the dataframe is decreasing as we continue to focus in on certain data. 
+This dataframe can be further refined using the filter function to explore COVID-19 deaths by Age, Group, and Year similarly to as was previously done. Note that the filtered "PennData" dataframe is now being saved as "CovidDataPennTotal", and that the number of observations in the dataframe is decreasing as we continue to focus in on certain data. 
 
 The problem of adolescent observations having different age intervals that are not consistent with the way the adult age intervals collected is one again a problem here, however, the age groups that are included in the analysis are broken up differently. See if you can look at the filter code below before running the analysis, compare it to the code in part 2 of the "Visualizing the Data" section, and see how the filter code for age ranges differs.
 
@@ -439,18 +441,15 @@ Now, we can plot a graph for data visualization. The following steps take place 
         -Change title of plot via function: ggtitle("Title")
         -Change name of x/y axis and legend title via function: labs(x= "X Title", y= "Y Title", color= "Legend Title")
         -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric,            hjust=numeric))
-    f. Apply theme_cowplot() which provides a classical plot appearance with two axis lines and no background grid.
+    f. Apply theme_cowplot() which provides a classical plot appearance with two axis lines and no background grid
     g. Plot using function plot(name of designated plot)
-    
-This is general outline of a plot can can be modified. Elements can be added or removed based on desired aesthetic appearance. ggplot packaged also plots more than line plots. A master list can be found at this link: 
-http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
 ```{r}
 PennTotal<-ggplot(CovidDataPennTotal, aes(x = Age.Group, y = COVID.19.Deaths)) +
   geom_point(aes(colour = factor(Sex)), 
              position = "jitter", 
-             alpha = 0.8,
-             size=0.05) +
+             alpha = 0.8,     #Change transparency for aesthetics
+             size=1.0) +      #Change size for aesthetics
   geom_smooth(formula = y ~ x,method='lm',aes(group = factor(Sex), 
                               colour = factor(Sex))) + 
   theme(legend.position = "right") + 
@@ -460,7 +459,6 @@ PennTotal<-ggplot(CovidDataPennTotal, aes(x = Age.Group, y = COVID.19.Deaths)) +
   theme_cowplot()
 plot(PennTotal)
 ```
-### Do you think it would be a good idea to increase the size of these jitter points? I changed it from .05 to 1 and it looks a little more visible when I was messing with it (BT Comment)
 
 A great, refined, visualization was created! Lets take the same code structure from the previous code chunk and look at COVID-19 Deaths from Pennsylvania by month. The creation of a new dataframe, filtering, and creation of a new plot name should be applied. The next plot is a manipulation of the x axis (change to Month) and factor (change to Year). Of course, dress the plot up by changing the titles of everything. 
 
