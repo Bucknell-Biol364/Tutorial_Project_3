@@ -666,9 +666,7 @@ plot(lmEvsW)
 
 random distribution of variance
 residuals are normally distributed
-is line through all of those points straight\
-
-
+is line through all of those points straight
 
 
 
