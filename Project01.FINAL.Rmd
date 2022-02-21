@@ -61,7 +61,7 @@ Uses of the tidyverse library:
 
 In the example below, other packages are loaded into the project. These packages beyond tidyverse are:
   1.Cowplot: Additional package to ggplot; includes features to make publish ready figures
-  2.Car: Used for statistical analysis; specifically linar models
+  2.Car: Used for statistical analysis; specifically linear models
   3.Stat2Data: Used to organize data in dataframe
 
 Finally, the require function is used to ensure we actually get the package we want. If R Studio is unable to receive it, the code will come back with an error or FALSE.
@@ -142,7 +142,6 @@ The hypothesis(s) we are interested in for this R tutorial are:
 
 The next step in exploratory data analysis is to read in a portion of data. The purpose of this task is to determine if the data is messy and should be cleaned. Messy data will often times not be orderly, have missing values, and is not suitable for immediate data visualization. As the data provided was from the CDC, we can expect relatively "clean" data. 
 
-
 ```{r}
 library(readr)
 summary(Covid_19)
@@ -195,7 +194,7 @@ Assessing the beginning and end of the dataframe is a useful tool to assure the 
 
 The "Covid_19" dataframe has dates and the ordering should be evaluated. This can be completed via the head and tail R commands. The structure of this commands is as follows: head/tail(dataframe[, c(column:column, #rows)]).
 
-The brackets in this structure are a useful way to filter data via the use of a preloaded packaked (dplyr). An immediate comma is placed after the bracket to specify the filtering of data from a column. Typical use of brackets are structured as [row, column]. The c command allows for a string of commands. Finally, we can specify a range of columns of interest and the number of rows of data desired. 
+The brackets in this structure are a useful way to filter data via the use of a preloaded packaged (dplyr). An immediate comma is placed after the bracket to specify the filtering of data from a column. Typical use of brackets are structured as [row, column]. The c command allows for a string of commands. Finally, we can specify a range of columns of interest and the number of rows of data desired. 
 
 ```{r}
 head(Covid_19[, c(1:3, 10)])
@@ -230,7 +229,8 @@ An additional consideration is to try to answer ones question/hypothesis in the 
 
 The purpose of this concluding paragraph on exploration of a dataset is to raise the point that not all questions require a deep dive into data analysis, rather, just a basic R exploration. Questions that compare variables, look at causality, and evaluate relationships, however, do require a lengthier analysis. 
 
-VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
+#VISUALIZATION OF DATASET AND VARIABLES OF INTEREST:
+
 1. Plotting Data of COVID-19 Deaths by year and month. 
 
 This is a great way to start looking at the data set. Here we can get a visualization of how the data is spread out over years and then narrow in per month. 
@@ -256,7 +256,7 @@ When you look at the structure of the data set you can see that Year is listed a
 * xlab: Where we write the name of the x-axis
 * ylab: Write the name you want on the y-axis
 * geom_point: Makes a scatter plot
-* theme_cowplot: Makes the whole plot look prettier. Good to use the same theme for all of your plots within an     analysis 
+* theme_cowplot: Makes the whole plot look prettier. Good to use the same theme for all of your plots within an analysis 
 ```{r}
 Covid_19$Year<-as.factor(Covid_19$Year)
 ggplot(Covid_19) +
