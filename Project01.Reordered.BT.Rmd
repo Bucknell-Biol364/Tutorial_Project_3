@@ -324,16 +324,46 @@ ggplot(Covid_19) +
 
 Here we can visualize if there is a difference in COVID-19 Deaths per month
 ```{r}
-ggplot(Covid_19) +
+CovidFilterMonth1 <- filter(Covid_19, Group == "By Month", Year == "2020") #filter is used here to filter out all groups that are not organized by month. We also filtered by the Year so we will only see data for 2020.
+CovidMonth1 <- group_by(CovidFilterMonth1, Year, Month) #group_by is used to group the data into Year and Month
+
+# p# is used below to lable each graph to make it easier to visualize them together later.
+p1 <- ggplot(CovidMonth1) +
   geom_jitter() + 
-  aes(x= factor(Month), y= COVID.19.Deaths) + 
-    ggtitle("Covid 19 Deaths per Year") + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Deaths per Month in 2020") + 
   xlab("Month") + 
   ylab("Covid 19 Deaths") + 
-  geom_point()+
+  geom_point() + 
   theme_cowplot()
+
+CovidFilterMonth2 <- filter(Covid_19, Group == "By Month", Year == "2021")
+CovidMonth2 <- group_by(CovidFilterMonth2, Year, Month)
+
+p2 <- ggplot(CovidMonth2) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Deaths per Month in 2021") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+
+CovidFilterMonth3 <- filter(Covid_19, Group == "By Month", Year == "2022")
+CovidMonth3 <- group_by(CovidFilterMonth2, Year, Month)
+
+p3 <- ggplot(CovidMonth3) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Deaths per Month in 2022") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+
+plot_grid(p1,p2,p3,ncol=2) #plot_grid allows us to plot all of the graphs next to one another for easier comparison
 ```
-###Also we have a problem here. I tired to make it a factor and the NAs are also present because they are also for the total deaths. Beyond this, grouping it only by month but not accounting for year means that january 2020, 2021, and 2022 are all grouped under january...(BT comment)
+
 ###May need to explain factor() here
 
 2. Code for Visualizing "do older people have higher death rates than younger people?"

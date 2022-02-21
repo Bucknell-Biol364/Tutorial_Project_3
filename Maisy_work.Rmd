@@ -103,6 +103,7 @@ Renaming any categories that have a space in them. RStudio does not like spaces 
 ```{r}
 # Below is a very handy way to eliminate those annoying spaces in the column names!
 names(Covid_19) <- make.names(names(Covid_19))
+names(CovidMonth) <- make.names(names(CovidMonth))
 ```
 
 ```{r}
@@ -149,5 +150,68 @@ ggplot(Covid_19) +
   geom_point() + 
   theme_cowplot()
 ```
+```{r}
+CovidFilterMonth1 <- filter(Covid_19, Group == "By Month", Year == "2020")
+CovidMonth1 <- group_by(CovidFilterMonth1, Year, Month)
 
+p1 <- ggplot(CovidMonth1) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Deaths per Month in 2020") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+
+CovidFilterMonth2 <- filter(Covid_19, Group == "By Month", Year == "2021")
+CovidMonth2 <- group_by(CovidFilterMonth2, Year, Month)
+
+p2 <- ggplot(CovidMonth2) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Deaths per Month in 2021") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+
+CovidFilterMonth3 <- filter(Covid_19, Group == "By Month", Year == "2022")
+CovidMonth3 <- group_by(CovidFilterMonth2, Year, Month)
+
+p3 <- ggplot(CovidMonth3) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Deaths per Month in 2022") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+
+plot_grid(p1,p2,p3,ncol=2)
+
+```
+
+```{r}
+CovidFilterMonth2 <- filter(Covid_19, Group == "By Month", Year == "2021")
+CovidMonth2 <- group_by(CovidFilterMonth2, Year, Month)
+
+ggplot(CovidMonth2) +
+  geom_jitter() + 
+  aes(x= Month, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Month") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+```
+```{r}
+ggplot(CovidYear) +
+  geom_jitter() + 
+  aes(x= Year, y= COVID.19.Deaths) + 
+    ggtitle("Covid 19 Deaths per Year") + 
+  xlab("Year") + 
+  ylab("Covid 19 Deaths") + 
+  geom_point() + 
+  theme_cowplot()
+```
 
