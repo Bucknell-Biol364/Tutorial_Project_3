@@ -258,8 +258,10 @@ When you look at the structure of the data set you can see that Year is listed a
 * geom_point: Makes a scatter plot
 * theme_cowplot: Makes the whole plot look prettier. Good to use the same theme for all of your plots within an     analysis 
 ```{r}
-Covid_19$Year<-as.factor(Covid_19$Year)
-ggplot(Covid_19) +
+CovidFilter <- filter(Covid_19, Group == "By Month")
+CovidYear <- group_by(CovidFilter, Year, Month)
+
+ggplot(CovidYear) +
   geom_jitter() + 
   aes(x= Year, y= COVID.19.Deaths) + 
     ggtitle("Covid 19 Deaths per Year") + 
