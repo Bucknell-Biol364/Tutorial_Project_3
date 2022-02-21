@@ -62,14 +62,6 @@ R Notebook is quite similar to R Markdown except in a notebook only one line is 
 
 ##Lets talk about a few of the basics to get you set up to use R. 
 
-To create headers in the text, you place a single hash tag (#) in front of the text. For subheaders, use 2 hash tags (##).
-
-If you want your text to be italicized, surround the text with asterisk (*). 
-In order for the text to be bolded surround it with two asterisks (**)
-To create a list place on asterisk (*) in front of each line.
-
-### ^These effects only work after rendering/knitting, right? We might want to explain knitting before this and say they arent implimented until the markdown is knit so they hypothetically wouldnt be confused when they didnt see any bold/italics popup right away (BT comment)
-
 Rendering is when you transform the markdown file into a HTML, PDF, or word document and this can be done by clicking on the knit button. When you press knit it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, like I have done below. 
 
 This code helps set up the R markdown document to make a nice clean html file for sharing. 
@@ -80,6 +72,15 @@ Click the green triangle to run the code chunk.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+To create headers in the text, you place a single hash tag (#) in front of the text. For subheaders, use 2 hash tags (##).
+
+If you want your text to be italicized, surround the text with asterisk (*). 
+In order for the text to be bolded surround it with two asterisks (**)
+To create a list place on asterisk (*) in front of each line.
+
+The effects I explained above will show up once you have knitted the document. The text wont appear italicised or bolded etc when you run your code, but when the document has been finalized the text will be altered accordingly.
+
 
 Packages are collections of R functions, data, and compiled code which are stored in the library. The require function is used to ensure we actually get the package we want and if R is unable to receive it, the code will come back with an error or FALSE.
 
