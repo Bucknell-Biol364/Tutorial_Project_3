@@ -22,9 +22,7 @@ At the conclusion of this project, the following should be accomplished:
   
 #INTRODUCTION TO R:
 
-NOTE: At the bottom of this file there is a glossary that you can refer to. It includes an overview of the stats and functions that will be used. 
-
-For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is is to introduce the applyication of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
+For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is is to introduce the application of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
 
 First it is important to understand the different types of files you can use in R Studio. Today, we will go over R Markdown and R Notebook.
 
