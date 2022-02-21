@@ -647,7 +647,15 @@ STATISTICAL ANALYSIS:
 
 As a reminder, the hypotheses we are interested in for this R tutorial are: 
 1. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
-###Need to ask Field a Q
+
+Using CovidDataCoasts dataset, with all sexes, By total, All Ages, excluding "United States", "New York City", and "Peurto Rico". 
+
+```{r}
+lmEvsW <- lm(COVID.19.Deaths ~ WC, data=CovidDataCoasts)
+summary(lmEvsW)
+plot(lmEvsW)
+```
+
 
 2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
 
@@ -684,6 +692,7 @@ GlOSSARY:
 
 
 
+###Should the below contents be at the beginning (BT comment)
 
 #### Project Details #####
 
