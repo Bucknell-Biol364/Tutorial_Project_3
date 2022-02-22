@@ -22,7 +22,7 @@ At the conclusion of this project, the following should be accomplished:
   
 #INTRODUCTION TO R:
 
-For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is is to introduce the application of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
+For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is to introduce the application of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
 
 First, it is important to understand the different types of files you can use in R Studio. Today, we will go over R Markdown and R Notebook.
 
@@ -48,7 +48,7 @@ To create headers in the text outside of the code chunk, once can place a single
   2.To bold text, surround it with two asterisks (**)
   3.To create a list, place on asterisk (*) in front of each line.
 
-These additions may appear throughout the following project, but  would be more apparent if the RMD became knitted. The text will not appear italicized or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
+These additions may appear throughout the following project, but would be more apparent if the RMD became knitted. The text will not appear italicized or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
 
 Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are currently loaded into the current project. Packages can either be manually added (via instalation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistant of the tidyverce library (and should be added last).
 =======
@@ -93,7 +93,7 @@ Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 
 Click on the "Covid_19" dataset in the Environment tab and it will pull up a tab for you to view it. Before you start exploring your dataset, one should check to see if any column names have spaces in them. As R Studio has trouble reading spaces, it is easiest to rename these columns at the beginning of a project. 
 
-In the code chunk below, the spaces in the column names are changed in incoorporate periods (.). This will make the data much easier to work with. After running the code chunk, check your dataframe to assure that the change was successful.
+In the code chunk below, the spaces in the column names are changed in incorporate periods (.). This will make the data much easier to work with. After running the code chunk, check your dataframe to assure that the change was successful.
 
 The structure of this function is as follows: names(dataframe)<-make.names(names(dataframe))
 
@@ -125,11 +125,11 @@ These variables are all divided into their own column. Just by initially looking
 
 Key functions for visualizing data in R studio include:
   1. &: Narrows search between dataframe and column.
-  2. ~: Comparison of variables that are "dependent on" one another; defines relationship between independent and dependent             variable.
+  2. ~: Comparison of variables that are "dependent on" one another; defines relationship between independent and dependent variable.
 
 ##Formulating a Question: 
 
-Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death  variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables from the subsequential analysis.
+Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables from the subsequential analysis.
 
 =======
 The questions we are interested in for this R tutorial: 
@@ -227,7 +227,7 @@ By looking at the states, however, we note that Puerto Rico, District of Columbi
 ##Other Checks to Consider:
 
 After an initial check over the dataframe has been complete, there are other factors to consider. For this purpose of this R tutorial, they will not be completed in full, but rather highlighted as things to be consider when conducting data analysis beyond this project. The first additional rule of thumb to consider is the validation of ones own data via a comparison with an external source. The CDC is very reliable, thus, the observations in this dataframe do not necessarily have be check. However, should further investigation be complete, eternal sources to consider include datasets from Johns Hopkins or Our World in Data.
-If one is using their own reseach data, they would certainly attemp an external validation of data. They would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. 
+If one is using their own research data, they would certainly attempt an external validation of data. They would want to compare observations and numeric variables against another reliable source to conclude the absence of erroneous data. 
 
 An additional consideration is to try to answer ones question/hypothesis in the easiest way possible. Say your question simply asks which state had the most COVID-19 death in 2020. The data can simply be filtered out using a table. Certain questions like these do not need further exploration. The solution to these questions, however, should be challenged if possible. Factors such as some states not reporting data could be an issue (this is one such example, but this problem is not present in the "Covid_19" dataframe).
 
@@ -255,8 +255,8 @@ Create a graph name and graph using the ggplot package
     e. Clean the graph up by changing:
         -Change legend position by using theme function of ggplot: theme(legend.position = "right, left, top, bottom")
         -Change title of plot via function: ggtitle("Title")
-        -Change name of x/y axis and legend title via function: labs(x= "X Title", y= "Y Title", color= "Legend Title") OR you             can individually state the x/y axis labels via xlab("Title") and ylab("Title")
-        -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric,            hjust=numeric))
+        -Change name of x/y axis and legend title via function: labs(x= "X Title", y= "Y Title", color= "Legend Title") OR you can individually state the x/y axis labels via xlab("Title") and ylab("Title")
+        -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric, hjust=numeric))
     f. A string of commands can be accomplished using "+" after each line of code.
     g. Apply theme_cowplot() which provides a classical plot appearance with two axis lines and no background grid
     h. Plot using function plot(name of designated plot)
@@ -282,7 +282,8 @@ Filtering can be accomplished by specifying what one would like to take/remove f
 
 Listed above are simply introductory commands that are used in conjunction with the filter command. Keep in mind, however, there are additional commands like is.na(), between(), and near() that can be used for advanced filtration. For the purpose of this project, we will mainly focus on the introductory commands. 
 
-
+Below we use filter to look at the data grouped by month. group_by is used to group the data by Year and Month. 
+The following ggplot helps us visualize Covid 19 deaths per year.
 ```{r}
 CovidFilter <- filter(Covid_19, Group == "By Month")
 CovidYear <- group_by(CovidFilter, Year, Month)
@@ -349,7 +350,7 @@ plot_grid(p1,p2,p3,ncol=2) #plot_grid allows us to plot all of the graphs next t
 
 2. Plots tp visualize if older individuals have higher death rates than younger individuals.
 
-You may have noticed comments being made in code chucks that do not interfere with running the code. These are denoted with a # and are shown in green. This is valuable tactic used to walk individuals (familiar or unfamiliar with the dataframe) through thethe code. 
+You may have noticed comments being made in code chucks that do not interfere with running the code. These are denoted with a # and are shown in green. This is valuable tactic used to walk individuals (familiar or unfamiliar with the dataframe) through the code. 
 
 Furthermore, note in this next code chuck, the operator %>% will be utilized from the Dplyr package to allow for pipeline commands. This is a close equivalent to using "+" in ggplot.
 
