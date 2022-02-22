@@ -680,29 +680,10 @@ plot(lmCDM1)
 
 
 
-GlOSSARY:
-
-
-
-###Should the below contents be at the beginning (BT comment)
-
-#### Project Details #####
-
-
-This project will require you to develop a tutorial to teach Bucknell students how to use R for graphing and data analysis. 
 
 ## Target Audience
 
-Discuss with your group the target audience for the tutorial. 
-Examples could be one of the new core Biology classes, another 300-level course (not 364), or a research group. 
-
-```{r echo=FALSE}
-
-```
-
-
-
-
+Upper level epidemiology class using R Studio for the first time.
 
 ## Grading
 
@@ -719,11 +700,36 @@ Each student will be expected to complete the following tasks to earn 85% of the
 
 Tutorials from previous classes can be viewed at our public github site: https://github.com/Bucknell-Biol364
 
-Each group should use an *Acknowledgements* section to document the participation of each member and the collaboration within and between groups.
-
 Additional credit will be awarded for providing assistance to other groups and for the development of a tutorial that goes beyond the minimal expectations listed above.
 
 
 # Acknowledgements
+Outline:
+README(Maisy)
+1) Introduction to class (Ashley)
+2) Introduction to R (Maisy)
+    Define RMD vs Regular R
+    Loading Data Set
+    Load Packages
+    Refer to glossary for a function/stats overview…
+3) Explore Data Set (with function explanations) (Ashley)
+    Formulate a question
+    Read data
+    Check packaging 
+    Run structure
+    Look at top and bottom of data
+    Check your n’s
+4) Visualize Data Set
+    1. Timeline vs death (Maisy)
+    2.Rank net deaths by state (Ben)
+    3.Do older people have higher death rates than younger (Ben)
+    4.West coast vs east coast (Ashley)
+    5.Covid-19 Deaths in Pennsylvania (Ashley)
+5) Statistical analysis to answer hypothesis(Ben)
+   1.We hypothesize that there will be more COVID-19 deaths reported for the East coast.
+   2.We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
+   3.We hypothesize that there will be no difference in COVID-19 deaths between the to genders in PA.
+
+
 
 
