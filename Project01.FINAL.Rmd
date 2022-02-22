@@ -9,9 +9,9 @@ Dataset we are using: https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-S
 
 #INTRODUCTION TO EPIDEMIOLOGY:
 
-Epidemiology is the "study of distribution and determinants of health related states among specified populations and the application of that study to control health problems" (A Dictionary of Epidemiology). The purpose of epidemiology in public health practice is to: (1) discover and analyze agents that affect heath, (2) determining causes of illness, disability, and death, (3) identification of populations at risk, and (4) develop effective programs and services to to improve population health. Many epidemiologists solve health problems through a formal scientific approach that includes data collection, assessment, hypothesis testing, and action.  
+Epidemiology is the "study of distribution and determinants of health related states among specified populations and the application of that study to control health problems" (A Dictionary of Epidemiology). The purpose of epidemiology in public health practice is to: (1) discover and analyze agents that affect heath, (2) determine causes of illness, disability, and death, (3) identify populations at risk, and (4) develop effective programs and services to to improve population health. Many epidemiologists solve health problems through a formal scientific approach that includes data collection, assessment, hypothesis testing, and action.  
 
-The employment of epidemiology has been notably publicized by the COVID-19 epidemic. As many people have been impacted by the virus in various capacities, this has sparked curiosity into how professionals identify, measure, and represent the epidemiology of such infections. In this R tutorial, we will assume the role of an epidemiologist and conduct a formal scientific method using a COVID-19 dataset provided by the CDC.
+The employment of epidemiology has been notably publicized by the COVID-19 epidemic. As many people have been impacted by the virus in various capacities, this has sparked curiosity into how professionals identify, measure, and represent the epidemiology of such infections. In this R tutorial, we will assume the role of an epidemiologist and conduct a formal scientific method using a COVID-19 dataset provided by the Centers for Disease Control (CDC).
 
 At the conclusion of this project, the following should be accomplished:
   1. Relate epidemiology data collection to data science/analysis
@@ -24,7 +24,7 @@ At the conclusion of this project, the following should be accomplished:
 
 For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is is to introduce the application of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
 
-First it is important to understand the different types of files you can use in R Studio. Today, we will go over R Markdown and R Notebook.
+First, it is important to understand the different types of files you can use in R Studio. Today, we will go over R Markdown and R Notebook.
 
 R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text, code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
 
@@ -32,9 +32,9 @@ R Notebook is quite similar to R Markdown except in a notebook only one line is 
 
 ##R Studio Basics. 
 
-Code chuncks can be created in the RMD file. This is where desired functions of anlaysis can be performed. The creation of a code chuck can be completed via clicking the green square "C" in the above toolbar, or by using the keyboard shortcut of cmd+option+I on macOS.
+Code chunks can be created in the RMD file. This is where desired functions of analysis can be performed. The creation of a code chuck can be completed via clicking the green square "C" in the above toolbar, or by using the keyboard shortcut of cmd+option+I on macOS.
 
-Additionally, one can transform their markdown file into a HTML, PDF, or word document. This is referred to as "rendering", and can be done by clicking on the Knit button up in the R Studio toolbar. When you press knit, it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, as shown below. 
+Additionally, one can transform their markdown file into a HTML, PDF, or word document. This is referred to as "rendering" and can be done by clicking on the Knit button up in the R Studio toolbar. When you press knit, it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, as shown below. 
 
 This code helps set up the R markdown document to make a nice clean html file for sharing. 
 Click the green triangle to run the code chunk.
@@ -48,9 +48,9 @@ To create headers in the text outside of the code chunk, once can place a single
   2.To bold text, surround it with two asterisks (**)
   3.To create a list, place on asterisk (*) in front of each line.
 
-These additions will appear throughout the following project and will be more appearent if the RMD becomes knitted. The text will not appear italicized or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
+These additions may appear throughout the following project, but  would be more apparent if the RMD became knitted. The text will not appear italicized or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
 
-Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are currently loaded into the current project. Packages can either be mannually added (via instalation tab in "Packages") or coded in via a code chunck. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistant of the tidyverce library (and should be added last).
+Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are loaded into the current project. Packages can either be manually added (via installation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistent of the tidyverse library (and should be added last in a code chuck).
 
 Uses of the tidyverse library:
   1.dplyr: Summarizes data quick and efficiently.
@@ -89,11 +89,11 @@ Click this green arrow to run a chunk of code that produces output. If this code
 Covid_19 <- read_csv("./Data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 ```
 
-Click on the "Covid_19" dataset in the Environment tab and it will pull up a tab for you to view it. Before you start exploring your dataset, one should check to see if any column names have spaces in them. As R Studio has trouble reading spaces, it is easiest to rename these columns. 
+Click on the "Covid_19" dataset in the Environment tab and it will pull up a tab for you to view it. Before you start exploring your dataset, one should check to see if any column names have spaces in them. As R Studio has trouble reading spaces, it is easiest to rename these columns at the beginning of a project. 
 
 In the code chunk below, the spaces in the column names are changed in incoorporate periods (.). This will make the data much easier to work with. After running the code chunk, check your dataframe to assure that the change was successful.
 
-The structure of this funciton is as follows: names(dataframe)<-make.names(names(dataframe))
+The structure of this function is as follows: names(dataframe)<-make.names(names(dataframe))
 
 ```{r}
 names(Covid_19) <- make.names(names(Covid_19))
@@ -123,7 +123,7 @@ These variables are all divided into their own column. Just by initially looking
 
 Key functions for visualizing data in R studio include:
   1. &: Narrows search between dataframe and column.
-  2. ~: Comparison of variables that are "dependent on" oneanother; defines relationship between independent and dependent             variable.
+  2. ~: Comparison of variables that are "dependent on" one another; defines relationship between independent and dependent             variable.
 
 ##Formulating a Question: 
 
@@ -142,16 +142,16 @@ The hypothesis(s) we are interested in for this R tutorial are:
 
 ##Read Data:
 
-The next step in exploratory data analysis is to read in a portion of data. The purpose of this task is to determine if the data is messy and should be cleaned. Messy data will often times not be orderly, have missing values, and is not suitable for immediate data visualization. As the data provided was from the CDC, we can expect relatively "clean" data. 
+The next step in exploratory data analysis is to read in a portion of data. The purpose of this task is to determine if the data is "messy" and should be "cleaned". Messy data will often times not be orderly, have missing values, and is not suitable for immediate data visualization. As the data provided was from the CDC, we can expect relatively "clean" data. 
 
 ```{r}
 library(readr)
 summary(Covid_19)
 ```
 
-The readr package is used here because it can read and analyze large dataframes fast. Also note the library notation of readr. This operation loads/attaches packages and stores them in the "System Library" located under the Packages tab. The checked packages in the system library are the ones in use for the duration of the coding project. They can either be manually added (as performed above) or checked here at the beginning of a project. 
+The readr package is used here because it can read and analyze large dataframes fast. Also note the library notation of readr. This operation loads/attaches packages and stores them in the "System Library" located under the Packages tab. This is an exaple of reading in a package into a code chuck, but again, this package was already loaded at the beginning of the project.
 
-The summary of the "Covid_19" dataframe was performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
+The summary of the "Covid_19" dataframe can be performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
 
 At the beginning of this project, we removed the spaces in the column names. Should they be changed at any point, the rename function can be used. The general structure of the rename function is as follows: dataframe (can make new or use original)<-rename(dataframe, new column name="column with spaces/Old name")
 
@@ -176,7 +176,7 @@ ncol(Covid_19)
 nrow(Covid_19)
 ```
 
-As the output of this code chuck matches the expected number of variables and observations (as displayed in the "Global Environment"), it can be assumed that the dataframe was uploaded correctly. 
+As the output of this code chuck matches the expected number of variables and observations (as displayed in the "Global Environment"), it can be assumed that the dataframe was uploaded correctly (although it can be checked by creating a table; a function performed later in this section). 
 
 ##Run str()
 
@@ -188,7 +188,7 @@ str(Covid_19)
 
 Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" dataframe, we can note that these NA values come from data that has been grouped. Grouped data as such makes the year and month values obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
 
-Beyond the NA values in the dataframe, there appears to be no other apparent issues. For future analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that cant be used.
+Beyond the NA values in the dataframe, there appears to be no other apparent issues. For future analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that can not be used.
 
 ##Check Top and Bottom of Data:
 
@@ -431,7 +431,7 @@ nlevels(Covid_19.State.Deaths$State)
 
 arrange(Covid_19.State.Deaths,desc(COVID.19.Deaths)) #arranges the data from the state with the highest number of deaths to the state with the lowest number of death
 ```
-Notice the first output frame shows that one observation (the data point representing the total number of deaths in each state since the start of the pandemic) remains in each state. Although there are 54 states total in the list, the ones removed (United States, District of Columbia, New York City, and Peurto Rico) all have no observations in their category, effectively taking them out of the set. And finally, the second box shows us the order of States with the most to least Covid-19 deaths with California being first (85,545 deaths).
+Notice the first output frame shows that one observation (the data point representing the total number of deaths in each state since the start of the pandemic) remains in each state. Although there are 54 states total in the list, the ones removed (United States, District of Columbia, New York City, and Puerto Rico) all have no observations in their category, effectively taking them out of the set. And finally, the second box shows us the order of States with the most to least Covid-19 deaths with California being first (85,545 deaths).
 
 4. West Coast vs East Coast COVID-19 Death Exploration 
 
