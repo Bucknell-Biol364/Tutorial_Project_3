@@ -622,11 +622,12 @@ The first linear model we will be running will be used to determine if the total
 
 lm(Response/Dependent Variable ~ Predictor/Independent Variable, data=data.frame)
 
-Notice that the product of this function is assigned the identity "lmEvsW" for East vs. West Coast. This analysis is performed using the CovidDataCoasts dataset, with both male and female sexes, by total, All Ages, excluding "United States", "New York City", and "Peurto Rico". The 102 observations are present within the data frame are 2 per "state" (one for female deaths, one for male deaths) for 51 "states" (the traditional 50 states + the District of Columbia). The summary(lmEvsW)
+Notice that the product of this function is assigned the identity "lmEvsW" for East vs. West Coast. This analysis is performed using the lmCovidDataCoasts dataset, with all sex, by total, All Age observations, excluding the "States" of "United States", "New York City", and "Peurto Rico". The 51 observations are present within the data frame are explained by 1 per "state" for 51 "states" (the traditional 50 states + the District of Columbia). The summary(lmEvsW)
 plot(lmEvsW) functions should always be ran in tandem with the execution of a linear model in order to ensure the model can be assessed. Briefly look at the output below after running the code chunk, and then follow the text below the output describing the results of a linear model.
 
 ```{r}
-lmEvsW <- lm(COVID.19.Deaths ~ WC, data=CovidDataCoasts)
+lmCovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex=="All Sexes" & Age.Group=="All Ages" & State!="United States" & State!="Puerto Rico", State!= "New York City" )
+lmEvsW <- lm(COVID.19.Deaths ~ WC, data=lmCovidDataCoasts)
 summary(lmEvsW)
 plot(lmEvsW)
 ```
@@ -645,9 +646,9 @@ Notice that we do not have normal distribution for this analysis. This does not 
 Interpreting Significance:
 Select the first output frame above. Theoretically what this linear model is doing is fitting a horizontal line through the weighted mean Y value for one category of X (call this X1). Then, the linear model is comparing the weighted mean Y value for X1 to the weighted mean Y value of category X2 and determining the probability (p value) that these two weighted mean values come from the same population. A linear model is capible of comparing a number of categorical variables like this, making it very useful.
 
-Look under the "Coefficients" detection of output frame 1. "(Intercept)" shows the baseline X value that the rest are being compared to. RStudio automatically selects the baseline category for comparison by alphabetical order. Although it is not explicitly stated, this category above is "WCFALSE", and WCTRUE is being compared to this baseline. Now, study the WCTRUE line of values. These say the following. WCTRUE Covid-19 deaths (or the total ) 151.9     
+Look under the "Coefficients" detection of output frame 1. "(Intercept)" shows the baseline X value that the rest are being compared to. RStudio automatically selects the baseline category for comparison by alphabetical order. Although it is not explicitly stated, this category above is "WCFALSE", and WCTRUE is being compared to this baseline. The number under the "Estimate" column for "(Intercept)" represents the the weighted average number of deaths per East Coast (or WCFALSE) State, which in this case is 16850.2 deaths. 
 
-1967.3   0.077    0.939
+Now, looking at the WCTRUE row of code, notice the number under the "Estimate" column is 303.8 deaths. Remember, everything is in comparison to the baseline category (WCFALSE), so this is actually saying that states on the west coast have weighted average number of deaths per state that is higher by 303.8 deaths. However, by looking under the "Pr(>|t|)" (or p value) column in the WCTRUE row, we can see that this difference in weighted average is no where near close to being significant (p=0.956), and we can conclude that the number of Covid-19 deaths do not differ significantly by coast. 
 
 
 2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
@@ -655,7 +656,6 @@ Look under the "Coefficients" detection of output frame 1. "(Intercept)" shows t
 ```{r}
 
 PennData$Age.Group<-recode_factor(PennData$Age.Group, `Under 1 year` = "0-1 years", `1-4 years` = "01-4 years", `5-14 years` = "05-14 years")
-
 PennData%>%
   filter(Group=="By Month" & Year!="2022") %>%
   filter(Age.Group != "0-17 years" & Age.Group != "All Ages" & Age.Group != "50-64 years") ->Covid_19PA.OldvsY
@@ -677,7 +677,6 @@ lmCDM1 <- lm(COVID.19.Deaths ~ Sex, data=CovidDataPennMonth1)
 summary(lmCDM1)
 plot(lmCDM1)
 ```
-
 
 
 
