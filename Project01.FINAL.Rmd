@@ -50,11 +50,9 @@ To create headers in the text outside of the code chunk, once can place a single
 
 These additions may appear throughout the following project, but  would be more apparent if the RMD became knitted. The text will not appear italicized or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
 
-<<<<<<< HEAD
 Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are currently loaded into the current project. Packages can either be manually added (via instalation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistant of the tidyverce library (and should be added last).
 =======
 Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are loaded into the current project. Packages can either be manually added (via installation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistent of the tidyverse library (and should be added last in a code chuck).
->>>>>>> 7b48d59c42f02549de69522a2eb2be8dd379d332
 
 Uses of the tidyverse library:
   1.dplyr: Summarizes data quick and efficiently.
@@ -298,7 +296,6 @@ ggplot(CovidYear) +
   geom_point() + 
   theme_cowplot()
 ```
-<<<<<<< HEAD
 
 
 Here we can visualize if there is a difference in COVID-19 Deaths per month. The graphs are organized per year so we can also look to see if the trends differ by year.
@@ -308,7 +305,7 @@ Here we can visualize if there is a difference in COVID-19 Deaths per month.
 
 Additional modifications to the plotting outline are needed. One can use the dplyr function group_by to group desired data from different columns/variables in a dataframe. In addition, we want to run the Month X-variable as a factor, instead of a numerical variable. This distinction is made within the aes() function, and is necessary to obtain the appropriate x-axis values. If you are curious about this functions effect, change "aes(x= factor(Month), y= COVID.19.Deaths)" to "aes(x= Month, y=COVID.19.Deaths)" for graph p1 and note the difference.
 
->>>>>>> 289479845bd9a1b24291f0059c577abb2143747d
+
 ```{r}
 CovidFilterMonth1 <- filter(Covid_19, Group == "By Month", Year == "2020") #filter is used here to filter out all groups that are not organized by month. We also filtered by the Year so we will only see data for 2020.
 CovidMonth1 <- group_by(CovidFilterMonth1, Year, Month) #group_by is used to group the data into Year and Month
@@ -721,7 +718,6 @@ README(Maisy)
     Define RMD vs Regular R
     Loading Data Set
     Load Packages
-    Refer to glossary for a function/stats overview…
 3) Explore Data Set (with function explanations) (Ashley)
     Formulate a question
     Read data
