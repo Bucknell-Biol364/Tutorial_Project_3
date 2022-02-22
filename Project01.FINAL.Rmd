@@ -22,9 +22,7 @@ At the conclusion of this project, the following should be accomplished:
   
 #INTRODUCTION TO R:
 
-NOTE: At the bottom of this file there is a glossary that you can refer to. It includes an overview of the stats and functions that will be used. 
-
-For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is is to introduce the applyication of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
+For many epidemiologists, the use of R Studio can be an effective program used to analyze collected data. As we are student epidemiologists, the aim of this tutorial and project is is to introduce the application of data analysis in R. Using R studio, however, may be a daunting task for those with limited experience with computer coding. This basic introduction to R serves to help alleviate such stress. Throughout the project, we will slowly add to a toolbox of coding techniques.
 
 First it is important to understand the different types of files you can use in R Studio. Today, we will go over R Markdown and R Notebook.
 
@@ -283,23 +281,6 @@ Filtering can be accomplished by specifying what one would like to take/remove f
 Listed above are simply introductory commands that are used in conjunction with the filter command. Keep in mind, however, there are additional commands like is.na(), between(), and near() that can be used for advanced filtration. For the purpose of this project, we will mainly focus on the introductory commands. 
 
 
-<<<<<<< HEAD
-=======
-The first line we are specifying which column of the data set we would like to look at and altering the data to ensure the variables are handled properly. 
-When you look at the structure of the data set you can see that Year is listed as numerical but we would like it to be handled as a factor instead. 
-* dataset$column you want <-as.factor(dataset$column you want)
-* as.factor: used to convert data from numerical to a factor
-* $: used to specify the column we want to use
-* ggplot creates a quardinate system that you can add layers to. The first argument is where you input the dataset to use in the graph
-* +: allows you to add layers to the plot
-* geom_jitter: a specific type of point plot that adds a small amount of variation in the location of each point. This is helpful when you are dealing with smaller data bases and you want to visualize each point.
-* aes: deals with the aesthetics of the graph. Use this to write which variables to map of the x and y axis
-* ggtitle: Allows us to put a title on the graph
-* xlab: Where we write the name of the x-axis
-* ylab: Write the name you want on the y-axis
-* geom_point: Makes a scatter plot
-* theme_cowplot: Makes the whole plot look prettier. Good to use the same theme for all of your plots within an     analysis 
->>>>>>> 9bc07043bbb80f98f6075717bd72a91f02d49189
 ```{r}
 CovidFilter <- filter(Covid_19, Group == "By Month")
 CovidYear <- group_by(CovidFilter, Year, Month)
@@ -319,7 +300,7 @@ ggplot(CovidYear) +
 Here we can visualize if there is a difference in COVID-19 Deaths per month. The graphs are organized per year so we can also look to see if the trends differ by year.
 =======
 
-Here we can visualize if there is a difference in COVID-19 Deaths per month
+Here we can visualize if there is a difference in COVID-19 Deaths per month.
 
 Additional modifications to the plotting outline are needed. One can use the dplyr function group_by to group desired data from different columns/variables in a dataframe. In addition, we want to run the Month X-variable as a factor, instead of a numerical variable. This distinction is made within the aes() function, and is necessary to obtain the appropriate x-axis values. If you are curious about this functions effect, change "aes(x= factor(Month), y= COVID.19.Deaths)" to "aes(x= Month, y=COVID.19.Deaths)" for graph p1 and note the difference.
 
@@ -377,7 +358,7 @@ Covid_19 %>% #Calls the Covid_19 dataset to be acted on by the following functio
   filter(State == "United States") %>% #Selects only the data total deaths in the United States independent of State
   filter(Sex == "All Sexes") %>% #Selects deaths from all sexes, excluding repetitive Male/Female subdivisions
   filter(Group == "By Total") %>% #Selects total deaths to date, excluding repetitive by month/year subdivisions
-  summarise(State, Sex, Age.Group, COVID.19.Deaths) -> Covid_19.Deaths.by.Age #Selects only the relavent columns to our analysis and saves them to a new dataset titled "Covid_19.Deaths.by.Age"
+  summarize(State, Sex, Age.Group, COVID.19.Deaths) -> Covid_19.Deaths.by.Age #Selects only the relavent columns to our analysis and saves them to a new dataset titled "Covid_19.Deaths.by.Age"
 
 table(Covid_19.Deaths.by.Age$Age.Group)
 ```
@@ -612,7 +593,7 @@ PM2<-ggplot(CovidDataPennMonth) +
 plot_grid(PM1,PM2, ncol=1)
 ```
 
-Finally, lets plot COVID-19 Deaths from Pennsylvania by year
+Finally, lets plot COVID-19 Deaths from Pennsylvania by year.
 
 ```{r}
 CovidDataPennYear<-filter(PennData, Group=="By Year" & Age.Group=="All Ages")
@@ -633,13 +614,9 @@ plot(PennYear)
 ```
 
 
-<<<<<<< HEAD
 #STATISTICAL ANALYSIS:
 ### I think we do age above 50 vs age below 50, W vs. E, no diff in the two genders
 
-=======
-STATISTICAL ANALYSIS:
->>>>>>> 9bc07043bbb80f98f6075717bd72a91f02d49189
 As a reminder, the hypotheses we are interested in for this R tutorial are: 
 1. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
 2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
@@ -709,29 +686,10 @@ plot(lmCDM1)
 
 
 
-GlOSSARY:
-
-
-
-###Should the below contents be at the beginning (BT comment)
-
-#### Project Details #####
-
-
-This project will require you to develop a tutorial to teach Bucknell students how to use R for graphing and data analysis. 
 
 ## Target Audience
 
-Discuss with your group the target audience for the tutorial. 
-Examples could be one of the new core Biology classes, another 300-level course (not 364), or a research group. 
-
-```{r echo=FALSE}
-
-```
-
-
-
-
+Upper level epidemiology class using R Studio for the first time.
 
 ## Grading
 
@@ -748,11 +706,36 @@ Each student will be expected to complete the following tasks to earn 85% of the
 
 Tutorials from previous classes can be viewed at our public github site: https://github.com/Bucknell-Biol364
 
-Each group should use an *Acknowledgements* section to document the participation of each member and the collaboration within and between groups.
-
 Additional credit will be awarded for providing assistance to other groups and for the development of a tutorial that goes beyond the minimal expectations listed above.
 
 
 # Acknowledgements
+Outline:
+README(Maisy)
+1) Introduction to class (Ashley)
+2) Introduction to R (Maisy)
+    Define RMD vs Regular R
+    Loading Data Set
+    Load Packages
+    Refer to glossary for a function/stats overview…
+3) Explore Data Set (with function explanations) (Ashley)
+    Formulate a question
+    Read data
+    Check packaging 
+    Run structure
+    Look at top and bottom of data
+    Check your n’s
+4) Visualize Data Set
+    1. Timeline vs death (Maisy)
+    2.Rank net deaths by state (Ben)
+    3.Do older people have higher death rates than younger (Ben)
+    4.West coast vs east coast (Ashley)
+    5.Covid-19 Deaths in Pennsylvania (Ashley)
+5) Statistical analysis to answer hypothesis(Ben)
+   1.We hypothesize that there will be more COVID-19 deaths reported for the East coast.
+   2.We hypothesize that there will be more COVID-19 deaths reported for older individuals in PA.
+   3.We hypothesize that there will be no difference in COVID-19 deaths between the to genders in PA.
+
+
 
 
