@@ -26,15 +26,15 @@ For many epidemiologists, the use of R Studio can be an effective program used t
 
 First, it is important to understand the different types of files you can use in R Studio. Today, we will go over R Markdown and R Notebook.
 
-R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text, code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copy and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
+R Markdown files allow you to include text with embedded R code chunks. When the document is knitted and finalized you will be able to see the text, code chunks, and the output of those embedded chunks. This is a great tool for authors because it saves the time of copying and pasting graphs or tables into a report and aids in reproducibility. Using R Markdown allows others to see exactly what was done to produce the figures. 
 
-R Notebook is quite similar to R Markdown except in a notebook only one line is sent at a time. In contrast R Markdown executes the entire code chunk at once. Another large difference is when a R Notebook file is rendered no code is re-run, only the code that has already been run will be presented in produced document. Whereas when an R Markdown file is rendered all code chunks are re-run and it will not allow you to convert it to a document if there is an error in a code chunk.  
+R Notebook is quite similar to R Markdown except in a notebook only one line is sent at a time. In contrast, R Markdown executes the entire code chunk at once. Another large difference is when a R Notebook file is rendered no code is re-run, only the code that has already been run will be presented in produced document. Whereas when an R Markdown file is rendered all code chunks are re-run and it will not allow you to convert it to a document if there is an error in a code chunk.  
 
-##R Studio Basics. 
+##R Studio Basics:
 
 Code chunks can be created in the RMD file. This is where desired functions of analysis can be performed. The creation of a code chuck can be completed via clicking the green square "C" in the above toolbar, or by using the keyboard shortcut of cmd+option+I on macOS.
 
-Additionally, one can transform their markdown file into a HTML, PDF, or word document. This is referred to as "rendering" and can be done by clicking on the Knit button up in the R Studio toolbar. When you press knit, it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, as shown below. 
+Additionally, one can transform their markdown file into a HTML, PDF, or word document. This is referred to as "rendering" and can be done by clicking on the Knit button up in the R Studio toolbar. When you press Knit, it will run all of your code and create an output. If you want to omit the code but include the results of a chunk in your final document use echo = FALSE. If you want to omit the code and the results form the document use include = FALSE, as shown below. 
 
 This code helps set up the R markdown document to make a nice clean html file for sharing. 
 Click the green triangle to run the code chunk.
@@ -50,9 +50,7 @@ To create headers in the text outside of the code chunk, once can place a single
 
 These additions may appear throughout the following project, but would be more apparent if the RMD became knitted. The text will not appear italicized or bolded etc when you run your code, however, when the document has been finalized, the text will be altered accordingly.
 
-Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are currently loaded into the current project. Packages can either be manually added (via instalation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistant of the tidyverce library (and should be added last).
-=======
-Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are loaded into the current project. Packages can either be manually added (via installation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added in later. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistent of the tidyverse library (and should be added last in a code chuck).
+Packages are collections of R functions, data, and compiled code which are stored in the library. The "System Library" can be found under the packages tab. The library will have checked boxes next to packages that are loaded into the current project. Packages can either be manually added (via installation tab in "Packages") or coded in via a code chunk. For simplicity, all packages should be installed in the first code chunk, however, if a package is needed later in the project, it can always be added. A general list of packages one may want to always start off with include *dplyr*, *ggplot2*, *readr*, which is consistent of the tidyverse library (and should be added last in a code chuck).
 
 Uses of the tidyverse library:
   1.dplyr: Summarizes data quick and efficiently.
@@ -66,7 +64,7 @@ In the example below, other packages are loaded into the project. These packages
 
 Finally, the require function is used to ensure we actually get the package we want. If R Studio is unable to receive it, the code will come back with an error or FALSE.
 
-Normally the R setup chunk can be included in the load libraries chunk, but I separated them today to allow for proper explanation.
+Normally the R setup chunk can be included in the load libraries chunk, but they have been separated today to allow for proper explanation.
 
 ```{r Load Libraries, include=FALSE}
 # Load other packages here.
@@ -76,14 +74,14 @@ if (!require("Stat2Data")) install.packages("Stat2Data"); library("Stat2Data")
 if (!require("tidyverse")) install.packages("tidyverse"); library("tidyverse")
 ```
 
-##Loading in Dataset
+##Loading in Datasets:
 
 Here we will walk through how to load your data set in, and what each part of the code means.
   First on the left you put the name you want for your data set. 
   1. < - This assigns the data frame to a variable 
   2. read_csv reads the data into RStudio as a data frame
-  3. within the parentheses is how you tell it where to find your data 
-  4. the period (.) indicates that the data is located one folder or click away from your RMD file
+  3. Within the parentheses is how you tell it where to find your data 
+  4. The period (.) indicates that the data is located one folder or click away from your RMD file
 
 Click this green arrow to run a chunk of code that produces output. If this code is successful, you should see "Covid_19" appear as a dataframe in the top right box of the R Studio interface under the "Environment" tab.
 
@@ -124,16 +122,15 @@ When a dataset is uploaded, there is an informal checklist to complete before vi
 These variables are all divided into their own column. Just by initially looking through these variables, one can notice some complexities that should be noted. This dataframe includes both summed total data and individual unit data. Thus, both broad and narrow analysis can be made using the dataset. For example, could could compare total deaths in the United States by age group, or one could look at total deaths by month, sex, and age group in a particular state. Caution should be used, however, when filtering the data when conducting an analysis to answer a particular question. Finally, for this dataframe, there are 82620 observations that can be inferred as individual points of collection. 
 
 Key functions for visualizing data in R studio include:
-  1. &: Narrows search between dataframe and column.
+  1. &: Narrows search between dataframe and columns.
   2. ~: Comparison of variables that are "dependent on" one another; defines relationship between independent and dependent variable.
 
 ##Formulating a Question: 
 
 Once the variables of the dataframe have been assessed, one should formulate a question. Assuming this dataframe was given to an epidemiologist, they may be particularity interested in the time, state, sex, and COVID-19 Death variables. Formulating a question at the beginning of data analysis can limit extraneous paths taken with a large dataset. A precise question and/or hypothesis can eliminate unnecessary variables from the subsequential analysis.
 
-=======
 The questions we are interested in for this R tutorial: 
-1. Do males or females have more COVID-19 deaths per month? (Pennsylvania data)
+1. Do males or females have more COVID-19 deaths per month? 
 2. Does west or east coast have more COVID-19 deaths?
 3. Do older people have higher COVID-19 deaths?
 
@@ -151,7 +148,7 @@ library(readr)
 summary(Covid_19)
 ```
 
-The readr package is used here because it can read and analyze large dataframes fast. Also note the library notation of readr. This operation loads/attaches packages and stores them in the "System Library" located under the Packages tab. This is an exaple of reading in a package into a code chuck, but again, this package was already loaded at the beginning of the project.
+The readr package is used here because it can read and analyze large dataframes fast. Also note the library notation of readr. This operation loads/attaches packages and stores them in the "System Library" located under the Packages tab. This is an example of reading in a package into a code chuck, but again, this package was already loaded at the beginning of the project.
 
 The summary of the "Covid_19" dataframe can be performed to get a general idea of what type of data is included (character, integer, and numeric variables) and it also preforms a basic analysis of the numeric data by providing quartile ranges.
 
@@ -163,10 +160,10 @@ Run the example below, and then check to see if the column name is changed in th
 Covid_19<- rename(Covid_19, Influenza = "Influenza.Deaths")
 ```
 
-For practice, try renaming the "Pneumonia.Deaths" to "Pneumonia" using this structure outline. Furthermore, one can add a code chunck in the RMD markdown file by clicking the green square "C" in the above toolbar, or by using the keyboard shortcut of cmd+option+I on macOS.
+For practice, try renaming the "Pneumonia.Deaths" to "Pneumonia" using this structure outline. 
 
 ```{r}
-
+#Type Here
 ```
 
 ##Check Packaging:
@@ -188,7 +185,7 @@ Another general exploration tool that should be completed before analysis is run
 str(Covid_19)
 ```
 
-Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" dataframe, we can note that these NA values come from data that has been grouped. Grouped data as such makes the year and month values obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
+Immediately, one may notice the NA values listed for the year and month columns. These should be further evaluated. By rescrolling through the "Covid_19" dataframe, we can note that these NA values come from data that has been grouped. Grouped data, such as the Year and Month, make some values/anlaysis obsolete. "By total" data may be useful for future data as it is clean and easy to work with. Less filtering, as we will discuss later, may be required. 
 
 Beyond the NA values in the dataframe, there appears to be no other apparent issues. For future analysis using R beyond this project, however, NA values should always be evaluated as it could indicate missing variables or erroneous data that can not be used.
 
@@ -211,7 +208,7 @@ Additionally, the tail command can be useful for identifying extraneous values o
 
 ##Check Observations (N's):
 
-For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be done a number of ways, but simply, a table can be made. For example, the "Covid_19" dataframe has distinguished variables that look at Sex and State observations. These variables can be crosschecked by the analysist to assure that the expected amount of observations are present. 
+For data exploration, it is helpful to identify landmarks within a dataframe that can be used to check against the data being evaluated. This can be done a number of ways, but simply, a table can be made. For example, the "Covid_19" dataframe has distinguished variables that look at Sex and State observations. These variables can be crosschecked by the analysis to assure that the expected amount of observations are present. 
 
 The table function can be utilized in R. The structure of the command is as follows: table(dataframe$variable). The dollar sign can be used to narrow analysis by column within a dataframe.
 
@@ -255,8 +252,8 @@ Create a graph name and graph using the ggplot package
     e. Clean the graph up by changing:
         -Change legend position by using theme function of ggplot: theme(legend.position = "right, left, top, bottom")
         -Change title of plot via function: ggtitle("Title")
-        -Change name of x/y axis and legend title via function: labs(x= "X Title", y= "Y Title", color= "Legend Title") OR you can individually state the x/y axis labels via xlab("Title") and ylab("Title")
-        -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric, hjust=numeric))
+        -Change name of x/y axis and legend title via function: labs(x= "X Title", y= "Y Title", color= "Legend Title") OR you             can individually state the x/y axis labels via xlab("Title") and ylab("Title")
+        -Change aesthetics of x axis categories via function: theme(axis.text.x = element_text(angle = 1-180, vjust = numeric,             hjust=numeric))
     f. A string of commands can be accomplished using "+" after each line of code.
     g. Apply theme_cowplot() which provides a classical plot appearance with two axis lines and no background grid
     h. Plot using function plot(name of designated plot)
@@ -284,6 +281,7 @@ Listed above are simply introductory commands that are used in conjunction with 
 
 Below we use filter to look at the data grouped by month. group_by is used to group the data by Year and Month. 
 The following ggplot helps us visualize Covid 19 deaths per year.
+
 ```{r}
 CovidFilter <- filter(Covid_19, Group == "By Month")
 CovidYear <- group_by(CovidFilter, Year, Month)
@@ -299,10 +297,7 @@ ggplot(CovidYear) +
 ```
 
 
-Here we can visualize if there is a difference in COVID-19 Deaths per month. The graphs are organized per year so we can also look to see if the trends differ by year.
-=======
-
-Here we can visualize if there is a difference in COVID-19 Deaths per month.
+Next, we can visualize if there is a difference in COVID-19 Deaths per month.
 
 Additional modifications to the plotting outline are needed. One can use the dplyr function group_by to group desired data from different columns/variables in a dataframe. In addition, we want to run the Month X-variable as a factor, instead of a numerical variable. This distinction is made within the aes() function, and is necessary to obtain the appropriate x-axis values. If you are curious about this functions effect, change "aes(x= factor(Month), y= COVID.19.Deaths)" to "aes(x= Month, y=COVID.19.Deaths)" for graph p1 and note the difference.
 
@@ -439,6 +434,7 @@ nlevels(Covid_19.State.Deaths$State)
 
 arrange(Covid_19.State.Deaths,desc(COVID.19.Deaths)) #arranges the data from the state with the highest number of deaths to the state with the lowest number of death
 ```
+
 Notice the first output frame shows that one observation (the data point representing the total number of deaths in each state since the start of the pandemic) remains in each state. Although there are 54 states total in the list, the ones removed (United States, District of Columbia, New York City, and Puerto Rico) all have no observations in their category, effectively taking them out of the set. And finally, the second box shows us the order of States with the most to least Covid-19 deaths with California being first (85,545 deaths).
 
 4. West Coast vs East Coast COVID-19 Death Exploration 
@@ -462,9 +458,9 @@ Covid_19%>%
 
 **Check to make sure new column as been added by opening up "Covid_19" from the environment.
 
-Now, lets utilize this new column and plot West coast vs East coast COVID-19 death by sex while applying the same coding techniques learned from previous sections. We should make a boxplot. In this code chuck, we will exclude data from the "States" labeled "United States", "New York City" , and  "Puerto Rico" because these are not traditional states. Washington DC data will remain included based on preference.
+Now, lets utilize this new column and plot West coast vs East coast COVID-19 death by sex while applying the same coding techniques learned from previous sections. We should make a boxplot. In this code chuck, we will exclude data from the "States" labeled "United States", "New York City", and "Puerto Rico" because these are not traditional states. Washington DC data will remain included based on preference.
 
-Finally, we will add one new line of code. We can change the x axis labels by incorporating the function: scale_x_discrete(labels = c('Title', 'Title')). We will want to specify East from West coast. Without this code, the lables will show up as "FLASE" and "TRUE".
+Finally, we will add one new line of code. We can change the x axis labels by incorporating the function: scale_x_discrete(labels = c('Title', 'Title')). We will want to specify East from West coast. Without this code, the labels will show up as "FALSE" and "TRUE".
 
 ```{r}
 CovidDataCoasts<-filter(Covid_19, Group=="By Total" & Sex!="All Sexes" & Age.Group=="All Ages" & State!="United States" & State!="Puerto Rico", State!= "New York City" )
@@ -616,6 +612,7 @@ plot(PennYear)
 ```
 
 #STATISTICAL ANALYSIS:
+
 As a reminder, the hypotheses we are interested in for this R tutorial are: 
 1. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
 2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in all states across the US.
@@ -753,7 +750,7 @@ README(Maisy)
     3. Do older people have higher death rates than younger (Ben)
     4. West coast vs east coast (Ashley)
     5. Covid-19 Deaths in Pennsylvania (Ashley)
-5) Statistical analysis to answer hypothesis(Ben)
+5) Statistical analysis to answer hypothesis (Ben)
    1. We hypothesize that there will be more COVID-19 deaths reported for the East coast.
    2. We hypothesize that there will be more COVID-19 deaths reported for older individuals in all states across the US. 
    3. We hypothesize that there will be no difference in COVID-19 deaths between the to genders in the US.
