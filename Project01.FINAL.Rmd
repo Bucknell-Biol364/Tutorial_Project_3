@@ -289,7 +289,7 @@ CovidYear <- group_by(CovidFilter, Year, Month)
 
 ggplot(CovidYear) +
   geom_jitter() + 
-  aes(x= Year, y= COVID.19.Deaths) + 
+  aes(x= factor(Year), y= COVID.19.Deaths) + 
     ggtitle("Covid 19 Deaths per Year") + 
   xlab("Year") + 
   ylab("Covid 19 Deaths") + 
