@@ -758,7 +758,7 @@ README(Maisy)
 
 Solution code to final linear model:
 ```{r}
-lmCDM1 <- lm(COVID.19.Deaths ~ Sex, data=CovidDataPennMonth1)
+lmCDM1 <- lm(COVID.19.Deaths ~ Sex, data=Covid_19.State.Deaths.Sex)
 summary(lmCDM1)
 plot(lmCDM1)
 ```
